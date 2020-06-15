@@ -8,7 +8,7 @@ const Header: FC<any> = (props: { title: string }) => {
     <PageHeader
       backIcon={<ArrowLeftOutlined style={{ fontSize: 32 }} />}
       className='site-page-header'
-      onBack={() => message.info('to be implemented')}
+      onBack={() => message.info('header back: to be implemented')}
       title={<div style={{ color: '#adeacd' }}>{title}</div>}
       subTitle={<div style={{ width: 32 }}></div>}
     ></PageHeader>

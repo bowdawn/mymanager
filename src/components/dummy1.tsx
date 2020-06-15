@@ -102,17 +102,52 @@ const DummyPage1: FC = (props: any) => {
           <Input.Search
             placeholder='고객명으로 검색하기'
             size='large'
-            onSearch={(value) => console.log(value)}
+            onSearch={(value) => {
+              if (value) {
+                message.info(`Entered input value: ${value}`);
+              } else {
+                message.info(`input is empty`);
+              }
+
+              message.info('input: to be implemented');
+            }}
             style={{ width: '100%' }}
           />
           <div style={{ width: '100%', display: 'flex' }}>
-            <Button style={{ flex: 1, marginRight: 8 }}>고객명</Button>
-            <Button style={{ flex: 1, marginRight: 8 }}>보낸일자</Button>
-            <Button style={{ flex: 1 }}>신청일자</Button>
+            <Button
+              style={{ flex: 1, marginRight: 8 }}
+              onClick={() => {
+                message.info('name filter: to be implemented');
+              }}
+            >
+              고객명
+            </Button>
+            <Button
+              style={{ flex: 1, marginRight: 8 }}
+              onClick={() => {
+                message.info('sendTime filter: to be implemented');
+              }}
+            >
+              보낸일자
+            </Button>
+            <Button
+              style={{ flex: 1 }}
+              onClick={() => {
+                message.info('applyTime filter: to be implemented');
+              }}
+            >
+              신청일자
+            </Button>
           </div>
           {data.map((item: any) => {
             return (
-              <Card hoverable style={{ width: '100%', color: '#adeacd' }}>
+              <Card
+                hoverable
+                style={{ width: '100%', color: '#adeacd' }}
+                onClick={() => {
+                  message.info('card click: to be implemented');
+                }}
+              >
                 <div style={{ display: 'flex' }}>
                   <div
                     style={{
@@ -148,8 +183,9 @@ const DummyPage1: FC = (props: any) => {
                       {item.birthdate}
                     </Space>
                     <DeleteOutlined
-                      onClick={() => {
-                        message.info('to be implemented');
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        message.info('delete card: to be implemented');
                       }}
                     />
                   </div>
@@ -182,8 +218,11 @@ const DummyPage1: FC = (props: any) => {
           type='primary'
           size='large'
           style={{ width: '50%', marginTop: 25 }}
+          onClick={() => {
+            message.info('start button: to be implemented');
+          }}
         >
-          설계 시작하고
+          설계 시작하기
         </Button>
       </div>
     </div>
