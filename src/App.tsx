@@ -42,7 +42,7 @@ const App: FC = () => {
           borderRadius: 10,
           width: width > maxWidth ? maxWidth : width,
           height: height > maxHeight ? maxHeight : height,
-          overflowY: 'scroll',
+          overflowY: 'auto',
         }}
       >
         <Header></Header>
