@@ -77,7 +77,7 @@ function onChange(pagination: any, filters: any, sorter: any, extra: any) {
   console.log('params', pagination, filters, sorter, extra);
 }
 
-const DummyPage1: FC = (props: any) => {
+const DummyPage2: FC = (props: any) => {
   return (
     <div
       style={{
@@ -87,7 +87,7 @@ const DummyPage1: FC = (props: any) => {
         justifyContent: 'space-between',
       }}
     >
-      <Header title='마이매니저'></Header>
+      <Header title='고객정보 입력'></Header>
       <div
         style={{
           padding: '25px',
@@ -190,4 +190,4 @@ const DummyPage1: FC = (props: any) => {
   );
 };
 
-export default DummyPage1;
+export default DummyPage2;
