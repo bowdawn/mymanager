@@ -1,0 +1,22 @@
+@import '../colors.less';
+@import './default.less';
+.ant-input::placeholder {
+  color: @primary-color-light;
+}
+
+.ant-input-search {
+  border-color: @primary-color-light;
+}
+
+.ant-input-search-icon {
+  color: @primary-color-light;
+  &::before {
+    border-left: solid 1px @primary-color-light;
+  }
+  &:hover {
+    color: @primary-color;
+    &::before {
+      border-left: solid 1px @primary-color;
+    }
+  }
+}

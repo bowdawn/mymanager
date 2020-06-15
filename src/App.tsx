@@ -1,7 +1,9 @@
 import React, { FC, useState, useLayoutEffect } from 'react';
-import { Button, Row, Col } from 'antd';
+
 import 'src/App.less';
 import Header from 'src/components/header';
+import Dummy from 'src/components/dummy';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
@@ -33,13 +35,20 @@ const App: FC = () => {
     >
       <div
         style={{
-          border: 'solid 1px lightgreen',
+          display: 'flex',
+          flexDirection: 'column',
+          border: 'solid 1px #37BD7D',
           borderRadius: 10,
           width: width > maxWidth ? maxWidth : width,
           height: height > maxHeight ? maxHeight : height,
         }}
       >
         <Header></Header>
+        <Router>
+          <Switch>
+            <Route exact path='/' component={Dummy} />
+          </Switch>
+        </Router>
       </div>
     </div>
   );
