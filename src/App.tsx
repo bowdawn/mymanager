@@ -2,7 +2,7 @@ import React, { FC, useState, useLayoutEffect } from 'react';
 
 import 'src/App.less';
 import Header from 'src/components/header';
-import Dummy from 'src/components/dummy';
+import Dummy from 'src/components/dummy1';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function useWindowSize() {
@@ -30,6 +30,7 @@ const App: FC = () => {
         display: 'flex',
         justifyContent: 'center',
         height: '100vh',
+        maxHeight: '100vh',
         alignItems: 'center',
       }}
     >
@@ -41,6 +42,7 @@ const App: FC = () => {
           borderRadius: 10,
           width: width > maxWidth ? maxWidth : width,
           height: height > maxHeight ? maxHeight : height,
+          overflowY: 'scroll',
         }}
       >
         <Header></Header>

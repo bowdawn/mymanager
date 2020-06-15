@@ -168,7 +168,11 @@ const DummyPage1: FC = (props: any) => {
           );
         })}
       </Space>
-      <Button type='primary' size='large' style={{ width: '50%' }}>
+      <Button
+        type='primary'
+        size='large'
+        style={{ width: '50%', marginTop: 25 }}
+      >
         설계 시작하고
       </Button>
     </div>
