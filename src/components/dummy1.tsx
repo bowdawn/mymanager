@@ -207,7 +207,9 @@ const DummyPage1: FC = (props: any) => {
                       justifyContent: 'flex-start',
                     }}
                   >
-                    <Text strong>신청일자: {item.applyTime}</Text>
+                    {item.applyTime ? (
+                      <Text strong>신청일자: {item.applyTime}</Text>
+                    ) : null}
                   </div>
                 </div>
               </Card>
