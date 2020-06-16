@@ -146,12 +146,6 @@ const DummyPage2: FC = (props: any) => {
                   labelCol={{ span: 24 }}
                   wrapperCol={{ span: 24 }}
                   name='birthdate'
-                  rules={[
-                    {
-                      type: 'object',
-                      message: 'The input is not valid input',
-                    },
-                  ]}
                 >
                   <DatePicker
                     disabled={!birthdateRequired}
@@ -164,12 +158,6 @@ const DummyPage2: FC = (props: any) => {
                   label='보험나이'
                   wrapperCol={{ span: 24 }}
                   name='age'
-                  rules={[
-                    {
-                      type: 'number',
-                      message: 'The input is not valid input',
-                    },
-                  ]}
                 >
                   <InputNumber
                     style={{ width: '100%' }}
