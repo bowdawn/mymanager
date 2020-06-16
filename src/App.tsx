@@ -2,6 +2,7 @@ import React, { FC, useState, useLayoutEffect } from 'react';
 
 import 'src/App.less';
 
+import Dummy from 'src/components/dummy';
 import Dummy1 from 'src/components/dummy1';
 import Dummy2 from 'src/components/dummy2';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -48,7 +49,8 @@ const App: FC = () => {
         <ConfigProvider locale={koKr}>
           <Router>
             <Switch>
-              <Route exact path='/' component={Dummy1} />
+              <Route exact path='/' component={Dummy} />
+              <Route exact path='/dummypage1' component={Dummy1} />
               <Route exact path='/dummypage2' component={Dummy2} />
             </Switch>
           </Router>

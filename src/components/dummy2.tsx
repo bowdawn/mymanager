@@ -2,10 +2,7 @@ import React, { FC, useState } from 'react';
 import {
   message,
   Input,
-  Space,
   Button,
-  Card,
-  Tag,
   Typography,
   Form,
   Row,
@@ -13,11 +10,8 @@ import {
   Radio,
   DatePicker,
   InputNumber,
-  Result,
 } from 'antd';
-
 import Header from 'src/components/header';
-const { Title, Text } = Typography;
 
 const DummyPage2: FC = (props: any) => {
   const onFinish = async (values: any) => {

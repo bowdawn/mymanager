@@ -157,7 +157,9 @@ const DummyPage1: FC = (props: any) => {
                     }}
                   >
                     <Space align='center' size={0}>
-                      <Tag color='#37bd7d'>{item.type}</Tag>
+                      <Tag color={item.type === '신규' ? '#37bd7d' : '#ff0000'}>
+                        {item.type}
+                      </Tag>
                       <Title level={4} style={{ color: '#37bd7d' }}>
                         {item.name}
                       </Title>
