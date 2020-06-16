@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import {
   message,
   Input,
@@ -13,20 +13,18 @@ import {
   Radio,
   DatePicker,
   InputNumber,
+  Result,
 } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons';
+
 import Header from 'src/components/header';
 const { Title, Text } = Typography;
 
 const DummyPage2: FC = (props: any) => {
   const onFinish = async (values: any) => {
-    const { name, gender, date, age } = values;
+    const { name, gender, birthdate, age } = values;
     console.log(values);
-    if (date === undefined && age === undefined) {
-      message.error('Validation Failure');
-    } else {
-      message.success('Validation Success');
-    }
+    message.success('Validation Success');
+    message.info('On Next: to be implemented');
   };
 
   const onFinishFailed = (info: any) => {
@@ -38,87 +36,171 @@ const DummyPage2: FC = (props: any) => {
     });
   };
 
+  const onValuesChange = (changedValues: any, allValues: any) => {
+    console.log(changedValues, allValues);
+    setAgeRequired(
+      form.getFieldValue('birthdate') === null ||
+        form.getFieldValue('birthdate') === undefined
+    );
+    setBirthdateRequired(
+      form.getFieldValue('age') === null ||
+        form.getFieldValue('age') === undefined ||
+        form.getFieldValue('age') === NaN
+    );
+  };
+
+  const onFieldsChange = (changedFields: any, allFields: Array<any>) => {
+    console.log(changedFields, allFields);
+  };
+
+  const [form] = Form.useForm();
+  const [ageRequired, setAgeRequired] = useState(true);
+  const [birthdateRequired, setBirthdateRequired] = useState(true);
+
   return (
     <div
       style={{
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
-        justifyContent: 'space-between',
       }}
     >
       <Header title='고객정보 입력'></Header>
-      <div
-        style={{
-          padding: '25px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+
+      <Form
+        style={{ width: '100%', flex: 1, display: 'flex' }}
+        name='basic'
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        onValuesChange={(changedValues, allValues) =>
+          onValuesChange(changedValues, allValues)
+        }
+        onFieldsChange={(changedFields, allFields) => {
+          onFieldsChange(changedFields, allFields);
+        }}
+        form={form}
+        initialValues={{
+          name: null,
+          gender: null,
+          birthdateOrAge: null,
+          birthdate: null,
+          age: null,
         }}
       >
-        <Form
-          name='basic'
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
+        <div
+          style={{
+            padding: '25px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
         >
-          <Form.Item
-            label='성명'
-            labelCol={{ span: 24 }}
-            name='name'
-            rules={[
-              {
-                type: 'string',
-                message: 'The input is not valid input',
-              },
-              {
-                required: true,
-                message: 'Please input your name!',
-              },
-            ]}
-          >
-            <Input placeholder='이름을 입력해주세요' />
-          </Form.Item>
-
-          <Form.Item
-            label='성병'
-            labelCol={{ span: 24 }}
-            name='gender'
-            rules={[{ required: true, message: 'Please input your gender!' }]}
-          >
-            <Radio.Group buttonStyle='solid'>
-              <Radio.Button value='a'>남</Radio.Button>
-              <Radio.Button value='b'>여</Radio.Button>
-            </Radio.Group>
-          </Form.Item>
-
-          <Form.Item
-            label='hi'
-            rules={[
-              {
-                type: 'object',
-                required: true,
-                message: 'Please select time!',
-              },
-            ]}
-          >
+          <div>
             <Form.Item
-              label='생년월일'
+              label='성명'
               labelCol={{ span: 24 }}
-              name='birthdate'
+              wrapperCol={{ span: 24 }}
+              name='name'
+              rules={[
+                {
+                  type: 'string',
+                  message: 'The input is not valid input',
+                },
+                {
+                  required: true,
+                  message: 'Please input your name!',
+                },
+              ]}
             >
-              <DatePicker />
+              <Input placeholder='이름을 입력해주세요' />
             </Form.Item>
 
-            <Form.Item label='보험나이'>
-              <Form.Item name='age' noStyle>
-                <InputNumber min={0} />
-              </Form.Item>
-              <span className='ant-form-text'> 세</span>
+            <Form.Item
+              label='성별'
+              labelCol={{ span: 24 }}
+              wrapperCol={{ span: 24 }}
+              name='gender'
+              rules={[{ required: true, message: 'Please input your gender!' }]}
+            >
+              <Radio.Group style={{ display: 'flex' }} buttonStyle='solid'>
+                <Radio.Button style={{ flex: 1 }} value='a'>
+                  남
+                </Radio.Button>
+                <Radio.Button style={{ flex: 1 }} value='b'>
+                  여
+                </Radio.Button>
+              </Radio.Group>
             </Form.Item>
-          </Form.Item>
 
+            <Form.Item
+              label='생년월일 혹은 나이 중 하나를 꼭 입력해주세요.'
+              labelCol={{ span: 24 }}
+              name={
+                birthdateRequired && ageRequired
+                  ? 'fail'
+                  : birthdateRequired
+                  ? 'birthdate'
+                  : 'age'
+              }
+              rules={[{ required: true, message: 'Enter birthdate or age' }]}
+            >
+              <Input.Group>
+                <Form.Item
+                  shouldUpdate
+                  label='생년월일'
+                  labelCol={{ span: 24 }}
+                  wrapperCol={{ span: 24 }}
+                  name='birthdate'
+                  rules={[
+                    {
+                      type: 'object',
+                      message: 'The input is not valid input',
+                    },
+                  ]}
+                >
+                  <DatePicker
+                    disabled={!birthdateRequired}
+                    style={{ width: '100%' }}
+                  />
+                </Form.Item>
+
+                <Form.Item
+                  labelCol={{ span: 24 }}
+                  label='보험나이'
+                  wrapperCol={{ span: 24 }}
+                  name='age'
+                  rules={[
+                    {
+                      type: 'number',
+                      message: 'The input is not valid input',
+                    },
+                  ]}
+                >
+                  <InputNumber
+                    style={{ width: '100%' }}
+                    disabled={!ageRequired}
+                    className='ant-input-number-input-text-align-right'
+                    formatter={(value) => {
+                      if (value) {
+                        return `${value}세`;
+                      } else {
+                        return '세';
+                      }
+                    }}
+                    parser={(value: string | undefined) => {
+                      let result: '' | number = '';
+                      if (value) {
+                        result = parseInt(value.replace('세', ''));
+                      }
+                      return result;
+                    }}
+                    min={0}
+                  />
+                </Form.Item>
+              </Input.Group>
+            </Form.Item>
+          </div>
           <Form.Item>
             <Row justify='center'>
               <Col>
@@ -128,8 +210,8 @@ const DummyPage2: FC = (props: any) => {
               </Col>
             </Row>
           </Form.Item>
-        </Form>
-      </div>
+        </div>
+      </Form>
     </div>
   );
 };

@@ -5,6 +5,8 @@ import 'src/App.less';
 import Dummy1 from 'src/components/dummy1';
 import Dummy2 from 'src/components/dummy2';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { ConfigProvider } from 'antd';
+import koKr from 'antd/es/locale/ko_KR';
 
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
@@ -43,12 +45,14 @@ const App: FC = () => {
           overflowY: 'auto',
         }}
       >
-        <Router>
-          <Switch>
-            <Route exact path='/' component={Dummy1} />
-            <Route exact path='/dummypage2' component={Dummy2} />
-          </Switch>
-        </Router>
+        <ConfigProvider locale={koKr}>
+          <Router>
+            <Switch>
+              <Route exact path='/' component={Dummy1} />
+              <Route exact path='/dummypage2' component={Dummy2} />
+            </Switch>
+          </Router>
+        </ConfigProvider>
       </div>
     </div>
   );
