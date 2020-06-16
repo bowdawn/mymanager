@@ -5,6 +5,8 @@ import 'src/App.less';
 import Dummy from 'src/components/dummy';
 import Dummy1 from 'src/components/dummy1';
 import Dummy2 from 'src/components/dummy2';
+import Dummy3 from 'src/components/dummy3';
+
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import koKr from 'antd/es/locale/ko_KR';
@@ -52,6 +54,7 @@ const App: FC = () => {
               <Route exact path='/' component={Dummy} />
               <Route exact path='/dummypage1' component={Dummy1} />
               <Route exact path='/dummypage2' component={Dummy2} />
+              <Route exact path='/dummypage3' component={Dummy3} />
             </Switch>
           </Router>
         </ConfigProvider>
