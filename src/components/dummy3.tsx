@@ -102,7 +102,6 @@ const DummyPage3: FC = (props: any) => {
             defaultActiveKey='1'
             tabPosition={'top'}
             type='card'
-            style={{ height: 220 }}
             tabBarGutter={0}
             tabBarStyle={{ paddingLeft: 25, paddingRight: 25 }}
           >
@@ -119,9 +118,18 @@ const DummyPage3: FC = (props: any) => {
                   nextArrow={<RightOutlined />}
                   draggable={true}
                 >
-                  {item.cards.map((item: any) => (
-                    <Card style={{ width: 100 }}>
-                      <div>{item.content}</div>
+                  {item.cards.map((item: any, j: number) => (
+                    <Card key={`card${i}-${j}`}>
+                      <div
+                        style={{
+                          height: 200,
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}
+                      >
+                        {item.content}
+                      </div>
                     </Card>
                   ))}
                 </Carousel>
