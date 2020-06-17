@@ -169,13 +169,12 @@ const DummyPage3: FC = (props: any) => {
             tabPosition={'top'}
             type='card'
             tabBarGutter={0}
-            tabBarStyle={{ paddingLeft: 25, paddingRight: 25 }}
+            tabBarStyle={{ paddingLeft: 25 }}
           >
             {tabs.map((item: any, i: number) => (
               <TabPane
                 tab={item.title}
                 key={i}
-                forceRender
                 style={{ paddingLeft: 25, paddingRight: 25 }}
               >
                 <Carousel
