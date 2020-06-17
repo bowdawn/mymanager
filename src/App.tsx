@@ -2,10 +2,10 @@ import React, { FC, useState, useLayoutEffect } from 'react';
 
 import 'src/App.less';
 
-import Dummy from 'src/components/dummy';
-import Dummy1 from 'src/components/dummy1';
-import Dummy2 from 'src/components/dummy2';
-import Dummy3 from 'src/components/dummy3';
+import Dummy from 'src/pages/dummy';
+import Dummy1 from 'src/pages/dummy1';
+import Dummy2 from 'src/pages/dummy2';
+import Dummy3 from 'src/pages/dummy3';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
