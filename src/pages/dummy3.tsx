@@ -12,6 +12,7 @@ import {
   Tag,
   Collapse,
   Button,
+  Modal,
 } from 'antd';
 import {
   SaveOutlined,
@@ -88,12 +89,14 @@ const DummyPage3: FC = (props: any) => {
     ...productCards.map((item: any) => '0'),
   ]);
 
+  const [saveModal, setSaveModal] = useState(false);
+
   return (
     <div>
       <Header
         title='플랜 확인'
         subTitle={
-          <div onClick={() => message.info('save icon: to be implemented')}>
+          <div onClick={() => setSaveModal(true)}>
             <Space size={4}>
               <SaveOutlined style={{ fontSize: 25 }} />
               저장
@@ -332,6 +335,17 @@ const DummyPage3: FC = (props: any) => {
           </Space>
         </div>
       </Space>
+      <Modal
+        closable={false}
+        title={null}
+        visible={saveModal}
+        footer={null}
+        onCancel={() => setSaveModal(false)}
+      >
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Modal>
     </div>
   );
 };
