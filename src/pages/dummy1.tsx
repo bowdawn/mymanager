@@ -106,7 +106,7 @@ const DummyPage1: FC = (props: any) => {
               if (value) {
                 message.info(`Entered input value: ${value}`);
               } else {
-                message.info(`input is empty`);
+                message.warning(`input is empty`);
               }
 
               message.info('input: to be implemented');

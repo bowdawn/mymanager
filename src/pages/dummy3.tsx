@@ -11,6 +11,7 @@ import {
   Card,
   Tag,
   Collapse,
+  Button,
 } from 'antd';
 import {
   SaveOutlined,
@@ -18,6 +19,7 @@ import {
   RightOutlined,
   DeleteOutlined,
   DownOutlined,
+  PlusOutlined,
 } from '@ant-design/icons';
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
@@ -122,17 +124,35 @@ const DummyPage3: FC = (props: any) => {
             <Radio.Group buttonStyle='solid' style={{ width: '100%' }}>
               <Row gutter={10}>
                 <Col flex={1}>
-                  <Radio.Button value='a' style={{ width: '100%' }}>
+                  <Radio.Button
+                    value='a'
+                    style={{ width: '100%' }}
+                    onClick={() =>
+                      message.info('plan toggle button: to be implemented')
+                    }
+                  >
                     나의 플랜 1
                   </Radio.Button>
                 </Col>
                 <Col flex={1}>
-                  <Radio.Button value='b' style={{ width: '100%' }}>
+                  <Radio.Button
+                    value='b'
+                    style={{ width: '100%' }}
+                    onClick={() =>
+                      message.info('plan toggle button: to be implemented')
+                    }
+                  >
                     나의 플랜 2
                   </Radio.Button>
                 </Col>
                 <Col flex={1}>
-                  <Radio.Button value='c' style={{ width: '100%' }}>
+                  <Radio.Button
+                    value='c'
+                    style={{ width: '100%' }}
+                    onClick={() =>
+                      message.info('plan toggle button: to be implemented')
+                    }
+                  >
                     나의 플랜 3
                   </Radio.Button>
                 </Col>
@@ -165,7 +185,15 @@ const DummyPage3: FC = (props: any) => {
                   draggable={true}
                 >
                   {item.cards.map((item: any, j: number) => (
-                    <Card key={`card${i}-${j}`} hoverable>
+                    <Card
+                      key={`card${i}-${j}`}
+                      hoverable
+                      onClick={() =>
+                        message.info(
+                          'selected card news on click: to be implemented'
+                        )
+                      }
+                    >
                       <div
                         style={{
                           height: 200,
@@ -201,6 +229,9 @@ const DummyPage3: FC = (props: any) => {
                 className='ant-card-no-padding'
                 key={`productcard-${i}`}
                 hoverable
+                onClick={() =>
+                  message.info('product card on click: to be implemented')
+                }
               >
                 <div style={{ padding: 8 }}>
                   <Row justify='space-between'>
@@ -249,7 +280,8 @@ const DummyPage3: FC = (props: any) => {
                 <Row
                   justify='center'
                   gutter={8}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     collapsedKeyArray[i] =
                       collapsedKeyArray[i] === '1' ? '0' : '1';
                     setCollapsedKeyArray([...collapsedKeyArray]);
@@ -266,6 +298,38 @@ const DummyPage3: FC = (props: any) => {
                 </Row>
               </Card>
             ))}
+            <Card
+              className='ant-card-hover-primary-border'
+              onClick={() => message.info('add product: to be implemented')}
+            >
+              <div>상품 추가하기</div>
+              <PlusOutlined style={{ fontSize: 25 }} />
+            </Card>
+
+            <Row gutter={[8, 25]}>
+              <Col>
+                <Button
+                  size='large'
+                  onClick={() =>
+                    message.info('cancel button: to be implemented')
+                  }
+                >
+                  취소
+                </Button>
+              </Col>
+              <Col flex={1}>
+                <Button
+                  type='primary'
+                  size='large'
+                  style={{ width: '100%' }}
+                  onClick={() =>
+                    message.info('send to kakaotalk button: to be implemented')
+                  }
+                >
+                  카카오톡으로 보내기
+                </Button>
+              </Col>
+            </Row>
           </Space>
         </div>
       </Space>
