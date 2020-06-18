@@ -89,14 +89,14 @@ const DummyPage3: FC = (props: any) => {
     ...productCards.map((item: any) => '0'),
   ]);
 
-  const [saveModal, setSaveModal] = useState(false);
+  const [saveModal, setSaveModal] = useState(0);
 
   return (
     <div>
       <Header
         title='플랜 확인'
         subTitle={
-          <div onClick={() => setSaveModal(true)}>
+          <div onClick={() => setSaveModal(1)}>
             <Space size={4}>
               <SaveOutlined style={{ fontSize: 25 }} />
               저장
@@ -338,13 +338,64 @@ const DummyPage3: FC = (props: any) => {
       <Modal
         closable={false}
         title={null}
-        visible={saveModal}
-        footer={null}
-        onCancel={() => setSaveModal(false)}
+        visible={saveModal !== 0}
+        footer={
+          saveModal === 1 ? (
+            <Row>
+              <Col flex={1}>
+                <Button
+                  style={{ width: '100%' }}
+                  onClick={() => setSaveModal(0)}
+                >
+                  취소
+                </Button>
+              </Col>
+              <Col flex={1}>
+                <Button
+                  type='primary'
+                  style={{ width: '100%' }}
+                  onClick={() => setSaveModal(2)}
+                >
+                  저장
+                </Button>
+              </Col>
+            </Row>
+          ) : (
+            <Row>
+              <Col flex={1}>
+                <Button
+                  type='primary'
+                  style={{ width: '100%' }}
+                  onClick={() => setSaveModal(0)}
+                >
+                  닫기
+                </Button>
+              </Col>
+            </Row>
+          )
+        }
+        onCancel={() => setSaveModal(0)}
+        width={275}
+        centered
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        {(saveModal === 1
+          ? [
+              <div>어디에 저장하실지 선택해주세요</div>,
+              <div>*이전 데이터가 있을 경우 사라질 수 있습니다.</div>,
+              <Radio.Group buttonStyle='solid' style={{ width: '100%' }}>
+                <Space
+                  direction='vertical'
+                  style={{ width: '100%' }}
+                  align='center'
+                >
+                  <Radio.Button value='a'>나의 플랜1</Radio.Button>
+                  <Radio.Button value='b'>나의 플랜2</Radio.Button>
+                  <Radio.Button value='c'>나의 플랜3</Radio.Button>
+                </Space>
+              </Radio.Group>,
+            ]
+          : [<div>저장이 완료 되었습니다</div>]
+        ).map((item: any) => item)}
       </Modal>
     </div>
   );
