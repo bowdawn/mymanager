@@ -8,13 +8,13 @@ const DummyPage: FC = (props: any) => {
     <div style={{ padding: 25 }}>
       <Space direction='vertical'>
         <Title level={3}>
-          Hello This is the prototype navigation page, please go click on the
-          links below to view the dummy pages.
+          안녕하세요, 네이비게이션 페이지입니다, 다른 페이지로 이동하려면 링크를
+          눌러주세요!
         </Title>
-        <Link href='/dummypage1'>go to dummypage1</Link>
-        <Link href='/dummypage2'>go to dummypage2</Link>
-        <Link href='/dummypage3'>go to dummypage3</Link>
-        <Link href='/dummypage4'>go to dummypage4</Link>
+        <Link href='/dummypage1'>페이지1 으로 이동 (진행중)</Link>
+        <Link href='/dummypage2'>페이지2 으로 이동 (진행중)</Link>
+        <Link href='/dummypage3'>페이지3 으로 이동 (진행중)</Link>
+        <Link href='/dummypage4'>페이지4 으로 이동 (진행중)</Link>
       </Space>
     </div>
   );

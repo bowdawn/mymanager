@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { message, Input, Space, Button, Card, Tag, Typography } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined, SearchOutlined } from '@ant-design/icons';
 import Header from 'src/components/header';
+import './dummy1.less';
 const { Title, Text } = Typography;
 
 const data = [
@@ -90,15 +91,21 @@ const DummyPage1: FC = (props: any) => {
       <Header title='마이매니저'></Header>
       <div
         style={{
-          padding: '25px',
-          display: 'flex',
+          padding: 16,
+          paddingTop: '24px',
+
           flex: 1,
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          alignItems: 'center',
         }}
       >
+        <div className='current-customer-count'>
+          간편보험설계 고객은 현재 <span>10명</span> 입니다.
+        </div>
         <Space style={{ width: '100%' }} direction='vertical' size={8}>
+          <Input
+            size='small'
+            placeholder='small size'
+            prefix={<SearchOutlined />}
+          />
           <Input.Search
             placeholder='고객명으로 검색하기'
             size='large'

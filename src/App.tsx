@@ -30,13 +30,12 @@ const App: FC = () => {
   const maxWidth = 500;
   const maxHeight = 900;
   return (
-    <div className='App' style={{}}>
+    <div className='App'>
       <div
         className='mobile-border'
         style={{
           width: width > maxWidth ? maxWidth : width,
           height: height > maxHeight ? maxHeight : height,
-          overflowY: 'auto',
         }}
       >
         <ConfigProvider locale={koKr}>
