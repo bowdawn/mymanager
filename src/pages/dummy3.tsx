@@ -291,11 +291,10 @@ const DummyPage3: FC = (props: any) => {
                 >
                   <Col>연령별 설계</Col>
                   <Col>
-                    <div className='rotate-wrapper'>
-                      <DownOutlined
-                        rotate={collapsedKeyArray[i] === '1' ? 180 : 0}
-                      />
-                    </div>
+                    <DownOutlined
+                      className='rotate-transition'
+                      rotate={collapsedKeyArray[i] === '1' ? 180 : 0}
+                    />
                   </Col>
                 </Row>
               </Card>
@@ -388,9 +387,30 @@ const DummyPage3: FC = (props: any) => {
                   style={{ width: '100%' }}
                   align='center'
                 >
-                  <Radio.Button value='a'>나의 플랜1</Radio.Button>
-                  <Radio.Button value='b'>나의 플랜2</Radio.Button>
-                  <Radio.Button value='c'>나의 플랜3</Radio.Button>
+                  <Radio.Button
+                    value='a'
+                    onClick={() =>
+                      message.info('save my plan 1 button : to be implemented')
+                    }
+                  >
+                    나의 플랜1
+                  </Radio.Button>
+                  <Radio.Button
+                    value='b'
+                    onClick={() =>
+                      message.info('save my plan 2 button : to be implemented')
+                    }
+                  >
+                    나의 플랜2
+                  </Radio.Button>
+                  <Radio.Button
+                    value='c'
+                    onClick={() =>
+                      message.info('save my plan 3 button : to be implemented')
+                    }
+                  >
+                    나의 플랜3
+                  </Radio.Button>
                 </Space>
               </Radio.Group>,
             ]

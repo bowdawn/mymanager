@@ -13,7 +13,8 @@ const DummyPage: FC = (props: any) => {
         </Title>
         <Link href='/dummypage1'>go to dummypage1</Link>
         <Link href='/dummypage2'>go to dummypage2</Link>
-        <Link href='/dummypage3'>go to dummypage3 (In Progress)</Link>
+        <Link href='/dummypage3'>go to dummypage3</Link>
+        <Link href='/dummypage4'>go to dummypage4</Link>
       </Space>
     </div>
   );

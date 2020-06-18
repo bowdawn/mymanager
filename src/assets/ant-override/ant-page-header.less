@@ -1,31 +1,37 @@
 @import '../colors.less';
 @import './default.less';
 
-.ant-page-header-heading-left {
-  flex: 1;
-  justify-content: space-between;
-  .ant-page-header-back {
-    flex: 1;
-    display: flex;
-    justify-content: start;
-    margin: 0;
-  }
-  .ant-page-header-heading-title {
-    margin: 0;
-  }
-  .ant-page-header-heading-sub-title {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    margin: 0;
-  }
-}
+.ant-page-header.ant-page-header-ghost.ant-page-header-compact {
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-image: url(/static/images/header/group-4.png);
+  height: 123px;
+  padding-bottom: 24px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 16px;
 
-.ant-page-header-heading-sub-title {
-  color: @primary-color-light;
-  margin: 0;
+  .ant-page-header-heading-left {
+    margin: 0;
+    .arrow-left {
+      width: 24px;
+      height: 24px;
+    }
+  }
 
-  &:hover {
-    color: @primary-color;
+  .ant-page-header-content {
+    padding-top: 20px;
+    div.title {
+      font-family: '12LotteMartDream';
+      font-size: 26px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.5;
+      letter-spacing: -0.5px;
+      text-align: center;
+      color: #ffffff;
+    }
   }
 }

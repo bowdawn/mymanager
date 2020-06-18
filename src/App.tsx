@@ -6,6 +6,7 @@ import Dummy from 'src/pages/dummy';
 import Dummy1 from 'src/pages/dummy1';
 import Dummy2 from 'src/pages/dummy2';
 import Dummy3 from 'src/pages/dummy3';
+import Dummy4 from 'src/pages/dummy4';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
@@ -29,20 +30,10 @@ const App: FC = () => {
   const maxWidth = 500;
   const maxHeight = 900;
   return (
-    <div
-      className='App'
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        height: '100vh',
-        maxHeight: '100vh',
-        alignItems: 'center',
-      }}
-    >
+    <div className='App' style={{}}>
       <div
+        className='mobile-border'
         style={{
-          border: 'solid 1px #37BD7D',
-          borderRadius: 10,
           width: width > maxWidth ? maxWidth : width,
           height: height > maxHeight ? maxHeight : height,
           overflowY: 'auto',
@@ -55,6 +46,7 @@ const App: FC = () => {
               <Route exact path='/dummypage1' component={Dummy1} />
               <Route exact path='/dummypage2' component={Dummy2} />
               <Route exact path='/dummypage3' component={Dummy3} />
+              <Route exact path='/dummypage4' component={Dummy4} />
             </Switch>
           </Router>
         </ConfigProvider>
