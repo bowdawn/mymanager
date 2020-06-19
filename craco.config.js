@@ -37,7 +37,7 @@ const globalVarTypes = Object.keys(colors)
 
 fs.writeFileSync(
   path.resolve(__dirname, './src/@types/globals.d.ts'),
-  globalVarTypes,
+  '//Auto Generated File: do not touch \n' + globalVarTypes,
   'utf8'
 );
 
