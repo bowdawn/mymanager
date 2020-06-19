@@ -2,7 +2,6 @@
 @import './default.less';
 
 .ant-card-bordered {
-  //border: solid 1px @primary-color-light;
   border-radius: 4px;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
@@ -14,18 +13,18 @@
   }
 }
 
-.ant-card-hover-primary-border:hover {
-  border-color: @primary-color;
-  color: @primary-color;
-  svg {
-    color: @primary-color;
-  }
-}
-
 .ant-card-hover-primary-border {
-  border-color: @primary-color-light;
-  color: @primary-color-light;
+  border-color: @primary-5;
+  color: @primary-5;
   svg {
-    color: @primary-color-light;
+    color: @primary-5;
+  }
+
+  &:hover {
+    border-color: @primary-color;
+    color: @primary-color;
+    svg {
+      color: @primary-color;
+    }
   }
 }

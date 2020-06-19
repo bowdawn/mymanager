@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { message, Input, Space, Button, Card, Tag, Typography } from 'antd';
 import { DeleteOutlined, SearchOutlined } from '@ant-design/icons';
 import Header from 'src/components/header';
+import { ReactComponent as SearchIcon } from 'src/assets/icons/search-icon.svg';
 import './dummy1.less';
 const { Title, Text } = Typography;
 
@@ -102,14 +103,10 @@ const DummyPage1: FC = (props: any) => {
         </div>
         <Space style={{ width: '100%' }} direction='vertical' size={8}>
           <Input
-            size='small'
-            placeholder='small size'
-            prefix={<SearchOutlined />}
-          />
-          <Input.Search
             placeholder='고객명으로 검색하기'
             size='large'
-            onSearch={(value) => {
+            prefix={<SearchIcon />}
+            onPressEnter={(value) => {
               if (value) {
                 message.info(`Entered input value: ${value}`);
               } else {
@@ -118,7 +115,6 @@ const DummyPage1: FC = (props: any) => {
 
               message.info('input: to be implemented');
             }}
-            style={{ width: '100%' }}
           />
           <div style={{ width: '100%', display: 'flex' }}>
             <Button
