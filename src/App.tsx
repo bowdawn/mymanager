@@ -11,6 +11,7 @@ import Dummy4 from 'src/pages/dummy4';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import koKr from 'antd/es/locale/ko_KR';
+import 'src/assets/constants/colors';
 
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);

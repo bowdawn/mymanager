@@ -1,9 +1,14 @@
 import React, { FC } from 'react';
 import { message, Input, Space, Button, Card, Tag, Typography } from 'antd';
-import { DeleteOutlined, SearchOutlined } from '@ant-design/icons';
+import {
+  DeleteOutlined,
+  SearchOutlined,
+  BorderRightOutlined,
+} from '@ant-design/icons';
 import Header from 'src/components/header';
 import { ReactComponent as SearchIcon } from 'src/assets/icons/search-icon.svg';
 import './dummy1.less';
+
 const { Title, Text } = Typography;
 
 const data = [
@@ -94,7 +99,6 @@ const DummyPage1: FC = (props: any) => {
         style={{
           padding: 16,
           paddingTop: '24px',
-
           flex: 1,
         }}
       >
@@ -160,7 +164,9 @@ const DummyPage1: FC = (props: any) => {
                     }}
                   >
                     <Space align='center' size={0}>
-                      <Tag color={item.type === '신규' ? '#37bd7d' : '#ff0000'}>
+                      <Tag
+                        color={item.type === '신규' ? darkSkyBlue : grapefruit}
+                      >
                         {item.type}
                       </Tag>
                       <Title level={4} style={{ color: '#37bd7d' }}>
