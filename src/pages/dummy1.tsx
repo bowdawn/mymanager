@@ -1,82 +1,79 @@
-import React, { FC } from 'react';
-import { message, Input, Space, Button, Card, Tag, Typography } from 'antd';
+import React, { FC, useState } from 'react';
 import {
-  DeleteOutlined,
-  SearchOutlined,
-  BorderRightOutlined,
-} from '@ant-design/icons';
+  message,
+  Input,
+  Space,
+  Button,
+  Card,
+  Tag,
+  Divider,
+  Pagination,
+  Row,
+  Col,
+} from 'antd';
+import Icon from '@ant-design/icons';
 import Header from 'src/components/header';
-import { ReactComponent as SearchIcon } from 'src/assets/icons/search-icon.svg';
-import './dummy1.less';
+import Footer from 'src/components/footer';
 
-const { Title, Text } = Typography;
+import { ReactComponent as SearchIcon } from 'src/assets/icons/search-icon.svg';
+import { ReactComponent as DeleteIcon } from 'src/assets/icons/delete-icon.svg';
+import { ReactComponent as PaginationRightIcon } from 'src/assets/icons/pagination-right.svg';
+import { ReactComponent as PaginationLeftIcon } from 'src/assets/icons/pagination-left.svg';
+import { ReactComponent as PaginationFirstIcon } from 'src/assets/icons/pagination-first.svg';
+import { ReactComponent as PaginationLastIcon } from 'src/assets/icons/pagination-last.svg';
+import './dummy1.less';
 
 const data = [
   {
     key: '1',
-    name: '김백호',
+    name: '배정남',
     type: '신규',
     gender: '남',
-    birthdate: '1980.11.11',
-    sendTime: '20.01.20/16:00',
+    birthdate: '1973.01.01',
+    sendTime: '20.05.20 / 16:32',
     applyTime: null,
-    age: 32,
-    address: 'New York No. 1 Lake Park',
+    age: null,
   },
   {
     key: '2',
-    name: '김백호',
+    name: '배정남',
     type: '신규',
     gender: '남',
-    birthdate: '1980.11.11',
-    sendTime: '20.01.20/16:00',
+    birthdate: '1973.01.01',
+    sendTime: '20.05.20 / 16:32',
     applyTime: null,
-    age: 42,
-    address: 'London No. 1 Lake Park',
+    age: null,
   },
   {
     key: '3',
-    name: '김백호',
+    name: '김정숙',
     type: '신청',
-    gender: '남',
-    birthdate: '1980.11.11',
-    sendTime: '20.01.20/16:00',
-    applyTime: '20.01.22/14:30',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
+    gender: '여',
+    birthdate: null,
+    sendTime: '20.05.20 / 16:32',
+    applyTime: '20.01.22 / 14:30',
+    age: 50,
   },
+
   {
     key: '4',
-    name: '김백호',
+    name: '김정숙',
     type: '신청',
-    gender: '남',
-    birthdate: '1980.11.11',
-    sendTime: '20.01.20/16:00',
-    applyTime: '20.01.22/14:30',
-    age: 32,
-    address: 'London No. 2 Lake Park',
+    gender: '여',
+    birthdate: null,
+    sendTime: '20.05.20 / 16:32',
+    applyTime: '20.01.22 / 14:30',
+    age: 50,
   },
   {
     key: '5',
-    name: '김백호',
+    name: '김정숙',
     type: '신청',
-    gender: '남',
-    birthdate: '1980.11.11',
-    sendTime: '20.01.20/16:00',
+    gender: '여',
+    birthdate: null,
+    sendTime: '20.05.20/16:32',
     applyTime: '20.01.22/14:30',
-    age: 32,
-    address: 'London No. 2 Lake Park',
-  },
-  {
-    key: '6',
-    name: '김백호',
-    type: '신청',
-    gender: '남',
-    birthdate: '1980.11.11',
-    sendTime: '20.01.20/16:00',
-    applyTime: '20.01.22/14:30',
-    age: 32,
-    address: 'London No. 2 Lake Park',
+    age: 50,
   },
 ];
 
@@ -85,27 +82,22 @@ function onChange(pagination: any, filters: any, sorter: any, extra: any) {
 }
 
 const DummyPage1: FC = (props: any) => {
+  const [current, setCurrent] = useState(1);
+  const total = 15;
+  const pageSize = 5;
   return (
     <div
+      className='f-fd-c f-jc-sb'
       style={{
-        display: 'flex',
-        flexDirection: 'column',
         height: '100%',
-        justifyContent: 'space-between',
       }}
     >
       <Header title='마이매니저'></Header>
-      <div
-        style={{
-          padding: 16,
-          paddingTop: '24px',
-          flex: 1,
-        }}
-      >
+      <div className='f1 ph16 pt24'>
         <div className='current-customer-count'>
           간편보험설계 고객은 현재 <span>10명</span> 입니다.
         </div>
-        <Space style={{ width: '100%' }} direction='vertical' size={8}>
+        <Space className='wp100' direction='vertical' size={8}>
           <Input
             placeholder='고객명으로 검색하기'
             size='large'
@@ -120,9 +112,9 @@ const DummyPage1: FC = (props: any) => {
               message.info('input: to be implemented');
             }}
           />
-          <div style={{ width: '100%', display: 'flex' }}>
+          <div className='f wp100'>
             <Button
-              style={{ flex: 1, marginRight: 8 }}
+              className='f1 mr8'
               onClick={() => {
                 message.info('name filter: to be implemented');
               }}
@@ -130,7 +122,7 @@ const DummyPage1: FC = (props: any) => {
               고객명
             </Button>
             <Button
-              style={{ flex: 1, marginRight: 8 }}
+              className='f1 mr8'
               onClick={() => {
                 message.info('sendTime filter: to be implemented');
               }}
@@ -138,7 +130,7 @@ const DummyPage1: FC = (props: any) => {
               보낸일자
             </Button>
             <Button
-              style={{ flex: 1 }}
+              className='f1'
               onClick={() => {
                 message.info('applyTime filter: to be implemented');
               }}
@@ -149,67 +141,56 @@ const DummyPage1: FC = (props: any) => {
           {data.map((item: any) => {
             return (
               <Card
+                className='ant-card-no-padding'
                 hoverable
-                style={{ width: '100%', color: '#adeacd' }}
                 onClick={() => {
                   message.info('card click: to be implemented');
                 }}
               >
-                <div style={{ display: 'flex' }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'flex-start',
-                      flex: 1,
-                    }}
-                  >
-                    <Space align='center' size={0}>
+                <div className='f pv12 ph16'>
+                  <div className='f1'>
+                    <Space size={10}>
                       <Tag
                         color={item.type === '신규' ? darkSkyBlue : grapefruit}
                       >
                         {item.type}
                       </Tag>
-                      <Title level={4} style={{ color: '#37bd7d' }}>
-                        {item.name}
-                      </Title>
+                      <div className='customer-name f-ai-c'>{item.name}</div>
                     </Space>
                   </div>
-                  <div
-                    style={{
-                      flex: 1,
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <Space align='center' size={0}>
-                      <Tag
-                        style={{
-                          color: '#37bd7d',
-                          borderColor: '#37bd7d',
-                          backgroundColor: '#37bd7d16',
-                        }}
-                      >
-                        {item.gender}
-                      </Tag>
-                      {item.birthdate}
+                  <div className='f1 f-jc-sb f-ai-c '>
+                    <Space align='center' size={8}>
+                      <Tag className='rounded-tag'>{item.gender}</Tag>
+                      <div className='customer-birthdate'>
+                        {(item.birthdate
+                          ? [item.birthdate]
+                          : ['보험나이 ', <span>{item.age}세</span>]
+                        ).map((item: any) => item)}
+                      </div>
                     </Space>
-                    <DeleteOutlined
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        message.info('delete card: to be implemented');
-                      }}
+
+                    <Icon
+                      component={() => (
+                        <DeleteIcon
+                          className='fs24'
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            message.info('delete card: to be implemented');
+                          }}
+                        />
+                      )}
                     />
                   </div>
                 </div>
-                <div style={{ display: 'flex' }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'flex-start',
-                      flex: 1,
-                    }}
-                  >
-                    보낸일자: {item.sendTime}
+                <Divider />
+                <div className='f pv8 ph16'>
+                  <div className='f1'>
+                    <Space size={5}>
+                      <div className='send-time-label '>보낸일자</div>
+                      <div className='send-time-value f-ai-c'>
+                        {item.sendTime}
+                      </div>
+                    </Space>
                   </div>
                   <div
                     style={{
@@ -219,7 +200,12 @@ const DummyPage1: FC = (props: any) => {
                     }}
                   >
                     {item.applyTime ? (
-                      <Text strong>신청일자: {item.applyTime}</Text>
+                      <Space size={5}>
+                        <div className='apply-time-label '>신청일자</div>
+                        <div className='apply-time-value f-ai-c'>
+                          {item.applyTime}
+                        </div>
+                      </Space>
                     ) : null}
                   </div>
                 </div>
@@ -227,17 +213,55 @@ const DummyPage1: FC = (props: any) => {
             );
           })}
         </Space>
-        <Button
-          type='primary'
-          size='large'
-          style={{ width: '50%', marginTop: 25 }}
-          onClick={() => {
-            message.info('start button: to be implemented');
-          }}
-        >
-          설계 시작하기
-        </Button>
+
+        <div className='f-jc-c f-ai-c p24'>
+          <Icon
+            {...(current === 1
+              ? { className: 'ant-pagination-disabled f-ai-c mr5' }
+              : { className: 'f-ai-c mr5' })}
+            component={() => <PaginationFirstIcon />}
+            onClick={() => setCurrent(1)}
+          />
+
+          <Pagination
+            simple
+            current={current}
+            onChange={(page, pageSize) => setCurrent(page)}
+            pageSize={pageSize}
+            total={total}
+            itemRender={(page, type, originalElement) => {
+              console.log(page, type, originalElement);
+              if (type === 'prev') {
+                return <Icon component={() => <PaginationLeftIcon />} />;
+              }
+              if (type === 'next') {
+                return <Icon component={() => <PaginationRightIcon />} />;
+              }
+              return originalElement;
+            }}
+          />
+          <Icon
+            {...(current === Math.floor(total / pageSize)
+              ? { className: 'ant-pagination-disabled f-ai-c ml5' }
+              : { className: 'f-ai-c ml5' })}
+            component={() => <PaginationLastIcon className='f-ai-c' />}
+            onClick={() => setCurrent(Math.floor(total / pageSize))}
+          />
+        </div>
+        <div className='f-jc-c'>
+          <Button
+            type='primary'
+            size='large'
+            className='mt6 wp50 br4 mb50 start-plan-btn'
+            onClick={() => {
+              message.info('start button: to be implemented');
+            }}
+          >
+            설계 시작하기
+          </Button>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };

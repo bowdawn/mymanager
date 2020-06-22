@@ -2,3 +2,7 @@
 declare var peacockBlue: string;
 declare var darkSkyBlue: string;
 declare var grapefruit: string;
+declare var greyishBrown: string;
+declare var warmGrey: string;
+declare var black10: string;
+declare var black: string;
