@@ -1,11 +1,12 @@
 @import '../assets/ant-override/default.less';
+@import '../assets/constants/colors.less';
 
 .current-customer-count {
   height: 20px;
   font-size: 14px;
   letter-spacing: -0.61px;
   color: #555555;
-  margin-bottom: 8px;
+
   span {
     color: @primary-color;
   }
@@ -55,4 +56,62 @@
   font-weight: bold;
   height: 55px;
   letter-spacing: -0.8px;
+}
+
+.filter-radio-group {
+  .ant-radio-button-wrapper {
+    border-color: #0000001a;
+    border-radius: 0px;
+    border-left: none;
+    border-right: none;
+    padding: 0px 4px;
+    height: 39px;
+
+    &::before {
+      background-color: transparent;
+    }
+    &:focus-within {
+      box-shadow: none;
+    }
+    > :nth-child(2) {
+      width: 100%;
+    }
+    div {
+      color: @warm-grey-two;
+      font-size: 14px;
+      letter-spacing: -0.7px;
+    }
+  }
+
+  .ant-radio-button-wrapper-checked {
+    &:not(.ant-radio-button-wrapper-disabled) {
+      z-index: 1;
+      border-top: 1px solid #0000001a;
+      border-left: transparent;
+      border-right: transparent;
+      border-bottom: 2px solid @primary-color;
+      div {
+        color: @primary-color;
+      }
+
+      &hover {
+        border-color: 1 solid #000000;
+      }
+      &:hover::before {
+        background-color: transparent;
+      }
+
+      .bottom-active {
+        path:nth-child(1) {
+          fill: @primary-color;
+        }
+      }
+
+      .top-active {
+        path:nth-child(2) {
+          fill: @primary-color;
+        }
+      }
+    }
+  }
 }

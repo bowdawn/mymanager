@@ -8,8 +8,7 @@ import {
   Tag,
   Divider,
   Pagination,
-  Row,
-  Col,
+  Radio,
 } from 'antd';
 import Icon from '@ant-design/icons';
 import Header from 'src/components/header';
@@ -21,6 +20,7 @@ import { ReactComponent as PaginationRightIcon } from 'src/assets/icons/paginati
 import { ReactComponent as PaginationLeftIcon } from 'src/assets/icons/pagination-left.svg';
 import { ReactComponent as PaginationFirstIcon } from 'src/assets/icons/pagination-first.svg';
 import { ReactComponent as PaginationLastIcon } from 'src/assets/icons/pagination-last.svg';
+import { ReactComponent as FilterIcon } from 'src/assets/icons/filter-icon.svg';
 import './dummy1.less';
 
 const data = [
@@ -77,67 +77,84 @@ const data = [
   },
 ];
 
+const filters = [
+  { label: '고객명', value: 'customerName' },
+  { label: '보낸일자', value: 'sendDate' },
+  { label: '신청일자', value: 'applyDate' },
+];
 function onChange(pagination: any, filters: any, sorter: any, extra: any) {
   console.log('params', pagination, filters, sorter, extra);
 }
 
 const DummyPage1: FC = (props: any) => {
   const [current, setCurrent] = useState(1);
-  const total = 15;
+  const total = 1500;
   const pageSize = 5;
+  const [filter, setFilter] = useState('none');
+
   return (
-    <div
-      className='f-fd-c f-jc-sb'
-      style={{
-        height: '100%',
-      }}
-    >
+    <div className='f-fd-c f-jc-sb hp100'>
       <Header title='마이매니저'></Header>
       <div className='f1 ph16 pt24'>
-        <div className='current-customer-count'>
+        <div className='current-customer-count mb8'>
           간편보험설계 고객은 현재 <span>10명</span> 입니다.
         </div>
-        <Space className='wp100' direction='vertical' size={8}>
-          <Input
-            placeholder='고객명으로 검색하기'
-            size='large'
-            prefix={<SearchIcon />}
-            onPressEnter={(value) => {
-              if (value) {
-                message.info(`Entered input value: ${value}`);
-              } else {
-                message.warning(`input is empty`);
-              }
 
-              message.info('input: to be implemented');
-            }}
-          />
-          <div className='f wp100'>
-            <Button
-              className='f1 mr8'
+        <Input
+          placeholder='고객명으로 검색하기'
+          size='large'
+          prefix={<SearchIcon />}
+          onPressEnter={(value) => {
+            if (value) {
+              message.info(`Entered input value: ${value}`);
+            } else {
+              message.warning(`input is empty`);
+            }
+            message.info('input: to be implemented');
+          }}
+        />
+
+        <Radio.Group
+          className='f wp100 mt16 filter-radio-group'
+          defaultValue='customerName'
+          onChange={(e) => {
+            e.stopPropagation();
+            setFilter('bottom');
+          }}
+        >
+          {filters.map((item: any) => (
+            <Radio.Button
+              className='f1 f-jc-c'
+              value={item.value}
               onClick={() => {
-                message.info('name filter: to be implemented');
+                //message.info('filter: to be implemented');
+                setFilter(
+                  filter === 'none'
+                    ? 'top'
+                    : filter === 'top'
+                    ? 'bottom'
+                    : 'none'
+                );
               }}
             >
-              고객명
-            </Button>
-            <Button
-              className='f1 mr8'
-              onClick={() => {
-                message.info('sendTime filter: to be implemented');
-              }}
-            >
-              보낸일자
-            </Button>
-            <Button
-              className='f1'
-              onClick={() => {
-                message.info('applyTime filter: to be implemented');
-              }}
-            >
-              신청일자
-            </Button>
-          </div>
+              <div className='f-ai-c hp100'>
+                <div className='f1'></div>
+                <div>{item.label}</div>
+                <div className='f1 f-jc-fe'>
+                  <FilterIcon
+                    {...(filter === 'none'
+                      ? {}
+                      : filter === 'top'
+                      ? { className: 'top-active' }
+                      : { className: 'bottom-active' })}
+                  />
+                </div>
+              </div>
+            </Radio.Button>
+          ))}
+        </Radio.Group>
+
+        <Space className='wp100' direction='vertical' size={8}>
           {data.map((item: any) => {
             return (
               <Card
@@ -230,7 +247,6 @@ const DummyPage1: FC = (props: any) => {
             pageSize={pageSize}
             total={total}
             itemRender={(page, type, originalElement) => {
-              console.log(page, type, originalElement);
               if (type === 'prev') {
                 return <Icon component={() => <PaginationLeftIcon />} />;
               }
