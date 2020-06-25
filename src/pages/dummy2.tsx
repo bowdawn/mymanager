@@ -12,6 +12,7 @@ import {
   InputNumber,
 } from 'antd';
 import Header from 'src/components/header';
+import './dummy2.less';
 
 const DummyPage2: FC = (props: any) => {
   const onFinish = async (values: any) => {
@@ -62,8 +63,8 @@ const DummyPage2: FC = (props: any) => {
       <Header title='고객정보 입력'></Header>
 
       <Form
-        style={{ width: '100%', flex: 1, display: 'flex' }}
-        name='basic'
+        className='custom-ant-form wp100 f1 f'
+        name='customer-info'
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         onValuesChange={(changedValues, allValues) =>
@@ -80,19 +81,12 @@ const DummyPage2: FC = (props: any) => {
           birthdate: null,
           age: null,
         }}
+        hideRequiredMark={true}
       >
-        <div
-          style={{
-            padding: '25px',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
+        <div className='ph16 pv24 f-fd-c f-jc-sb f-ai-c'>
           <div>
             <Form.Item
-              label='성명'
+              label={<div className='h20'>*성명</div>}
               labelCol={{ span: 24 }}
               wrapperCol={{ span: 24 }}
               name='name'
@@ -111,7 +105,7 @@ const DummyPage2: FC = (props: any) => {
             </Form.Item>
 
             <Form.Item
-              label='성별'
+              label={<div className='h20'>*성별</div>}
               labelCol={{ span: 24 }}
               wrapperCol={{ span: 24 }}
               name='gender'
