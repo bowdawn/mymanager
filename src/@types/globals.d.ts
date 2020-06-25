@@ -7,3 +7,5 @@ declare var warmGrey: string;
 declare var warmGreyTwo: string;
 declare var black10: string;
 declare var black: string;
+declare var white: string;
+declare var peacockBlue7: string;

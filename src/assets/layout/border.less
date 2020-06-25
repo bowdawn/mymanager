@@ -1,3 +1,5 @@
+@import '../ant-override/default.less';
+
 each(range(25), {
     .br@{value} {
       border-radius: @value * 1px;
@@ -32,3 +34,7 @@ each(range(25), {
       }
 
   });
+
+.bpc {
+  border: 1px solid @primary-color;
+}

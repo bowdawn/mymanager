@@ -2,13 +2,27 @@
 @import '../constants/colors.less';
 
 .custom-ant-form.ant-form {
-  line-height: unset;
   .ant-form-item {
     margin-bottom: 40px;
-
-    .ant-form-item-label > label {
-      height: unset;
-    }
+    @h-values: 18, 20;
+    each(@h-values, {
+      &.custom-form-label-h@{value} {
+        .ant-form-item-label {
+          height: @value * 1px;
+          label {
+            height: @value * 1px;
+          }
+        }
+      }
+    });
+    @mb-values: 2, 16;
+    each(@mb-values, {
+      &.custom-form-label-mb@{value} {
+        .ant-form-item-label {
+          margin-bottom: @value * 1px;
+        }
+      }
+    });
     .ant-form-item-label {
       .ant-form-item-required {
         font-size: 14px;
@@ -17,13 +31,11 @@
         color: @greyish-brown;
       }
     }
-
     .ant-form-vertical .ant-form-item-label,
     .ant-col-24.ant-form-item-label,
     .ant-col-xl-24.ant-form-item-label {
       padding: 0px;
     }
-
     .ant-form-item-control-input-content {
       .ant-input {
         border-radius: 0;
@@ -31,7 +43,6 @@
         border-left: none;
         border-right: none;
         padding: 8px;
-
         &::placeholder {
           opacity: 0.35;
           font-family: SpoqaHanSans;
@@ -50,7 +61,6 @@
         box-shadow: none;
       }
     }
-
     .ant-form-item-has-error .ant-input:focus,
     .ant-form-item-has-error .ant-input-affix-wrapper:focus,
     .ant-form-item-has-error .ant-input-focused,
@@ -63,6 +73,21 @@
     .ant-form-item-has-error .ant-form-item-explain,
     .ant-form-item-has-error .ant-form-item-split {
       color: #ff4d4f;
+    }
+
+    .ant-radio-button-wrapper {
+      border: 1px solid @white;
+      border-radius: 4px;
+      &::before {
+        background-color: transparent;
+      }
+    }
+    .ant-radio-button-wrapper-checked {
+      border-color: @primary-color;
+      background-color: fade(@primary-color, 7%);
+      div {
+        color: @primary-color;
+      }
     }
   }
 }

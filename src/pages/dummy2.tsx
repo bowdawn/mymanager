@@ -13,6 +13,7 @@ import {
 } from 'antd';
 import Header from 'src/components/header';
 import './dummy2.less';
+import { ReactComponent as Checkbox } from 'src/assets/icons/checkbox.svg';
 
 const DummyPage2: FC = (props: any) => {
   const onFinish = async (values: any) => {
@@ -86,7 +87,8 @@ const DummyPage2: FC = (props: any) => {
         <div className='ph16 pv24 f-fd-c f-jc-sb f-ai-c'>
           <div>
             <Form.Item
-              label={<div className='h20'>*성명</div>}
+              label='*성명'
+              className='custom-form-label-h20 custom-form-label-mb2'
               labelCol={{ span: 24 }}
               wrapperCol={{ span: 24 }}
               name='name'
@@ -105,24 +107,54 @@ const DummyPage2: FC = (props: any) => {
             </Form.Item>
 
             <Form.Item
-              label={<div className='h20'>*성별</div>}
+              label='*성별'
+              className='custom-form-label-h20 custom-form-label-mb16'
               labelCol={{ span: 24 }}
               wrapperCol={{ span: 24 }}
               name='gender'
               rules={[{ required: true, message: 'Please input your gender!' }]}
+              shouldUpdate
             >
-              <Radio.Group style={{ display: 'flex' }} buttonStyle='solid'>
-                <Radio.Button style={{ flex: 1 }} value='a'>
-                  남
+              <Radio.Group
+                className='f'
+                onChange={(e) =>
+                  form.setFieldsValue({ ['gender']: e.target.value })
+                }
+              >
+                <Radio.Button className='f1 f-jc-c  f-ai-c pv21' value='a'>
+                  <div className='f-ai-c'>
+                    <Form.Item noStyle shouldUpdate>
+                      {() =>
+                        form.getFieldValue('gender') === 'a' ? (
+                          <Checkbox className='mr6' />
+                        ) : (
+                          ''
+                        )
+                      }
+                    </Form.Item>
+                    남
+                  </div>
                 </Radio.Button>
-                <Radio.Button style={{ flex: 1 }} value='b'>
-                  여
+                <Radio.Button className='f1 ml4 f-jc-c f-ai-c pv21' value='b'>
+                  <div className='f-ai-c'>
+                    <Form.Item noStyle shouldUpdate>
+                      {() =>
+                        form.getFieldValue('gender') === 'b' ? (
+                          <Checkbox className='mr6' />
+                        ) : (
+                          ''
+                        )
+                      }
+                    </Form.Item>
+                    여
+                  </div>
                 </Radio.Button>
               </Radio.Group>
             </Form.Item>
 
             <Form.Item
               label='생년월일 혹은 나이 중 하나를 꼭 입력해주세요.'
+              className='custom-form-label-h20 custom-form-label-mb16'
               labelCol={{ span: 24 }}
               name={
                 birthdateRequired && ageRequired
