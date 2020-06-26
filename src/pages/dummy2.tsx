@@ -216,6 +216,7 @@ const DummyPage2: FC = (props: any) => {
                             }}
                             min={0}
                             max={150}
+                            onChange={(value: any) => setBirthdate(null)}
                           />
                         )}
                       </Form.Item>
@@ -247,8 +248,10 @@ const DummyPage2: FC = (props: any) => {
           setDate={(date: Date) => {
             setBirthdate(date);
             console.log('setDate');
-            form.setFieldsValue({ age: 3 });
-            console.log(form.getFieldValue('age'));
+
+            form.setFieldsValue({
+              age: Math.floor(moment().diff(moment(date), 'years', true)),
+            });
           }}
           visible={datePickerVisible}
           setVisible={(value: boolean) => setDatePickerVisible(value)}
