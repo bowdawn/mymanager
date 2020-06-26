@@ -241,20 +241,19 @@ const DummyPage2: FC = (props: any) => {
             </div>
           </div>
         </div>
+        <DatePickerModal
+          date={birthdate}
+          setDate={(date: Date) => {
+            setBirthdate(date);
+            console.log('setDate');
+            form.setFieldsValue({ age: 3 });
+            console.log(form.getFieldValue('age'));
+          }}
+          visible={datePickerVisible}
+          setVisible={(value: boolean) => setDatePickerVisible(value)}
+        ></DatePickerModal>
       </Form>
       <Footer className='f1' />
-
-      <DatePickerModal
-        date={birthdate}
-        setDate={(date: Date) => {
-          setBirthdate(date);
-          console.log('setDate');
-          form.setFieldsValue({ age: 3 });
-          console.log(form.getFieldValue('age'));
-        }}
-        visible={datePickerVisible}
-        setVisible={(value: boolean) => setDatePickerVisible(value)}
-      ></DatePickerModal>
     </div>
   );
 };
