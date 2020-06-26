@@ -1,16 +1,23 @@
 @import '../ant-override/default.less';
+@import '../constants/colors.less';
 
 each(range(25), {
     .fs@{value} {
         font-size: @value * 1px;
       }
 })
-  .fcpc {
+  .fc-pc {
   color: @primary-color;
-  & div {
-    color: @primary-color;
-  }
 }
+
+.fc-dsb {
+  color: @dark-sky-blue;
+}
+
+.fc-w {
+  color: white;
+}
+
 .fwb {
   font-weight: bold;
 }

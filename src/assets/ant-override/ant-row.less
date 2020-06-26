@@ -1,7 +1,15 @@
 @import './default.less';
+@import '../constants/colors.less';
 
 .ant-row-primary-color.ant-row {
   background-color: @primary-color;
+  .ant-col {
+    color: white;
+  }
+}
+
+.ant-row-midnight.ant-row {
+  background-color: @midnight;
   .ant-col {
     color: white;
   }

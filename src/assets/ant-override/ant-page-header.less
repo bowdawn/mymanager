@@ -6,6 +6,9 @@
   padding-left: 14px;
   padding-right: 16px;
   padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   .ant-page-header-heading {
     .ant-page-header-heading-left {
       transition: all 0.3s;
@@ -27,10 +30,36 @@
         }
       }
     }
+    .ant-page-header-heading-extra {
+      transition: all 0.3s;
+      position: relative;
+      color: white;
+      > div {
+        position: absolute;
+        top: -4px;
+        left: -42px;
+        &:active {
+          padding-top: 2px;
+          path {
+            fill: @primary-1;
+          }
+        }
+      }
+
+      &:hover {
+        div {
+          color: @primary-1;
+        }
+
+        path {
+          fill: @primary-1;
+        }
+      }
+    }
   }
 
   .ant-page-header-content {
-    padding-top: 20px;
+    padding: 0px;
     div.title {
       font-family: '12LotteMartDream';
       font-size: 26px;

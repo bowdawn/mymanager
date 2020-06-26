@@ -14,7 +14,7 @@ import {
   Button,
   Modal,
 } from 'antd';
-import {
+import Icon, {
   SaveOutlined,
   LeftOutlined,
   RightOutlined,
@@ -22,6 +22,7 @@ import {
   DownOutlined,
   PlusOutlined,
 } from '@ant-design/icons';
+import { ReactComponent as SaveIcon } from 'src/assets/icons/save.svg';
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
 const tabs = [
@@ -95,17 +96,21 @@ const DummyPage3: FC = (props: any) => {
     <div>
       <Header
         title='플랜 확인'
-        subTitle={
-          <div onClick={() => setSaveModal(1)}>
-            <Space size={4}>
-              <SaveOutlined style={{ fontSize: 25 }} />
-              저장
-            </Space>
+        extra={
+          <div className='f-fd-c' onClick={() => setSaveModal(1)}>
+            <Icon className='mb6' component={() => <SaveIcon />} />
+            <div className='fs12 fls6'>플랜저장</div>
           </div>
         }
+        backgroundColor
       />
-      <Row className='ant-row-primary-color' justify='center' gutter={[0, 20]}>
-        <Col>감백호 님 보험연령 46세</Col>
+      <Row className='ant-row-midnight ' justify='center'>
+        <Col>
+          <div className='pv10 fs18'>
+            <span className='fc-dsb'>김백호</span>님 보험연령
+            <span className='fc-dsb'>46</span>세
+          </div>
+        </Col>
       </Row>
       <Space direction='vertical' style={{ width: '100%' }}>
         <div

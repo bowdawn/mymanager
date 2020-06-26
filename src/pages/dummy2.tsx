@@ -225,7 +225,7 @@ const DummyPage2: FC = (props: any) => {
                 </Input.Group>
               </Form.Item>
             </div>
-            <div className='fs12 fcpc fls6 mb12'>
+            <div className='fs12 fc-pc fls6 mb12'>
               *최대 10개까지 설계가 가능합니다.
             </div>
             <div className='mb40'>
