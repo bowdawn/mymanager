@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import koKr from 'antd/es/locale/ko_KR';
 import 'src/assets/constants/colors';
+import 'src/assets/constants/globals';
 
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
@@ -35,8 +36,12 @@ const App: FC = () => {
       <div
         className='mobile-border'
         style={{
-          width: width > maxWidth ? maxWidth : width,
-          height: height > maxHeight ? maxHeight : height,
+          width:
+            width > parseInt(maxScreenWidth) ? parseInt(maxScreenWidth) : width,
+          height:
+            height > parseInt(maxScreenHeight)
+              ? parseInt(maxScreenHeight)
+              : height,
         }}
       >
         <ConfigProvider locale={koKr}>

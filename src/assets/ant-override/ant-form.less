@@ -3,7 +3,15 @@
 
 .custom-ant-form.ant-form {
   .ant-form-item {
-    margin-bottom: 40px;
+    margin-bottom: 0px;
+    &.custom-form-label-primary {
+      .ant-form-item-label {
+        label {
+          color: @primary-color;
+        }
+      }
+    }
+
     @h-values: 18, 20;
     each(@h-values, {
       &.custom-form-label-h@{value} {
@@ -15,7 +23,7 @@
         }
       }
     });
-    @mb-values: 2, 16;
+    @mb-values: 16, 2;
     each(@mb-values, {
       &.custom-form-label-mb@{value} {
         .ant-form-item-label {
@@ -24,6 +32,9 @@
       }
     });
     .ant-form-item-label {
+      label {
+        letter-spacing: -0.6px;
+      }
       .ant-form-item-required {
         font-size: 14px;
         font-weight: bold;
@@ -37,7 +48,8 @@
       padding: 0px;
     }
     .ant-form-item-control-input-content {
-      .ant-input {
+      .ant-input,
+      .ant-input-number {
         border-radius: 0;
         border-top: none;
         border-left: none;
@@ -56,23 +68,12 @@
         }
       }
       .ant-input:focus,
-      .ant-input-focused {
+      .ant-input-focused,
+      .ant-input-number:focus,
+      .ant-input-number-focused {
         outline: 0;
         box-shadow: none;
       }
-    }
-    .ant-form-item-has-error .ant-input:focus,
-    .ant-form-item-has-error .ant-input-affix-wrapper:focus,
-    .ant-form-item-has-error .ant-input-focused,
-    .ant-form-item-has-error .ant-input-affix-wrapper-focused {
-      border-color: #ff7875;
-      border-right-width: 1px !important;
-      outline: 0;
-      box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.2);
-    }
-    .ant-form-item-has-error .ant-form-item-explain,
-    .ant-form-item-has-error .ant-form-item-split {
-      color: #ff4d4f;
     }
 
     .ant-radio-button-wrapper {

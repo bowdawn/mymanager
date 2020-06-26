@@ -1,5 +1,23 @@
+@import '../ant-override/default.less';
+
 each(range(25), {
     .fs@{value} {
         font-size: @value * 1px;
       }
 })
+  .fcpc {
+  color: @primary-color;
+  & div {
+    color: @primary-color;
+  }
+}
+.fwb {
+  font-weight: bold;
+}
+
+@ls-values: 6, 7, 8;
+each(@ls-values, {
+  .fls@{value} {
+    letter-spacing: @value * -0.1px; 
+  }
+});
