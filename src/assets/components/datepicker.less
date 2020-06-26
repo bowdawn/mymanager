@@ -1,43 +1,45 @@
 @import '../ant-override/default.less';
 
-.datepicker.android .datepicker-header,
-.datepicker.android-dark .datepicker-header {
-  color: @primary-color;
-  border-color: @primary-color;
-  display: flex;
-  padding: 8px 16px;
-}
+.custom-date-picker-styling {
+  .datepicker.android .datepicker-header,
+  .datepicker.android-dark .datepicker-header {
+    color: @primary-color;
+    border-color: @primary-color;
+    display: flex;
+    padding: 8px 16px;
+  }
 
-.datepicker.android .datepicker-wheel,
-.datepicker.android-dark .datepicker-wheel {
-  border-color: @primary-color;
-}
+  .datepicker.android .datepicker-wheel,
+  .datepicker.android-dark .datepicker-wheel {
+    border-color: @primary-color;
+  }
 
-.datepicker.android,
-.datepicker.android-dark {
-  background-color: white;
-}
+  .datepicker.android,
+  .datepicker.android-dark {
+    background-color: white;
+  }
 
-.datepicker.android .datepicker-viewport::after,
-.datepicker.android-dark .datepicker-viewport::after {
-  background-image: unset;
-}
+  .datepicker.android .datepicker-viewport::after,
+  .datepicker.android-dark .datepicker-viewport::after {
+    background-image: unset;
+  }
 
-.datepicker.android .datepicker-navbar-btn:nth-child(2),
-.datepicker.android-dark .datepicker-navbar-btn:nth-child(2) {
-  border-left: unset;
-}
+  .datepicker.android .datepicker-navbar-btn:nth-child(2),
+  .datepicker.android-dark .datepicker-navbar-btn:nth-child(2) {
+    border-left: unset;
+  }
 
-.datepicker.android .datepicker-navbar-btn:nth-child(1),
-.datepicker.android-dark .datepicker-navbar-btn:nth-child(1) {
-  border-left: 1px solid #d9d4d4;
-}
+  .datepicker.android .datepicker-navbar-btn:nth-child(1),
+  .datepicker.android-dark .datepicker-navbar-btn:nth-child(1) {
+    border-left: 1px solid #d9d4d4;
+  }
 
-.datepicker.android .datepicker-navbar,
-.datepicker.android-dark .datepicker-navbar {
-  flex-direction: row-reverse;
-}
+  .datepicker.android .datepicker-navbar,
+  .datepicker.android-dark .datepicker-navbar {
+    flex-direction: row-reverse;
+  }
 
-.datepicker {
-  position: unset;
+  .datepicker {
+    position: unset;
+  }
 }

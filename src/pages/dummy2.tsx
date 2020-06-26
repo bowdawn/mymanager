@@ -241,6 +241,7 @@ const DummyPage2: FC = (props: any) => {
             </div>
           </div>
         </div>
+
         <DatePickerModal
           date={birthdate}
           setDate={(date: Date) => {

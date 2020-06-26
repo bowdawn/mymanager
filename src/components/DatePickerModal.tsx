@@ -45,16 +45,18 @@ const DatePickerModal: FC<Props> = ({ date, setDate, visible, setVisible }) => {
         </div>
       }
     >
-      <DatePicker
-        value={time}
-        headerFormat={`YYYY년 MM월 DD일 ${moment(time).format('dddd')}`}
-        onChange={(time: Date) => setTime(time)}
-        min={new Date(1980, 1, 1)}
-        max={new Date()}
-        theme='android'
-        showFooter={false}
-        isPopup={false}
-      />
+      <div className='custom-date-picker-styling'>
+        <DatePicker
+          value={time}
+          headerFormat={`YYYY년 MM월 DD일 ${moment(time).format('dddd')}`}
+          onChange={(time: Date) => setTime(time)}
+          min={new Date(1980, 1, 1)}
+          max={new Date()}
+          theme='android'
+          showFooter={false}
+          isPopup={false}
+        />
+      </div>
     </Modal>
   );
 };
