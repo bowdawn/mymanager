@@ -24,7 +24,7 @@ const Header: FC<Props> = ({ title, extra, backgroundColor }) => {
         }
         onBack={() => message.info('header back: to be implemented')}
         title={null}
-        extra={extra ? <div>{extra}</div> : <div></div>}
+        extra={extra ? <div>{extra}</div> : <div>cccccccccccccccccc</div>}
       >
         {<div className='title'>{title}</div>}
       </PageHeader>

@@ -155,7 +155,12 @@ const DummyPage3: FC = (props: any) => {
 
       <Divider />
       <Space direction='vertical' style={{ width: '100%' }}>
-        <Tabs defaultActiveKey='1' tabPosition={'top'} tabBarGutter={10}>
+        <Tabs
+          defaultActiveKey='1'
+          tabPosition={'top'}
+          tabBarGutter={0}
+          onTabScroll={(event) => console.log(event)}
+        >
           {tabs.map((item: any, i: number) => (
             <TabPane tab={<div className='w78'>{item.title}</div>} key={i}>
               <Divider />
