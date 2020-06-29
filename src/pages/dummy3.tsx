@@ -25,6 +25,8 @@ import Icon, {
 } from '@ant-design/icons';
 import { ReactComponent as Checkbox } from 'src/assets/icons/checkbox.svg';
 import { ReactComponent as SaveIcon } from 'src/assets/icons/save.svg';
+import { ReactComponent as PrevArrow } from 'src/assets/icons/carousel-arrow-left.svg';
+import { ReactComponent as NextArrow } from 'src/assets/icons/carousel-arrow-right.svg';
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
 
@@ -166,11 +168,10 @@ const DummyPage3: FC = (props: any) => {
               tab={<div className='w78 f-jc-c'>{item.title}</div>}
               key={i}
             >
-              <Divider />
               <Carousel
                 arrows={true}
-                prevArrow={<LeftOutlined />}
-                nextArrow={<RightOutlined />}
+                prevArrow={<Icon component={() => <PrevArrow />} />}
+                nextArrow={<Icon component={() => <NextArrow />} />}
                 draggable={true}
                 className='mt10'
               >

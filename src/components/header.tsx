@@ -1,7 +1,7 @@
 import React, { FC, ReactHTMLElement, ReactChild } from 'react';
 import { message, PageHeader } from 'antd';
 
-import { ReactComponent as ArrowLeft } from 'src/assets/icons/arrow-left.svg';
+import { ReactComponent as ArrowLeft } from 'src/assets/icons/header-arrow-left.svg';
 import Icon from '@ant-design/icons';
 import 'src/assets/components/header.less';
 import { Link } from 'react-router-dom';
