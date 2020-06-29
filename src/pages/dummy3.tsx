@@ -162,7 +162,10 @@ const DummyPage3: FC = (props: any) => {
           onTabScroll={(event) => console.log(event)}
         >
           {tabs.map((item: any, i: number) => (
-            <TabPane tab={<div className='w78'>{item.title}</div>} key={i}>
+            <TabPane
+              tab={<div className='w78 f-jc-c'>{item.title}</div>}
+              key={i}
+            >
               <Divider />
               <Carousel
                 arrows={true}
