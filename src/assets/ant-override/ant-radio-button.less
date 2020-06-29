@@ -1,0 +1,24 @@
+@import './default.less';
+@import '../constants/colors.less';
+
+.ant-override {
+  .ant-radio-button-wrapper {
+    border: 1px solid @white;
+    border-radius: 4px;
+    color: @greyish-brown;
+    &::before {
+      background-color: transparent;
+    }
+  }
+  .ant-radio-button-wrapper-checked {
+    border-color: @primary-color;
+    background-color: fade(@primary-color, 7%);
+    div {
+      color: @primary-color;
+    }
+  }
+
+  .ant-radio-button-wrapper:first-child:last-child {
+    border-radius: 4px;
+  }
+}

@@ -32,7 +32,7 @@ const App: FC = () => {
   const maxWidth = 500;
   const maxHeight = 900;
   return (
-    <div className='App'>
+    <div className='App ant-override'>
       <div
         className='mobile-border'
         style={{

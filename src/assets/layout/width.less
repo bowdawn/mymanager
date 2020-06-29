@@ -16,3 +16,12 @@ each(range(30 , 100, 5 ), {
       width: @value * 1px;
     }
 })
+
+
+@specific-widths: 78, 79;
+
+each(@specific-widths, {
+  .w@{value} {
+    width: @value * 1px;
+  }
+})
