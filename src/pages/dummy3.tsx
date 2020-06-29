@@ -22,11 +22,16 @@ import Icon, {
   DeleteOutlined,
   DownOutlined,
   PlusOutlined,
+  CaretDownOutlined,
 } from '@ant-design/icons';
 import { ReactComponent as Checkbox } from 'src/assets/icons/checkbox.svg';
 import { ReactComponent as SaveIcon } from 'src/assets/icons/save.svg';
 import { ReactComponent as PrevArrow } from 'src/assets/icons/carousel-arrow-left.svg';
 import { ReactComponent as NextArrow } from 'src/assets/icons/carousel-arrow-right.svg';
+import { ReactComponent as DeleteIcon } from 'src/assets/icons/delete-icon.svg';
+import { ReactComponent as PlusIcon } from 'src/assets/icons/plus-icon.svg';
+import Footer from 'src/components/footer';
+
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
 
@@ -40,33 +45,36 @@ const tabs = [
   {
     title: '3대질병',
     cards: [
-      { content: '3대질병 content 1 ' },
-      { content: '3대질병 content 2 ' },
+      { content: '카드를 선택하세요' },
+      { content: '다른 카드를 선택하세요' },
     ],
   },
   {
     title: '4대질병',
     cards: [
-      { content: '4대질병 content 1 ' },
-      { content: '4대질병 content 2 ' },
+      { content: '4대질병 카드를 선택하세요' },
+      { content: '다른 4대질병 카드를 선택하세요' },
     ],
   },
   {
     title: '운전자보험',
     cards: [
-      { content: '운전자보험 content 1 ' },
-      { content: '운전자보험 content 2 ' },
+      { content: '운전자보험 카드를 선택하세요' },
+      { content: '다른 운전자보험 카드를 선택하세요 ' },
     ],
   },
   {
     title: '암보혐',
-    cards: [{ content: '암보혐 content 1 ' }, { content: '암보혐 content 2 ' }],
+    cards: [
+      { content: '암보혐 카드를 선택하세요' },
+      { content: '다른 암보혐 카드를 선택하세요' },
+    ],
   },
   {
     title: '실손보험',
     cards: [
-      { content: '실손보험 content 1 ' },
-      { content: '실손보험 content 2 ' },
+      { content: '실손보험 카드를 선택하세요' },
+      { content: '다른 실손보험 카드를 선택하세요' },
     ],
   },
 ];
@@ -156,66 +164,52 @@ const DummyPage3: FC = (props: any) => {
       </div>
 
       <Divider />
-      <Space direction='vertical' style={{ width: '100%' }}>
-        <Tabs
-          defaultActiveKey='1'
-          tabPosition={'top'}
-          tabBarGutter={0}
-          onTabScroll={(event) => console.log(event)}
-        >
-          {tabs.map((item: any, i: number) => (
-            <TabPane
-              tab={<div className='w78 f-jc-c'>{item.title}</div>}
-              key={i}
+
+      <Tabs
+        defaultActiveKey='0'
+        tabPosition={'top'}
+        tabBarGutter={0}
+        onTabScroll={(event) => console.log(event)}
+        className='mb24'
+      >
+        {tabs.map((item: any, i: number) => (
+          <TabPane tab={<div className='w78 f-jc-c'>{item.title}</div>} key={i}>
+            <Carousel
+              arrows={true}
+              prevArrow={<Icon component={() => <PrevArrow />} />}
+              nextArrow={<Icon component={() => <NextArrow />} />}
+              draggable={true}
+              dots={false}
             >
-              <Carousel
-                arrows={true}
-                prevArrow={<Icon component={() => <PrevArrow />} />}
-                nextArrow={<Icon component={() => <NextArrow />} />}
-                draggable={true}
-                className='mt10'
-              >
-                {item.cards.map((item: any, j: number) => (
-                  <Card
-                    key={`card${i}-${j}`}
-                    hoverable
-                    onClick={() =>
-                      message.info(
-                        'selected card news on click: to be implemented'
-                      )
-                    }
-                    className='m24'
-                  >
-                    <div
-                      style={{
-                        height: 200,
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                    >
-                      {item.content}
-                    </div>
-                  </Card>
-                ))}
-              </Carousel>
-            </TabPane>
-          ))}
-        </Tabs>
-      </Space>
+              {item.cards.map((item: any, j: number) => (
+                <div
+                  key={`card${i}-${j}`}
+                  onClick={() =>
+                    message.info(
+                      'selected card news on click: to be implemented'
+                    )
+                  }
+                >
+                  <div className='f-jc-c f-ai-c fc-pc fu fls7 h328'>
+                    {item.content}
+                  </div>
+                </div>
+              ))}
+            </Carousel>
+          </TabPane>
+        ))}
+      </Tabs>
+
       <div
+        className='ph16 f-fd-c f-jc-sb f-ai-c'
         style={{
-          paddingRight: 25,
-          paddingLeft: 25,
-          paddingTop: 0,
-          paddingBottom: 0,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
           alignItems: 'center',
         }}
       >
-        <Space direction='vertical' style={{ width: '100%' }}>
+        <Space direction='vertical' size={10} style={{ width: '100%' }}>
           {productCards.map((item: any, i: number) => (
             <Card
               className='ant-card-no-padding'
@@ -225,32 +219,39 @@ const DummyPage3: FC = (props: any) => {
                 message.info('product card on click: to be implemented')
               }
             >
-              <div style={{ padding: 8 }}>
+              <div className='p16'>
+                <div className='f-jc-sb'>
+                  <Space size={8}>
+                    {item.tags.map((tag: any, j: number) => (
+                      <div className='fls7' key={`tag${i}-${j}`}>
+                        {tag}
+                      </div>
+                    ))}
+                  </Space>
+
+                  <Icon
+                    component={() => (
+                      <DeleteIcon
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          message.info('delete card: to be implemented');
+                        }}
+                      />
+                    )}
+                  />
+                </div>
+
+                <div className='fs12 fc-gf mb10'>{item.title}</div>
+
                 <Row justify='space-between'>
-                  <Col>{item.title}</Col>
                   <Col>
-                    <DeleteOutlined
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        message.info('delete card: to be implemented');
-                      }}
-                    />
+                    <Tag color={darkSkyBlue} className='fc-w'>
+                      {item.type}
+                    </Tag>
                   </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <Space>
-                      {item.tags.map((tag: any, j: number) => (
-                        <div key={`tag${i}-${j}`}>{tag}</div>
-                      ))}
-                    </Space>
+                  <Col className='fwb'>
+                    {item.price.toLocaleString('ko-Kr')}원
                   </Col>
-                </Row>
-                <Row justify='space-between'>
-                  <Col>
-                    <Tag color={'#37bd7d'}>{item.type}</Tag>
-                  </Col>
-                  <Col>{item.price.toLocaleString('ko-Kr')}원</Col>
                 </Row>
               </div>
               <Collapse activeKey={[collapsedKeyArray[i]]}>
@@ -269,9 +270,8 @@ const DummyPage3: FC = (props: any) => {
                 </Panel>
               </Collapse>
 
-              <Row
-                justify='center'
-                gutter={8}
+              <div
+                className='f-jc-c f-ai-c pv8 lighten-svg-hover  lighten-svg-text-hover '
                 onClick={(e) => {
                   e.stopPropagation();
                   collapsedKeyArray[i] =
@@ -279,49 +279,45 @@ const DummyPage3: FC = (props: any) => {
                   setCollapsedKeyArray([...collapsedKeyArray]);
                 }}
               >
-                <Col>연령별 설계</Col>
-                <Col>
-                  <DownOutlined
-                    className='rotate-transition'
-                    rotate={collapsedKeyArray[i] === '1' ? 180 : 0}
-                  />
-                </Col>
-              </Row>
+                <div className='mr4'>연령별 설계</div>
+                <CaretDownOutlined
+                  className='ml4 rotate-transition fs7'
+                  rotate={collapsedKeyArray[i] === '1' ? 180 : 0}
+                />
+              </div>
             </Card>
           ))}
-          <Card
-            className='ant-card-hover-primary-border'
+          <Button
+            className='f-jc-c f-ai-c h76 wp100 mb40 fwb fls7'
             onClick={() => message.info('add product: to be implemented')}
           >
-            <div>상품 추가하기</div>
-            <PlusOutlined style={{ fontSize: 25 }} />
-          </Card>
-
-          <Row gutter={[8, 25]}>
-            <Col>
-              <Button
-                size='large'
-                onClick={() => message.info('cancel button: to be implemented')}
-              >
-                취소
-              </Button>
-            </Col>
-            <Col flex={1}>
-              <Button
-                type='primary'
-                size='large'
-                style={{ width: '100%' }}
-                onClick={() =>
-                  message.info('send to kakaotalk button: to be implemented')
-                }
-              >
-                카카오톡으로 보내기
-              </Button>
-            </Col>
-          </Row>
+            <div className='mr4'>상품 추가하기</div>
+            <PlusIcon className='ml4' />
+          </Button>
         </Space>
-      </div>
+        <div className='f wp100 mb50'>
+          <Button
+            className='mr8'
+            size='large'
+            onClick={() => message.info('cancel button: to be implemented')}
+          >
+            취소
+          </Button>
 
+          <Button
+            className='f1'
+            type='primary'
+            size='large'
+            style={{ width: '100%' }}
+            onClick={() =>
+              message.info('send to kakaotalk button: to be implemented')
+            }
+          >
+            카카오톡으로 보내기
+          </Button>
+        </div>
+      </div>
+      <Footer />
       <Modal
         closable={false}
         title={null}

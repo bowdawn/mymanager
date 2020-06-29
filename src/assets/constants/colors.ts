@@ -9,5 +9,6 @@
 (global as any)["black10"] = "rgba(0, 0, 0, 0.1)";
 (global as any)["black"] = "#262626";
 (global as any)["white"] = "#e8e8e8";
+(global as any)["whiteTwo"] = "#faf9f9";
 (global as any)["peacockBlue7"] = "rgba(3, 90, 166, 0.07)";
 export {};
