@@ -279,7 +279,6 @@ const DummyPage3: FC = (props: any) => {
                   setCollapsedKeyArray([...collapsedKeyArray]);
                 }}
               >
-                {}
                 <div className='mr4'>연령별 설계</div>
                 <CaretDownOutlined
                   className='ml4 rotate-transition fs7'
