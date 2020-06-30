@@ -122,6 +122,7 @@ const DummyPage3: FC = (props: any) => {
   const [saveModal, setSaveModal] = useState(0);
 
   const [myPlan, setMyPlan] = useState('');
+  const [savePlan, setSavePlan] = useState('');
 
   return (
     <div>
@@ -313,26 +314,6 @@ const DummyPage3: FC = (props: any) => {
                       key='premium'
                     ></Table.Column>
                   </Table>
-                  {/* <Row>
-                    <Col flex={1} className='fc-pc fwb fs12 fls6'></Col>
-                    <Col flex={1} className='fc-pc fwb fs12 fls6'>
-                      월보험료
-                    </Col>
-                    <Col flex={1} className='fc-pc fwb fs10 fls10.2'>
-                      현재 나이 대비 <br /> 더 납입할 보험료 총계원
-                    </Col>
-                  </Row>
-                  {item.ageGroupPlan.map((_item: any) => (
-                    <Row align='middle'>
-                      <Col flex={1}>{_item.age}세</Col>
-                      <Col flex={1}>
-                        <div>{_item.price.toLocaleString('ko-Kr')}원</div>
-                      </Col>
-                      <Col flex={1}>
-                        <div>{_item.premium.toLocaleString('ko-Kr')}원</div>
-                      </Col>
-                    </Row> 
-                  ))}*/}
                 </Panel>
               </Collapse>
 
@@ -393,73 +374,70 @@ const DummyPage3: FC = (props: any) => {
         visible={saveModal !== 0}
         footer={null}
         onCancel={() => setSaveModal(0)}
-        width={275}
+        width={296}
         centered
       >
         {(saveModal === 1
           ? [
-              <div>어디에 저장하실지 선택해주세요</div>,
-              <div>*이전 데이터가 있을 경우 사라질 수 있습니다.</div>,
-              <Radio.Group buttonStyle='solid' style={{ width: '100%' }}>
+              <div className='fs18 fwb fo9 fc-bt'>
+                저장 위치를 선택해주세요.
+              </div>,
+              <div className='fls7 mb24'>
+                * 이전 데이터가 있을 경우 사라질 수 있습니다.
+              </div>,
+              <Radio.Group className='ant-override' style={{ width: '100%' }}>
                 <Space
                   direction='vertical'
-                  style={{ width: '100%' }}
+                  className='wp100 mb24'
                   align='center'
+                  size={10}
                 >
-                  <Radio.Button
-                    value='a'
-                    onClick={() =>
-                      message.info('save my plan 1 button : to be implemented')
-                    }
-                  >
-                    나의 플랜1
-                  </Radio.Button>
-                  <Radio.Button
-                    value='b'
-                    onClick={() =>
-                      message.info('save my plan 2 button : to be implemented')
-                    }
-                  >
-                    나의 플랜2
-                  </Radio.Button>
-                  <Radio.Button
-                    value='c'
-                    onClick={() =>
-                      message.info('save my plan 3 button : to be implemented')
-                    }
-                  >
-                    나의 플랜3
-                  </Radio.Button>
+                  {myPlans.map((item: any, index: number) => (
+                    <Radio.Button
+                      value={item.value}
+                      key={`save-plan-${index + 1}`}
+                      onClick={() =>
+                        message.info(
+                          `save my plan ${index + 1} button : to be implemented`
+                        )
+                      }
+                    >
+                      {item.label}
+                    </Radio.Button>
+                  ))}
                 </Space>
               </Radio.Group>,
               <div className='f'>
-                <Button className='f1' onClick={() => setSaveModal(0)}>
+                <Button
+                  className='f1 mr8 primary-border-button-hover br4'
+                  onClick={() => setSaveModal(0)}
+                >
                   취소
                 </Button>
 
                 <Button
                   type='primary'
-                  className='f1'
+                  className='f1 br4'
                   onClick={() => setSaveModal(2)}
                 >
                   저장
                 </Button>
               </div>,
             ]
-          : [
-              <div>저장이 완료 되었습니다</div>,
-              <Row>
-                <Col flex={1}>
-                  <Button
-                    type='primary'
-                    style={{ width: '100%' }}
-                    onClick={() => setSaveModal(0)}
-                  >
-                    닫기
-                  </Button>
-                </Col>
-              </Row>,
+          : saveModal === 2
+          ? [
+              <div className='f-jc-c mt36 mb42 '>저장이 완료 되었습니다</div>,
+              <div className='f-jc-c'>
+                <Button
+                  className='h55 w128'
+                  type='primary'
+                  onClick={() => setSaveModal(0)}
+                >
+                  닫기
+                </Button>
+              </div>,
             ]
+          : []
         ).map((item: any) => item)}
       </Modal>
     </div>

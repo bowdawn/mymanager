@@ -8,6 +8,7 @@ declare var greyishBrown: string;
 declare var warmGrey: string;
 declare var warmGreyTwo: string;
 declare var pinkishGrey: string;
+declare var blackThree: string;
 declare var black10: string;
 declare var black: string;
 declare var white: string;

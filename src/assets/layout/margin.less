@@ -51,3 +51,32 @@ each(range(25 , 50, 5), {
       }
 
   });
+
+@m-values: 36 42;
+
+each(@m-values, {
+    .m@{value} {
+      margin: @value * 1px;
+    }
+    .mt@{value} {
+        margin-top: @value * 1px;
+      }
+      .mr@{value} {
+        margin-right: @value * 1px;
+      }
+      .mb@{value} {
+        margin-bottom: @value * 1px;
+      }
+      .ml@{value} {
+        margin-left: @value * 1px;
+      }
+      .mh@{value} {
+        margin-left: @value * 1px;
+        margin-right: @value * 1px;
+      }
+      .mv@{value} {
+        margin-top: @value * 1px;
+        margin-bottom: @value * 1px;
+      }
+
+  });

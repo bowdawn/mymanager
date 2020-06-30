@@ -26,9 +26,14 @@ each(range(25), {
   color: @grapefruit;
 }
 
+.fc-bt {
+  color: @black-three;
+}
+
 .fwb {
   font-weight: bold;
 }
+
 .fw300 {
   font-weight: 300;
 }
@@ -48,3 +53,12 @@ each(@ls-values, {
 .fu {
   text-decoration: underline;
 }
+
+@o-values: 2, 9;
+each(@o-values, {
+  
+  .fo@{value} {
+    letter-spacing: @value * 0.1; 
+  }
+
+});
