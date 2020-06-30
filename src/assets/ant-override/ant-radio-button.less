@@ -7,7 +7,6 @@
     border-radius: 4px;
     color: @greyish-brown;
     &::before {
-      background-color: transparent;
     }
   }
   .ant-radio-button-wrapper-checked {
@@ -20,5 +19,11 @@
 
   .ant-radio-button-wrapper:first-child:last-child {
     border-radius: 4px;
+  }
+  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):active::before {
+    content: none;
+  }
+  .ant-radio-button-wrapper:not(:first-child)::before {
+    content: none;
   }
 }

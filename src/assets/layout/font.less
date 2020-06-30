@@ -29,14 +29,22 @@ each(range(25), {
 .fwb {
   font-weight: bold;
 }
+.fw300 {
+  font-weight: 300;
+}
 
 @ls-values: 6, 7, 8;
 each(@ls-values, {
+  
   .fls@{value} {
     letter-spacing: @value * -0.1px; 
   }
+
 });
 
+.fls {
+  letter-spacing: -1.02px;
+}
 .fu {
   text-decoration: underline;
 }

@@ -14,6 +14,7 @@ import {
   Button,
   Modal,
   Divider,
+  Table,
 } from 'antd';
 import Icon, {
   SaveOutlined,
@@ -32,7 +33,10 @@ import { ReactComponent as DeleteIcon } from 'src/assets/icons/delete-icon.svg';
 import { ReactComponent as PlusIcon } from 'src/assets/icons/plus-icon.svg';
 import { ReactComponent as KakaoIcon } from 'src/assets/icons/kakao.svg';
 import Footer from 'src/components/footer';
+import img from 'src/assets/images/dummy3/card.jpg';
+
 import './dummy3.less';
+
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
 
@@ -46,6 +50,7 @@ const tabs = [
   {
     title: '3대질병',
     cards: [
+      { content: '', img: true },
       { content: '카드를 선택하세요' },
       { content: '다른 카드를 선택하세요' },
     ],
@@ -54,6 +59,7 @@ const tabs = [
     title: '4대질병',
     cards: [
       { content: '4대질병 카드를 선택하세요' },
+      { content: '', img: true },
       { content: '다른 4대질병 카드를 선택하세요' },
     ],
   },
@@ -62,11 +68,13 @@ const tabs = [
     cards: [
       { content: '운전자보험 카드를 선택하세요' },
       { content: '다른 운전자보험 카드를 선택하세요 ' },
+      { content: '', img: true },
     ],
   },
   {
     title: '암보혐',
     cards: [
+      { content: '', img: true },
       { content: '암보혐 카드를 선택하세요' },
       { content: '다른 암보혐 카드를 선택하세요' },
     ],
@@ -76,6 +84,7 @@ const tabs = [
     cards: [
       { content: '실손보험 카드를 선택하세요' },
       { content: '다른 실손보험 카드를 선택하세요' },
+      { content: '', img: true },
     ],
   },
 ];
@@ -180,7 +189,7 @@ const DummyPage3: FC = (props: any) => {
               prevArrow={<Icon component={() => <PrevArrow />} />}
               nextArrow={<Icon component={() => <NextArrow />} />}
               draggable={true}
-              dots={false}
+              appendDots={(dots) => <div className='custom-dots'>{dots}</div>}
             >
               {item.cards.map((item: any, j: number) => (
                 <div
@@ -191,8 +200,12 @@ const DummyPage3: FC = (props: any) => {
                     )
                   }
                 >
-                  <div className='f-jc-c f-ai-c fc-pc fu fls7 h328'>
-                    {item.content}
+                  <div className='f-jc-c f-ai-c fc-pc fu fls7 '>
+                    {item.img ? (
+                      <img className='wp100' src={img} />
+                    ) : (
+                      <div className='hp100'>{item.content}</div>
+                    )}
                   </div>
                 </div>
               ))}
@@ -257,17 +270,69 @@ const DummyPage3: FC = (props: any) => {
               </div>
               <Collapse activeKey={[collapsedKeyArray[i]]}>
                 <Panel showArrow={false} header={null} key='1'>
+                  <Table
+                    className='clean-style-table'
+                    dataSource={item.ageGroupPlan}
+                    pagination={false}
+                  >
+                    <Table.Column
+                      align='center'
+                      title={<div className='fc-pc fwb fs12 fls6'>나이</div>}
+                      dataIndex='age'
+                      key='age'
+                      render={(value) => (
+                        <div className='fs14 fls7'> {value}세</div>
+                      )}
+                    ></Table.Column>
+                    <Table.Column
+                      align='center'
+                      title={
+                        <div className='fc-pc fwb fs12 fls6'>월보험료</div>
+                      }
+                      render={(value) => (
+                        <div className='fs14 fwb'>
+                          {value.toLocaleString('ko-Kr')}원
+                        </div>
+                      )}
+                      dataIndex='price'
+                      key='price'
+                    ></Table.Column>
+                    <Table.Column
+                      align='center'
+                      title={
+                        <div className='fc-pc fwb fs10 fls10.2'>
+                          현재 나이 대비 <br /> 더 납입할 보험료 총계원
+                        </div>
+                      }
+                      render={(value) => (
+                        <div className='fs14 fw300'>
+                          (+{value.toLocaleString('ko-Kr')}원)
+                        </div>
+                      )}
+                      dataIndex='premium'
+                      key='premium'
+                    ></Table.Column>
+                  </Table>
+                  {/* <Row>
+                    <Col flex={1} className='fc-pc fwb fs12 fls6'></Col>
+                    <Col flex={1} className='fc-pc fwb fs12 fls6'>
+                      월보험료
+                    </Col>
+                    <Col flex={1} className='fc-pc fwb fs10 fls10.2'>
+                      현재 나이 대비 <br /> 더 납입할 보험료 총계원
+                    </Col>
+                  </Row>
                   {item.ageGroupPlan.map((_item: any) => (
-                    <Row justify={'space-between'}>
-                      <Col>{_item.age}세</Col>
-                      <Col>
-                        <Space>
-                          <div>{_item.price.toLocaleString('ko-Kr')}원</div>
-                          <div>{_item.premium.toLocaleString('ko-Kr')}원</div>
-                        </Space>
+                    <Row align='middle'>
+                      <Col flex={1}>{_item.age}세</Col>
+                      <Col flex={1}>
+                        <div>{_item.price.toLocaleString('ko-Kr')}원</div>
                       </Col>
-                    </Row>
-                  ))}
+                      <Col flex={1}>
+                        <div>{_item.premium.toLocaleString('ko-Kr')}원</div>
+                      </Col>
+                    </Row> 
+                  ))}*/}
                 </Panel>
               </Collapse>
 
@@ -283,13 +348,14 @@ const DummyPage3: FC = (props: any) => {
                 <div className='mr4'>연령별 설계</div>
                 <CaretDownOutlined
                   className='ml4 rotate-transition fs7'
-                  rotate={collapsedKeyArray[i] === '1' ? 180 : 0}
+                  rotate={collapsedKeyArray[i] === '1' ? 360 : 0}
                 />
               </div>
             </Card>
           ))}
           <Button
             className='f-jc-c f-ai-c h76 wp100 mb40 fwb fls7 primary-border-button-hover br5'
+            style={{ backgroundColor: peacockBlue7 }}
             onClick={() => message.info('add product: to be implemented')}
           >
             <div className='mr4'>상품 추가하기</div>
@@ -298,7 +364,7 @@ const DummyPage3: FC = (props: any) => {
         </Space>
         <div className='f wp100 mb50'>
           <Button
-            className='mr8 br4 primary-border-button-hover'
+            className='mr8 br4 primary-border-button-hover h55'
             size='large'
             onClick={() => message.info('cancel button: to be implemented')}
           >
@@ -306,15 +372,14 @@ const DummyPage3: FC = (props: any) => {
           </Button>
 
           <Button
-            className='f1  f-jc-c f-ai-c kakao-btn br4'
+            className='f1  f-jc-c f-ai-c kakao-btn br4 h55 wp100'
             type='primary'
             size='large'
-            style={{ width: '100%' }}
             onClick={() =>
               message.info('send to kakaotalk button: to be implemented')
             }
           >
-            <KakaoIcon className='mr6' />
+            <KakaoIcon className='mr6 ' />
             <div>카카오톡으로 보내기</div>
           </Button>
         </div>
@@ -323,42 +388,10 @@ const DummyPage3: FC = (props: any) => {
       <Modal
         closable={false}
         title={null}
+        style={{ borderRadius: 4 }}
+        bodyStyle={{ padding: 16 }}
         visible={saveModal !== 0}
-        footer={
-          saveModal === 1 ? (
-            <Row>
-              <Col flex={1}>
-                <Button
-                  style={{ width: '100%' }}
-                  onClick={() => setSaveModal(0)}
-                >
-                  취소
-                </Button>
-              </Col>
-              <Col flex={1}>
-                <Button
-                  type='primary'
-                  style={{ width: '100%' }}
-                  onClick={() => setSaveModal(2)}
-                >
-                  저장
-                </Button>
-              </Col>
-            </Row>
-          ) : (
-            <Row>
-              <Col flex={1}>
-                <Button
-                  type='primary'
-                  style={{ width: '100%' }}
-                  onClick={() => setSaveModal(0)}
-                >
-                  닫기
-                </Button>
-              </Col>
-            </Row>
-          )
-        }
+        footer={null}
         onCancel={() => setSaveModal(0)}
         width={275}
         centered
@@ -399,8 +432,34 @@ const DummyPage3: FC = (props: any) => {
                   </Radio.Button>
                 </Space>
               </Radio.Group>,
+              <div className='f'>
+                <Button className='f1' onClick={() => setSaveModal(0)}>
+                  취소
+                </Button>
+
+                <Button
+                  type='primary'
+                  className='f1'
+                  onClick={() => setSaveModal(2)}
+                >
+                  저장
+                </Button>
+              </div>,
             ]
-          : [<div>저장이 완료 되었습니다</div>]
+          : [
+              <div>저장이 완료 되었습니다</div>,
+              <Row>
+                <Col flex={1}>
+                  <Button
+                    type='primary'
+                    style={{ width: '100%' }}
+                    onClick={() => setSaveModal(0)}
+                  >
+                    닫기
+                  </Button>
+                </Col>
+              </Row>,
+            ]
         ).map((item: any) => item)}
       </Modal>
     </div>

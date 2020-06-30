@@ -26,3 +26,46 @@
 .slick-slide > div {
   display: flex;
 }
+
+.ant-carousel .slick-slider .slick-track {
+  display: flex;
+  align-items: center;
+}
+
+.ant-carousel {
+  .slick-dots-bottom {
+    bottom: 8px;
+  }
+  .slick-dots {
+    li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 10px;
+      height: 10px;
+      margin: 0;
+      button {
+        color: @primary-color;
+        background: @primary-color;
+        height: 6px;
+        width: 6px;
+        border-radius: 3px;
+        opacity: 0.2;
+        &:hover {
+          height: 10px;
+          width: 10px;
+          border-radius: 5px;
+        }
+      }
+
+      &.slick-active {
+        width: 10px;
+        button {
+          color: @primary-color;
+          background: @primary-color;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
