@@ -115,6 +115,8 @@ const DummyPage3: FC = (props: any) => {
   const [myPlan, setMyPlan] = useState('');
   const [savePlan, setSavePlan] = useState('');
 
+  const history = useHistory();
+
   return (
     <div className='f-fd-c hp100'>
       <Header
@@ -328,7 +330,7 @@ const DummyPage3: FC = (props: any) => {
           <Button
             className='f-jc-c f-ai-c h76 wp100 mb40 fwb fls7 primary-border-button-hover br5'
             style={{ backgroundColor: peacockBlue7 }}
-            onClick={() => message.info('add product: to be implemented')}
+            onClick={() => history.push('/dummypage4')}
           >
             <div className='mr4'>상품 추가하기</div>
             <PlusIcon className='ml4' />
