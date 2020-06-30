@@ -1,0 +1,39 @@
+@import './default.less';
+
+.primary-border-button-hover {
+  &:hover {
+    box-shadow: 0 0 0 3px fade(@primary-color, 8%);
+  }
+  path {
+    fill: @primary-color;
+  }
+  &.ant-btn:active {
+    path {
+      fill: @primary-7;
+    }
+  }
+}
+
+.ant-override {
+  .kakao-btn {
+    background-color: @sunflower-yellow;
+    color: @purple-brown;
+    border-color: @sunflower-yellow;
+    path {
+      fill: @purple-brown;
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: lighten(@sunflower-yellow, 10%);
+      color: darken(@purple-brown, 10%);
+      path {
+        fill: darken(@purple-brown, 10%);
+      }
+    }
+
+    &.ant-btn[ant-click-animating-without-extra-node='true']::after {
+      opacity: 0.3;
+    }
+  }
+}

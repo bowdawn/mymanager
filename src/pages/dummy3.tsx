@@ -30,8 +30,9 @@ import { ReactComponent as PrevArrow } from 'src/assets/icons/carousel-arrow-lef
 import { ReactComponent as NextArrow } from 'src/assets/icons/carousel-arrow-right.svg';
 import { ReactComponent as DeleteIcon } from 'src/assets/icons/delete-icon.svg';
 import { ReactComponent as PlusIcon } from 'src/assets/icons/plus-icon.svg';
+import { ReactComponent as KakaoIcon } from 'src/assets/icons/kakao.svg';
 import Footer from 'src/components/footer';
-
+import './dummy3.less';
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
 
@@ -288,7 +289,7 @@ const DummyPage3: FC = (props: any) => {
             </Card>
           ))}
           <Button
-            className='f-jc-c f-ai-c h76 wp100 mb40 fwb fls7'
+            className='f-jc-c f-ai-c h76 wp100 mb40 fwb fls7 primary-border-button-hover br5'
             onClick={() => message.info('add product: to be implemented')}
           >
             <div className='mr4'>상품 추가하기</div>
@@ -297,7 +298,7 @@ const DummyPage3: FC = (props: any) => {
         </Space>
         <div className='f wp100 mb50'>
           <Button
-            className='mr8'
+            className='mr8 br4 primary-border-button-hover'
             size='large'
             onClick={() => message.info('cancel button: to be implemented')}
           >
@@ -305,7 +306,7 @@ const DummyPage3: FC = (props: any) => {
           </Button>
 
           <Button
-            className='f1'
+            className='f1  f-jc-c f-ai-c kakao-btn br4'
             type='primary'
             size='large'
             style={{ width: '100%' }}
@@ -313,7 +314,8 @@ const DummyPage3: FC = (props: any) => {
               message.info('send to kakaotalk button: to be implemented')
             }
           >
-            카카오톡으로 보내기
+            <KakaoIcon className='mr6' />
+            <div>카카오톡으로 보내기</div>
           </Button>
         </div>
       </div>
