@@ -53,13 +53,7 @@ const DummyPage2: FC = (props: any) => {
   const [datePickerVisible, setDatePickerVisible] = useState(false);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-      }}
-    >
+    <div className='f-fd-c hp100'>
       <Header title='고객정보 입력'></Header>
 
       <Form

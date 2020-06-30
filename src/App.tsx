@@ -24,20 +24,21 @@ function useWindowSize() {
 const App: FC = () => {
   const [width, height] = useWindowSize();
   return (
-    <div
-      className='App ant-override'
-      style={{
-        width:
-          width > parseInt(maxScreenWidth) ? parseInt(maxScreenWidth) : width,
-        height:
-          height > parseInt(maxScreenHeight)
-            ? parseInt(maxScreenHeight)
-            : height,
-      }}
-    >
-      <ConfigProvider locale={koKr}>
-        <MainNavigator />
-      </ConfigProvider>
+    <div className='App ant-override'>
+      <div
+        style={{
+          width:
+            width > parseInt(maxScreenWidth) ? parseInt(maxScreenWidth) : width,
+          height:
+            height > parseInt(maxScreenHeight)
+              ? parseInt(maxScreenHeight)
+              : height,
+        }}
+      >
+        <ConfigProvider locale={koKr}>
+          <MainNavigator />
+        </ConfigProvider>
+      </div>
     </div>
   );
 };

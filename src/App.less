@@ -1,11 +1,13 @@
 @import '~antd/dist/antd.less';
 @import './assets/ant-override/index.less';
 @import './assets/layout/index.less';
+@import './assets/constants/globals.less';
 
 .App {
   display: flex;
-  justify-content: center;
   color: @greyish-brown;
+  max-width: @max-screen-width;
+  max-height: @max-screen-height;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;

@@ -106,7 +106,6 @@ const productCards = [
 ];
 
 const DummyPage3: FC = (props: any) => {
-  let history = useHistory();
   const [collapsedKeyArray, setCollapsedKeyArray] = useState([
     ...productCards.map((item: any) => '0'),
   ]);
@@ -117,7 +116,7 @@ const DummyPage3: FC = (props: any) => {
   const [savePlan, setSavePlan] = useState('');
 
   return (
-    <div>
+    <div className='f-fd-c hp100'>
       <Header
         title='플랜 확인'
         extra={
@@ -329,7 +328,7 @@ const DummyPage3: FC = (props: any) => {
           <Button
             className='f-jc-c f-ai-c h76 wp100 mb40 fwb fls7 primary-border-button-hover br5'
             style={{ backgroundColor: peacockBlue7 }}
-            onClick={() => history.push('/dummypage4')}
+            onClick={() => message.info('add product: to be implemented')}
           >
             <div className='mr4'>상품 추가하기</div>
             <PlusIcon className='ml4' />
