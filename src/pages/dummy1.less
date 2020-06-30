@@ -85,17 +85,17 @@
 
   .ant-radio-button-wrapper-checked {
     &:not(.ant-radio-button-wrapper-disabled) {
-      z-index: 1;
-      border-top: 1px solid #0000001a;
       border-left: transparent;
       border-right: transparent;
+      border-top-color: #0000001a;
       border-bottom: 2px solid @primary-color;
+      background-color: transparent;
       div {
         color: @primary-color;
       }
 
-      &hover {
-        border-color: 1 solid #000000;
+      &:hover {
+        border-top-color: #0000001a;
       }
       &:hover::before {
         background-color: transparent;

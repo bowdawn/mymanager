@@ -17,7 +17,9 @@ const DummyPage: FC = (props: any) => {
         <Link href='/dummypage2' style={{ color: 'green' }}>
           페이지2 으로 이동 (디자인 완료)
         </Link>
-        <Link href='/dummypage3'>페이지3 으로 이동 (디자인 진행중)</Link>
+        <Link href='/dummypage3' style={{ color: 'green' }}>
+          페이지3 으로 이동 (디자인 완료)
+        </Link>
         <Link href='/dummypage4'>페이지4 으로 이동 (디자인 진행중)</Link>
       </Space>
     </div>
