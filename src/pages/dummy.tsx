@@ -1,5 +1,5 @@
-import React, { FC, useState } from 'react';
-import { Typography, Space, Modal, Button } from 'antd';
+import React, { FC } from 'react';
+import { Typography, Space } from 'antd';
 
 const { Title, Link } = Typography;
 
