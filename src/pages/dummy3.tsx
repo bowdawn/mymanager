@@ -16,15 +16,7 @@ import {
   Divider,
   Table,
 } from 'antd';
-import Icon, {
-  SaveOutlined,
-  LeftOutlined,
-  RightOutlined,
-  DeleteOutlined,
-  DownOutlined,
-  PlusOutlined,
-  CaretDownOutlined,
-} from '@ant-design/icons';
+import Icon, { CaretDownOutlined } from '@ant-design/icons';
 import { ReactComponent as Checkbox } from 'src/assets/icons/checkbox.svg';
 import { ReactComponent as SaveIcon } from 'src/assets/icons/save.svg';
 import { ReactComponent as PrevArrow } from 'src/assets/icons/carousel-arrow-left.svg';
@@ -34,9 +26,8 @@ import { ReactComponent as PlusIcon } from 'src/assets/icons/plus-icon.svg';
 import { ReactComponent as KakaoIcon } from 'src/assets/icons/kakao.svg';
 import Footer from 'src/components/footer';
 import img from 'src/assets/images/dummy3/card.jpg';
-
 import './dummy3.less';
-
+import { useHistory } from 'react-router-dom';
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
 
@@ -115,6 +106,7 @@ const productCards = [
 ];
 
 const DummyPage3: FC = (props: any) => {
+  let history = useHistory();
   const [collapsedKeyArray, setCollapsedKeyArray] = useState([
     ...productCards.map((item: any) => '0'),
   ]);
@@ -337,7 +329,7 @@ const DummyPage3: FC = (props: any) => {
           <Button
             className='f-jc-c f-ai-c h76 wp100 mb40 fwb fls7 primary-border-button-hover br5'
             style={{ backgroundColor: peacockBlue7 }}
-            onClick={() => message.info('add product: to be implemented')}
+            onClick={() => history.push('/dummypage4')}
           >
             <div className='mr4'>상품 추가하기</div>
             <PlusIcon className='ml4' />

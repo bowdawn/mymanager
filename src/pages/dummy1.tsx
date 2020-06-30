@@ -22,6 +22,7 @@ import { ReactComponent as PaginationFirstIcon } from 'src/assets/icons/paginati
 import { ReactComponent as PaginationLastIcon } from 'src/assets/icons/pagination-last.svg';
 import { ReactComponent as FilterIcon } from 'src/assets/icons/filter-icon.svg';
 import './dummy1.less';
+import { Link } from 'react-router-dom';
 
 const data = [
   {
@@ -265,16 +266,15 @@ const DummyPage1: FC = (props: any) => {
           />
         </div>
         <div className='f-jc-c'>
-          <Button
-            type='primary'
-            size='large'
-            className='mt6 wp50 br4 mb50 start-plan-btn'
-            onClick={() => {
-              message.info('start button: to be implemented');
-            }}
-          >
-            설계 시작하기
-          </Button>
+          <Link to='/dummypage2'>
+            <Button
+              type='primary'
+              size='large'
+              className='mt6 wp50 br4 mb50 start-plan-btn'
+            >
+              설계 시작하기
+            </Button>
+          </Link>
         </div>
       </div>
       <Footer />

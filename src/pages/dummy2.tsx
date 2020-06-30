@@ -20,13 +20,14 @@ import { ReactComponent as Checkbox } from 'src/assets/icons/checkbox.svg';
 import { ReactComponent as Calendar } from 'src/assets/icons/calendar.svg';
 import Icon from '@ant-design/icons';
 import moment from 'moment';
+import { useHistory } from 'react-router-dom';
 
 const DummyPage2: FC = (props: any) => {
+  let history = useHistory();
   const onFinish = async (values: any) => {
     const { name, gender, birthdate, age } = values;
-    console.log(values);
-    message.success('Validation Success');
-    message.info('On Next: to be implemented');
+
+    history.push('/dummypage3');
   };
 
   const onFinishFailed = (info: any) => {
