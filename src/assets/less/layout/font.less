@@ -37,18 +37,14 @@ each(range(25), {
   font-weight: 300;
 }
 
-@ls-values: 6, 7, 8;
+@ls-values: 60, 61, 70, 80, 102;
 each(@ls-values, {
   
   .fls@{value} {
-    letter-spacing: @value * -0.1px; 
+    letter-spacing: @value * -0.01px; 
   }
-
 });
 
-.fls {
-  letter-spacing: -1.02px;
-}
 .fu {
   text-decoration: underline;
 }

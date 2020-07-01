@@ -11,8 +11,8 @@ const path = require('path');
 // process.env.BROWSER = 'none';
 
 //custom helper method 1: takes object and parses it into file contents that declares all types to strings.
-const parseTypeDeclarations = (object) =>
-  Object.keys(object)
+const parseTypeDeclarations = (object) => {
+  return Object.keys(object)
     .map((key) => {
       let camelCaseKey = key
         .split('@')
@@ -29,6 +29,7 @@ const parseTypeDeclarations = (object) =>
       return `declare var ${camelCaseKey}: string;\n`;
     })
     .join('');
+};
 
 //custom helper method 2: takes object and parses it into file contents that initializes all values as strings.
 const parseVariableDeclarations = (object) => {
@@ -101,6 +102,7 @@ module.exports = {
       options: {
         lessLoaderOptions: {
           lessOptions: {
+            modifyVars: {},
             javascriptEnabled: true,
           },
         },

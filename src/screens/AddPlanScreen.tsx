@@ -113,7 +113,7 @@ const companies = [
   '메트',
 ];
 
-const DummyPage4: FC = (props: any) => {
+const AddPlanScreen: FC = (props: any) => {
   const [saveModal, setSaveModal] = useState(0);
   const [quickPlanCollapse, setQuickPlanCollapse] = useState(false);
   const [quickPlanOptions, setQuickPlanOptions] = useState([
@@ -132,178 +132,161 @@ const DummyPage4: FC = (props: any) => {
   return (
     <div>
       <Header title='빠른 설계' subHeader={{ name: '김백호', age: 46 }} />
+      <Card
+        className='ant-card-no-padding'
+        onClick={() => setQuickPlanCollapse(!quickPlanCollapse)}
+      >
+        <div className='f-jc-sb f-ai-c ph16 pt20 pb10'>
+          <div className='fs12 fls60 fwb'>빠른 설계</div>
 
-      <Space direction='vertical' style={{ width: '100%' }}>
-        <div
-          style={{
-            paddingRight: 25,
-            paddingLeft: 25,
-            paddingTop: 0,
-            paddingBottom: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
+          <DownOutlined
+            className='rotate-transition'
+            rotate={quickPlanCollapse ? 0 : -360}
+          />
+        </div>
+        <Collapse
+          className='transparent-collapse'
+          activeKey={[quickPlanCollapse ? '1' : '0']}
         >
-          <Space direction='vertical' style={{ width: '100%' }}>
-            <Card onClick={() => setQuickPlanCollapse(!quickPlanCollapse)}>
-              <Row justify='space-between'>
-                <Col>빠른 설계</Col>
-                <Col>
-                  <DownOutlined
-                    className='rotate-transition'
-                    rotate={quickPlanCollapse ? 0 : -180}
-                  />
+          <Panel showArrow={false} header={null} key='1'>
+            <Row gutter={[8, 8]}>
+              {tagsData.map((item: any, i: number) => (
+                <Col span={6}>
+                  <div onClick={(e) => e.stopPropagation()}>
+                    <CheckableTag
+                      checked={quickPlanOptions[i]}
+                      style={{ width: '100%' }}
+                      onChange={(e) => {
+                        quickPlanOptions[i] = e;
+                        setQuickPlanOptions([...quickPlanOptions]);
+                      }}
+                    >
+                      {item}
+                    </CheckableTag>
+                  </div>
                 </Col>
-              </Row>
-              <Collapse
-                className='transparent-collapse'
-                activeKey={[quickPlanCollapse ? '1' : '0']}
+              ))}
+            </Row>
+          </Panel>
+        </Collapse>
+      </Card>
+
+      <div className='ph16 pt40'>
+        <div className='fs12 fls60 fwb'>성품군 선택</div>
+
+        <Carousel
+          arrows={true}
+          prevArrow={<LeftOutlined />}
+          nextArrow={<RightOutlined />}
+          draggable={true}
+          slidesPerRow={4}
+          dots={false}
+          infinite={false}
+        >
+          {productTypes.map((item: any, i: number) => (
+            <CheckableTag
+              checked={selectedProductedTypes[i]}
+              onChange={(e) => {
+                selectedProductedTypes[i] = e;
+                setSelectedProductTypes([...selectedProductedTypes]);
+              }}
+            >
+              {item}
+            </CheckableTag>
+          ))}
+        </Carousel>
+        <Row justify='start'>
+          <Col>플랜선택</Col>
+        </Row>
+
+        <Carousel
+          arrows={true}
+          prevArrow={<LeftOutlined />}
+          nextArrow={<RightOutlined />}
+          draggable={true}
+          slidesPerRow={4}
+          dots={false}
+          infinite={false}
+        >
+          {planTypes.map((item: any, i: number) => (
+            <CheckableTag
+              checked={selectedPlanTypes[i]}
+              onChange={(e) => {
+                selectedPlanTypes[i] = e;
+                setSelectedPlanTypes([...selectedPlanTypes]);
+              }}
+            >
+              {item}
+            </CheckableTag>
+          ))}
+        </Carousel>
+        <Row justify='start'>
+          <Col>회사선택</Col>
+        </Row>
+        <Row gutter={[0, 0]}>
+          {companies.map((item: any, i: number) => (
+            <Col style={{ width: '20%' }}>
+              <CheckableTag
+                checked={selectedCompanies[i]}
+                style={{ width: '100%' }}
+                onChange={(e) => {
+                  selectedCompanies[i] = e;
+                  setSelectedCompanies([...selectedCompanies]);
+                }}
               >
-                <Panel showArrow={false} header={null} key='1'>
-                  <Row gutter={[8, 8]}>
-                    {tagsData.map((item: any, i: number) => (
-                      <Col span={6}>
-                        <div onClick={(e) => e.stopPropagation()}>
-                          <CheckableTag
-                            checked={quickPlanOptions[i]}
-                            style={{ width: '100%' }}
-                            onChange={(e) => {
-                              quickPlanOptions[i] = e;
-                              setQuickPlanOptions([...quickPlanOptions]);
-                            }}
-                          >
-                            {item}
-                          </CheckableTag>
-                        </div>
-                      </Col>
-                    ))}
-                  </Row>
-                </Panel>
-              </Collapse>
-            </Card>
-            <Row justify='start'>
-              <Col>성품군 선택</Col>
-            </Row>
+                {item}
+              </CheckableTag>
+            </Col>
+          ))}
+        </Row>
+      </div>
 
-            <Carousel
-              arrows={true}
-              prevArrow={<LeftOutlined />}
-              nextArrow={<RightOutlined />}
-              draggable={true}
-              slidesPerRow={4}
-              dots={false}
-              infinite={false}
-            >
-              {productTypes.map((item: any, i: number) => (
-                <CheckableTag
-                  checked={selectedProductedTypes[i]}
-                  onChange={(e) => {
-                    selectedProductedTypes[i] = e;
-                    setSelectedProductTypes([...selectedProductedTypes]);
-                  }}
-                >
-                  {item}
-                </CheckableTag>
-              ))}
-            </Carousel>
-            <Row justify='start'>
-              <Col>플랜선택</Col>
-            </Row>
+      <div
+        style={{
+          paddingRight: 25,
+          paddingLeft: 25,
+          paddingTop: 0,
+          paddingBottom: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <Space direction='vertical' style={{ width: '100%' }}>
+          <Card
+            className='ant-card-hover-primary-border'
+            onClick={() => message.info('add product: to be implemented')}
+          >
+            <div>상품 추가하기</div>
+            <PlusOutlined style={{ fontSize: 25 }} />
+          </Card>
 
-            <Carousel
-              arrows={true}
-              prevArrow={<LeftOutlined />}
-              nextArrow={<RightOutlined />}
-              draggable={true}
-              slidesPerRow={4}
-              dots={false}
-              infinite={false}
-            >
-              {planTypes.map((item: any, i: number) => (
-                <CheckableTag
-                  checked={selectedPlanTypes[i]}
-                  onChange={(e) => {
-                    selectedPlanTypes[i] = e;
-                    setSelectedPlanTypes([...selectedPlanTypes]);
-                  }}
-                >
-                  {item}
-                </CheckableTag>
-              ))}
-            </Carousel>
-            <Row justify='start'>
-              <Col>회사선택</Col>
-            </Row>
-            <Row gutter={[0, 0]}>
-              {companies.map((item: any, i: number) => (
-                <Col style={{ width: '20%' }}>
-                  <CheckableTag
-                    checked={selectedCompanies[i]}
-                    style={{ width: '100%' }}
-                    onChange={(e) => {
-                      selectedCompanies[i] = e;
-                      setSelectedCompanies([...selectedCompanies]);
-                    }}
-                  >
-                    {item}
-                  </CheckableTag>
-                </Col>
-              ))}
-            </Row>
-          </Space>
-        </div>
-        <Space direction='vertical' style={{ width: '100%' }}></Space>
-        <div
-          style={{
-            paddingRight: 25,
-            paddingLeft: 25,
-            paddingTop: 0,
-            paddingBottom: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
-          <Space direction='vertical' style={{ width: '100%' }}>
-            <Card
-              className='ant-card-hover-primary-border'
-              onClick={() => message.info('add product: to be implemented')}
-            >
-              <div>상품 추가하기</div>
-              <PlusOutlined style={{ fontSize: 25 }} />
-            </Card>
-
-            <Row gutter={[8, 25]}>
-              <Col>
-                <Button
-                  size='large'
-                  onClick={() =>
-                    message.info('reset button: to be implemented')
-                  }
-                >
-                  <RedoOutlined rotate={-90} />
-                </Button>
-              </Col>
-              <Col flex={1}>
-                <Button
-                  type='primary'
-                  size='large'
-                  style={{ width: '100%' }}
-                  onClick={() =>
-                    message.info('send to kakaotalk button: to be implemented')
-                  }
-                >
-                  카카오톡으로 보내기
-                </Button>
-              </Col>
-            </Row>
-          </Space>
-        </div>
-      </Space>
+          <Row gutter={[8, 25]}>
+            <Col>
+              <Button
+                size='large'
+                onClick={() => message.info('reset button: to be implemented')}
+              >
+                <RedoOutlined rotate={-90} />
+              </Button>
+            </Col>
+            <Col flex={1}>
+              <Button
+                type='primary'
+                size='large'
+                style={{ width: '100%' }}
+                onClick={() =>
+                  message.info('send to kakaotalk button: to be implemented')
+                }
+              >
+                카카오톡으로 보내기
+              </Button>
+            </Col>
+          </Row>
+        </Space>
+      </div>
     </div>
   );
 };
-export default DummyPage4;
+export default AddPlanScreen;

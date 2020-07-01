@@ -24,4 +24,59 @@
   .ant-radio-button-wrapper:not(:first-child)::before {
     content: none;
   }
+
+  .filter-radio-group {
+    .ant-radio-button-wrapper {
+      border-color: #0000001a;
+      border-radius: 0px;
+      border-left: none;
+      border-right: none;
+      padding: 0px 4px;
+      height: 39px;
+
+      &::before {
+        background-color: transparent;
+      }
+      &:focus-within {
+        box-shadow: none;
+      }
+      > :nth-child(2) {
+        width: 100%;
+      }
+      div {
+        color: @warm-grey-two;
+        font-size: 14px;
+        letter-spacing: -0.7px;
+      }
+    }
+
+    .ant-radio-button-wrapper-checked {
+      &:not(.ant-radio-button-wrapper-disabled) {
+        border-left: transparent;
+        border-right: transparent;
+        border-top-color: #0000001a;
+        border-bottom: 2px solid @primary-color;
+        background-color: transparent;
+        div {
+          color: @primary-color;
+        }
+        &:hover {
+          border-top-color: #0000001a;
+        }
+        &:hover::before {
+          background-color: transparent;
+        }
+        .bottom-active {
+          path:nth-child(1) {
+            fill: @primary-color;
+          }
+        }
+        .top-active {
+          path:nth-child(2) {
+            fill: @primary-color;
+          }
+        }
+      }
+    }
+  }
 }

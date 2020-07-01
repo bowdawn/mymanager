@@ -164,10 +164,9 @@ const CustomerInputScreen: FC = (props: any) => {
                               ? moment(birthdate).format('YYYY-MM-DD')
                               : ''
                           }
-                          className='mr8'
+                          className='mr8 wp100'
                           placeholder='생년월일을 선택해주세요.'
                           onClick={() => setDatePickerVisible(true)}
-                          style={{ width: '100%' }}
                         />
                         <Icon
                           onClick={() => setDatePickerVisible(true)}
@@ -188,10 +187,9 @@ const CustomerInputScreen: FC = (props: any) => {
                       <Form.Item noStyle shouldUpdate>
                         {() => (
                           <InputNumber
-                            style={{ width: '100%' }}
                             value={form.getFieldValue('age')}
                             placeholder='보험 나이를 입력해주세요.'
-                            className='mr8'
+                            className='mr8 f1'
                             formatter={(value) => {
                               if (value) {
                                 return `${value}`;
@@ -221,13 +219,13 @@ const CustomerInputScreen: FC = (props: any) => {
                 </Input.Group>
               </Form.Item>
             </div>
-            <div className='fs12 fc-pc fls6 mb12'>
+            <div className='fs12 fc-pc fls60 mb12'>
               *최대 10개까지 설계가 가능합니다.
             </div>
             <div className='mb40'>
               <Form.Item className='wp100'>
                 <Button
-                  className='wp100 h55 br4 fls8 '
+                  className='wp100 h55 br4 fls80'
                   type='primary'
                   htmlType='submit'
                 >

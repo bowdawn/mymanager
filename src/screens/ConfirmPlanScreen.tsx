@@ -124,7 +124,7 @@ const PlanConfirmScreen: FC = (props: any) => {
         extra={
           <div className='f-fd-c' onClick={() => setSaveModal(1)}>
             <Icon className='mb6' component={() => <SaveIcon />} />
-            <div className='fs12 fls6'>플랜저장</div>
+            <div className='fs12 fls60'>플랜저장</div>
           </div>
         }
         subHeader={{ name: '김백호', age: 46 }}
@@ -186,7 +186,7 @@ const PlanConfirmScreen: FC = (props: any) => {
                     )
                   }
                 >
-                  <div className='f-jc-c f-ai-c fc-pc fu fls7 '>
+                  <div className='f-jc-c f-ai-c fc-pc fu fls70 '>
                     {item.img ? (
                       <img className='wp100' src={img} />
                     ) : (
@@ -200,16 +200,8 @@ const PlanConfirmScreen: FC = (props: any) => {
         ))}
       </Tabs>
 
-      <div
-        className='ph16 f-fd-c f-jc-sb f-ai-c'
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <Space direction='vertical' size={10} style={{ width: '100%' }}>
+      <div className='ph16 f-fd-c f-jc-sb f-ai-c'>
+        <Space direction='vertical' size={10} className='wp100'>
           {productCards.map((item: any, i: number) => (
             <Card
               className='ant-card-no-padding'
@@ -223,7 +215,7 @@ const PlanConfirmScreen: FC = (props: any) => {
                 <div className='f-jc-sb'>
                   <Space size={8}>
                     {item.tags.map((tag: any, j: number) => (
-                      <div className='fls7' key={`tag${i}-${j}`}>
+                      <div className='fls70' key={`tag${i}-${j}`}>
                         {tag}
                       </div>
                     ))}
@@ -263,17 +255,17 @@ const PlanConfirmScreen: FC = (props: any) => {
                   >
                     <Table.Column
                       align='center'
-                      title={<div className='fc-pc fwb fs12 fls6'>나이</div>}
+                      title={<div className='fc-pc fwb fs12 fls60'>나이</div>}
                       dataIndex='age'
                       key='age'
                       render={(value) => (
-                        <div className='fs14 fls7'> {value}세</div>
+                        <div className='fs14 fls70'> {value}세</div>
                       )}
                     ></Table.Column>
                     <Table.Column
                       align='center'
                       title={
-                        <div className='fc-pc fwb fs12 fls6'>월보험료</div>
+                        <div className='fc-pc fwb fs12 fls60'>월보험료</div>
                       }
                       render={(value) => (
                         <div className='fs14 fwb'>
@@ -286,7 +278,7 @@ const PlanConfirmScreen: FC = (props: any) => {
                     <Table.Column
                       align='center'
                       title={
-                        <div className='fc-pc fwb fs10 fls10.2'>
+                        <div className='fc-pc fwb fs10 fls102'>
                           현재 나이 대비 <br /> 더 납입할 보험료 총계원
                         </div>
                       }
@@ -320,9 +312,9 @@ const PlanConfirmScreen: FC = (props: any) => {
             </Card>
           ))}
           <Button
-            className='f-jc-c f-ai-c h76 wp100 mb40 fwb fls7 primary-border-button-hover br5'
+            className='f-jc-c f-ai-c h76 wp100 mb40 fwb fls70 primary-border-button-hover br5'
             style={{ backgroundColor: peacockBlue7 }}
-            onClick={() => history.push('/dummypage4')}
+            onClick={() => history.push(screenPath4)}
           >
             <div className='mr4'>상품 추가하기</div>
             <PlusIcon className='ml4' />
@@ -367,10 +359,10 @@ const PlanConfirmScreen: FC = (props: any) => {
               <div className='fs18 fwb fo9 fc-bt'>
                 저장 위치를 선택해주세요.
               </div>,
-              <div className='fls7 mb24'>
+              <div className='fls70 mb24'>
                 * 이전 데이터가 있을 경우 사라질 수 있습니다.
               </div>,
-              <Radio.Group className='ant-override' style={{ width: '100%' }}>
+              <Radio.Group className='wp100'>
                 <Space
                   direction='vertical'
                   className='wp100 mb24'
