@@ -1,0 +1,29 @@
+@import '../index.less';
+
+.ant-card-bordered {
+  border-radius: 4px;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+.ant-card-no-padding {
+  .ant-card-body {
+    padding: 0;
+  }
+}
+
+.ant-card-hover-primary-border {
+  border-color: @primary-5;
+  color: @primary-5;
+  svg {
+    color: @primary-5;
+  }
+
+  &:hover {
+    border-color: @primary-color;
+    color: @primary-color;
+    svg {
+      color: @primary-color;
+    }
+  }
+}

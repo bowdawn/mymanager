@@ -1,0 +1,63 @@
+@import '../index.less';
+
+each(range(25), {
+    .fs@{value} {
+        font-size: @value * 1px;
+      }
+})
+  .fc-pc {
+  color: @primary-color;
+}
+
+.fc-dsb {
+  color: @dark-sky-blue;
+}
+
+.fc-w {
+  color: white;
+}
+
+.fc-wgt {
+  color: @warm-grey-two;
+}
+
+.fc-gf {
+  color: @grapefruit;
+}
+
+.fc-bt {
+  color: @black-three;
+}
+
+.fwb {
+  font-weight: bold;
+}
+
+.fw300 {
+  font-weight: 300;
+}
+
+@ls-values: 6, 7, 8;
+each(@ls-values, {
+  
+  .fls@{value} {
+    letter-spacing: @value * -0.1px; 
+  }
+
+});
+
+.fls {
+  letter-spacing: -1.02px;
+}
+.fu {
+  text-decoration: underline;
+}
+
+@o-values: 2, 9;
+each(@o-values, {
+  
+  .fo@{value} {
+    letter-spacing: @value * 0.1; 
+  }
+
+});

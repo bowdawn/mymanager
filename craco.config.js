@@ -63,13 +63,13 @@ const globalVarTypes = Object.keys(globals)
 
 //Step3: write parsed type declartations into files
 fs.writeFileSync(
-  path.resolve(__dirname, './src/@types/colors.d.ts'),
+  path.resolve(__dirname, './src/assets/@types/colors.d.ts'),
   '//Auto Generated File: do not touch \n' + colorVarTypes,
   'utf8'
 );
 
 fs.writeFileSync(
-  path.resolve(__dirname, './src/@types/globals.d.ts'),
+  path.resolve(__dirname, './src/assets/@types/globals.d.ts'),
   '//Auto Generated File: do not touch \n' + globalVarTypes,
   'utf8'
 );

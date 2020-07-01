@@ -1,0 +1,67 @@
+@import '../index.less';
+
+.ant-override {
+  .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab,
+  .ant-tabs-card > div > .ant-tabs-nav .ant-tabs-tab {
+    color: @primary-color;
+    background-color: white;
+    border: 1px solid @primary-color;
+  }
+
+  .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab-active,
+  .ant-tabs-card > div > .ant-tabs-nav .ant-tabs-tab-active {
+    color: white;
+    background: @primary-color;
+    border: none;
+  }
+
+  .ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab,
+  .ant-tabs-card.ant-tabs-top > div > .ant-tabs-nav .ant-tabs-tab {
+    border-radius: 0;
+    width: 110px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .ant-tabs-top > .ant-tabs-nav,
+  .ant-tabs-bottom > .ant-tabs-nav,
+  .ant-tabs-top > div > .ant-tabs-nav,
+  .ant-tabs-bottom > div > .ant-tabs-nav {
+    margin: 0;
+  }
+
+  .ant-tabs > .ant-tabs-nav .ant-tabs-nav-operations,
+  .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-operations {
+    display: none;
+  }
+
+  .ant-tabs-tab {
+    color: @warm-grey-two;
+  }
+
+  .ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap,
+  .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-wrap {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    overscroll-behavior: contain;
+    &::-webkit-scrollbar {
+      width: 0px;
+      height: 0px; /* Remove scrollbar space */
+      background: transparent; /* Optional: just make scrollbar invisible */
+    }
+  }
+
+  .ant-tabs-top > .ant-tabs-nav .ant-tabs-nav-wrap::after {
+    width: 48px;
+
+    background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.99) 100%
+    );
+  }
+
+  .ant-tabs-content-holder {
+    background-color: @white-two;
+  }
+}

@@ -1,0 +1,83 @@
+@import '../index.less';
+
+.ant-page-header.ant-page-header-ghost.ant-page-header-compact {
+  height: 123px;
+  padding-bottom: 24px;
+  padding-left: 14px;
+  padding-right: 16px;
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  * {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+  }
+  .ant-page-header-heading {
+    .ant-page-header-heading-left {
+      transition: all 0.3s;
+      margin: 0;
+      padding-left: 2px;
+
+      .arrow-left {
+        width: 24px;
+        height: 24px;
+      }
+      &:active {
+        padding-left: 0px;
+        path {
+          fill: @primary-1;
+        }
+      }
+      &:hover {
+        path {
+          fill: @primary-1;
+        }
+      }
+    }
+    .ant-page-header-heading-extra {
+      transition: all 0.3s;
+      position: relative;
+      color: white;
+      > div {
+        position: absolute;
+        top: -4px;
+        left: -42px;
+        &:active {
+          padding-top: 2px;
+          path {
+            fill: @primary-1;
+          }
+        }
+      }
+
+      &:hover {
+        div {
+          color: @primary-1;
+        }
+
+        path {
+          fill: @primary-1;
+        }
+      }
+    }
+  }
+
+  .ant-page-header-content {
+    padding: 0px;
+    div.title {
+      font-family: '12LotteMartDream';
+      font-size: 26px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.5;
+      letter-spacing: -0.5px;
+      text-align: center;
+      color: #ffffff;
+    }
+  }
+}

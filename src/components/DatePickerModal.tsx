@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import DatePicker from 'react-mobile-datepicker';
 
-import 'src/assets/components/datepicker.less';
+import 'src/assets/less/components/datepicker.less';
 import { Modal, Button } from 'antd';
 import moment from 'moment';
 import 'moment/locale/ko';
