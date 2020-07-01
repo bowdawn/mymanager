@@ -10,122 +10,83 @@ const path = require('path');
 
 // process.env.BROWSER = 'none';
 
-//Step 1: parse the less files to js object
-const colors = lessToJS(
-  fs.readFileSync(
-    path.resolve(__dirname, './src/assets/constants/colors.less'),
+const parseTypeDeclarations = (object) =>
+  Object.keys(object)
+    .map((key) => {
+      let camelCaseKey = key
+        .split('@')
+        .join('')
+        .split('-')
+        .map((keyword, index) => {
+          if (index !== 0) {
+            return keyword.charAt(0).toUpperCase() + keyword.slice(1);
+          } else {
+            return keyword;
+          }
+        })
+        .join('');
+      return `declare var ${camelCaseKey}: string;\n`;
+    })
+    .join('');
+
+const parseVariableDeclarations = (object) => {
+  return Object.entries(object)
+    .map((item) => {
+      let key = item[0];
+      let value = item[1];
+      let camelCaseKey = key
+        .split('@')
+        .join('')
+        .split('-')
+        .map((keyword, index) => {
+          if (index !== 0) {
+            return keyword.charAt(0).toUpperCase() + keyword.slice(1);
+          } else {
+            return keyword;
+          }
+        })
+        .join('');
+      return `(global as any)["${camelCaseKey}"] = "${value}";\n`;
+    })
+    .join('');
+};
+
+const globalizeLessFile = (
+  lessFilePath,
+  TypeDeclarationPath,
+  VariableDeclarationPath
+) => {
+  //Step 1: parse the less files to js object
+  const deserializedObject = lessToJS(
+    fs.readFileSync(path.resolve(__dirname, lessFilePath), 'utf8')
+  );
+  //Step 2: parse the objecT keys into type declarations (if using Typescript)
+  const objectTypes = parseTypeDeclarations(deserializedObject);
+  //Step3: write parsed type declartations into files
+  fs.writeFileSync(
+    path.resolve(__dirname, TypeDeclarationPath),
+    '//Auto Generated File: do not touch \n' + objectTypes,
     'utf8'
-  )
-);
-const globals = lessToJS(
-  fs.readFileSync(
-    path.resolve(__dirname, './src/assets/constants/globals.less'),
+  );
+  //Step4: parse js Objects into global variable declarations including Type as any to avoid Typescript conflict
+  const objectInit = parseVariableDeclarations(deserializedObject);
+  //Step5: write global variable declarations in files
+  fs.writeFileSync(
+    path.resolve(__dirname, VariableDeclarationPath),
+    '//Auto Generated File: do not touch \n' + objectInit + 'export {};',
     'utf8'
-  )
-);
+  );
+};
 
-//Step 2: parse the objecT keys into type declarations (if using Typescript)
-const colorVarTypes = Object.keys(colors)
-  .map((key) => {
-    let camelCaseKey = key
-      .split('@')
-      .join('')
-      .split('-')
-      .map((keyword, index) => {
-        if (index !== 0) {
-          return keyword.charAt(0).toUpperCase() + keyword.slice(1);
-        } else {
-          return keyword;
-        }
-      })
-      .join('');
-    return `declare var ${camelCaseKey}: string;\n`;
-  })
-  .join('');
+const path1 = './src/assets/less/colors.less';
+const path2 = './src/assets/@types/colors.d.ts';
+const path3 = './src/assets/constants/colors.ts';
+globalizeLessFile(path1, path2, path3);
 
-const globalVarTypes = Object.keys(globals)
-  .map((key) => {
-    let camelCaseKey = key
-      .split('@')
-      .join('')
-      .split('-')
-      .map((keyword, index) => {
-        if (index !== 0) {
-          return keyword.charAt(0).toUpperCase() + keyword.slice(1);
-        } else {
-          return keyword;
-        }
-      })
-      .join('');
-    return `declare var ${camelCaseKey}: string;\n`;
-  })
-  .join('');
-
-//Step3: write parsed type declartations into files
-fs.writeFileSync(
-  path.resolve(__dirname, './src/assets/@types/colors.d.ts'),
-  '//Auto Generated File: do not touch \n' + colorVarTypes,
-  'utf8'
-);
-
-fs.writeFileSync(
-  path.resolve(__dirname, './src/assets/@types/globals.d.ts'),
-  '//Auto Generated File: do not touch \n' + globalVarTypes,
-  'utf8'
-);
-
-//Step4: parse js Objects into global variable declarations including Type as any to avoid Typescript conflict
-const colorInit = Object.entries(colors)
-  .map((item) => {
-    let key = item[0];
-    let value = item[1];
-    let camelCaseKey = key
-      .split('@')
-      .join('')
-      .split('-')
-      .map((keyword, index) => {
-        if (index !== 0) {
-          return keyword.charAt(0).toUpperCase() + keyword.slice(1);
-        } else {
-          return keyword;
-        }
-      })
-      .join('');
-    return `(global as any)["${camelCaseKey}"] = "${value}";\n`;
-  })
-  .join('');
-
-const globalInit = Object.entries(globals)
-  .map((item) => {
-    let key = item[0];
-    let value = item[1];
-    let camelCaseKey = key
-      .split('@')
-      .join('')
-      .split('-')
-      .map((keyword, index) => {
-        if (index !== 0) {
-          return keyword.charAt(0).toUpperCase() + keyword.slice(1);
-        } else {
-          return keyword;
-        }
-      })
-      .join('');
-    return `(global as any)["${camelCaseKey}"] = "${value}";\n`;
-  })
-  .join('');
-
-//Step5: write global variable declarations in files
-fs.writeFileSync(
-  path.resolve(__dirname, './src/assets/constants/colors.ts'),
-  '//Auto Generated File: do not touch \n' + colorInit + 'export {};',
-  'utf8'
-);
-fs.writeFileSync(
-  path.resolve(__dirname, './src/assets/constants/globals.ts'),
-  '//Auto Generated File: do not touch \n' + globalInit + 'export {};',
-  'utf8'
-);
+const path4 = './src/assets/less/globals.less';
+const path5 = './src/assets/@types/globals.d.ts';
+const path6 = './src/assets/constants/globals.ts';
+globalizeLessFile(path4, path5, path6);
 
 module.exports = {
   plugins: [
@@ -134,7 +95,6 @@ module.exports = {
       options: {
         lessLoaderOptions: {
           lessOptions: {
-            modifyVars: colors,
             javascriptEnabled: true,
           },
         },

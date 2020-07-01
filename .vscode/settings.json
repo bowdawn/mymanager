@@ -1,0 +1,7 @@
+// Workspace settings
+{
+  // The following will hide the listed files from being viewed
+  "files.exclude": {
+    "src/react-app-env.d.ts": true
+  }
+}
