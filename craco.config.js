@@ -10,6 +10,7 @@ const path = require('path');
 
 // process.env.BROWSER = 'none';
 
+//custom helper method 1: takes object and parses it into file contents that declares all types to strings.
 const parseTypeDeclarations = (object) =>
   Object.keys(object)
     .map((key) => {
@@ -29,6 +30,7 @@ const parseTypeDeclarations = (object) =>
     })
     .join('');
 
+//custom helper method 2: takes object and parses it into file contents that initializes all values as strings.
 const parseVariableDeclarations = (object) => {
   return Object.entries(object)
     .map((item) => {
@@ -51,6 +53,7 @@ const parseVariableDeclarations = (object) => {
     .join('');
 };
 
+//custom helper method 3: Allows less variables to be accessed in Typescript files
 const globalizeLessFile = (
   lessFilePath,
   TypeDeclarationPath,
@@ -78,6 +81,9 @@ const globalizeLessFile = (
   );
 };
 
+// to add a new globalized Less File that refreshes on edit,
+// edit the package.json start script
+// by add the lessfilepath to the list of files that nodemon watches.
 const path1 = './src/assets/less/colors.less';
 const path2 = './src/assets/@types/colors.d.ts';
 const path3 = './src/assets/constants/colors.ts';
