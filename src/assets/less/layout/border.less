@@ -1,6 +1,7 @@
 @import '../index.less';
 
-each(range(25), {
+.ant-override {
+  each(range(25), {
     .br@{value} {
       border-radius: @value * 1px;
     }
@@ -32,9 +33,8 @@ each(range(25), {
         border-bottom-right-radius: @value * 1px;
         border-top-right-radius: @value * 1px;
       }
-
   });
-
-.bpc {
-  border: 1px solid @primary-color;
+  .bpc {
+    border: 1px solid @primary-color;
+  }
 }

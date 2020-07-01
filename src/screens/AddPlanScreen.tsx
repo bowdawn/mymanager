@@ -132,10 +132,8 @@ const AddPlanScreen: FC = (props: any) => {
   return (
     <div>
       <Header title='빠른 설계' subHeader={{ name: '김백호', age: 46 }} />
-      <Card
-        className='ant-card-no-padding'
-        onClick={() => setQuickPlanCollapse(!quickPlanCollapse)}
-      >
+
+      <div onClick={() => setQuickPlanCollapse(!quickPlanCollapse)}>
         <div className='f-jc-sb f-ai-c ph16 pt20 pb10'>
           <div className='fs12 fls60 fwb'>빠른 설계</div>
 
@@ -149,19 +147,19 @@ const AddPlanScreen: FC = (props: any) => {
           activeKey={[quickPlanCollapse ? '1' : '0']}
         >
           <Panel showArrow={false} header={null} key='1'>
-            <Row gutter={[8, 8]}>
+            <Row className='bc-wt p16' gutter={[7, 7]}>
               {tagsData.map((item: any, i: number) => (
-                <Col span={6}>
+                <Col className='wp20 f-jc-c'>
                   <div onClick={(e) => e.stopPropagation()}>
                     <CheckableTag
+                      className='w60 h78 br4'
                       checked={quickPlanOptions[i]}
-                      style={{ width: '100%' }}
                       onChange={(e) => {
                         quickPlanOptions[i] = e;
                         setQuickPlanOptions([...quickPlanOptions]);
                       }}
                     >
-                      {item}
+                      <div className='fs12 fls110'>{item}</div>
                     </CheckableTag>
                   </div>
                 </Col>
@@ -169,7 +167,7 @@ const AddPlanScreen: FC = (props: any) => {
             </Row>
           </Panel>
         </Collapse>
-      </Card>
+      </div>
 
       <div className='ph16 pt40'>
         <div className='fs12 fls60 fwb'>성품군 선택</div>
