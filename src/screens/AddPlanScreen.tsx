@@ -39,6 +39,8 @@ import { ReactComponent as DriverIcon } from 'src/assets/icons/driver.svg';
 import { ReactComponent as DentalIcon } from 'src/assets/icons/dental.svg';
 import { ReactComponent as CheckboxIcon } from 'src/assets/icons/checkbox.svg';
 import { ReactComponent as ArrowUpIcon } from 'src/assets/icons/arrow-up.svg';
+import { ReactComponent as ArrowLeftIcon } from 'src/assets/icons/arrow-left.svg';
+import { ReactComponent as ArrowRightIcon } from 'src/assets/icons/arrow-right.svg';
 
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
@@ -194,11 +196,7 @@ const AddPlanScreen: FC = (props: any) => {
         <div className='f-jc-sb f-ai-c ph16 pt20 pb10'>
           <div className='fs12 fls60 fwb'>빠른 설계</div>
 
-          <Icon
-            className='rotation-transition'
-            rotate={quickPlanCollapse ? 180 : 0}
-            component={ArrowUpIcon}
-          />
+          <Icon rotate={quickPlanCollapse ? 180 : 0} component={ArrowUpIcon} />
         </div>
         <div className='h1 fo1 bc-bt' />
         <Collapse
@@ -239,69 +237,114 @@ const AddPlanScreen: FC = (props: any) => {
       </div>
 
       <div className='ph16 pt40'>
-        <div className='fs12 fls60 fwb'>성품군 선택</div>
+        <div className='fs12 fls60 fwb mb10 ph2-5'>성품군 선택</div>
 
         <Carousel
+          className='slick-prev-left-0 slick-next-right-0 ph16  mb40'
           arrows={true}
-          prevArrow={<LeftOutlined />}
-          nextArrow={<RightOutlined />}
+          prevArrow={<Icon component={ArrowLeftIcon} />}
+          nextArrow={<Icon component={ArrowRightIcon} />}
           draggable={true}
           slidesPerRow={4}
           dots={false}
           infinite={false}
         >
           {productTypes.map((item: any, i: number) => (
-            <CheckableTag
-              checked={selectedProductedTypes[i]}
-              onChange={(e) => {
-                selectedProductedTypes[i] = e;
-                setSelectedProductTypes([...selectedProductedTypes]);
-              }}
-            >
-              {item}
-            </CheckableTag>
+            <div>
+              <div className='f-jc-c ph2-5'>
+                <CheckableTag
+                  className={
+                    selectedProductedTypes[i]
+                      ? 'h70 wp100 br4 f-fd-c f-jc-sb f-ai-c pv8'
+                      : 'h70 wp100 br4 f-fd-c f-jc-c f-ai-c pv8'
+                  }
+                  checked={selectedProductedTypes[i]}
+                  onChange={(e) => {
+                    selectedProductedTypes[i] = e;
+                    setSelectedProductTypes([...selectedProductedTypes]);
+                  }}
+                >
+                  {selectedProductedTypes[i] ? (
+                    <CheckboxIcon className='pt2' />
+                  ) : null}
+                  <div
+                    className={
+                      selectedProductedTypes[i] ? 'fs14 fls7 fwb' : 'fs14 fls7'
+                    }
+                  >
+                    {item}
+                  </div>
+                </CheckableTag>
+              </div>
+            </div>
           ))}
         </Carousel>
-        <Row justify='start'>
-          <Col>플랜선택</Col>
-        </Row>
+        <div className='fs12 fls60 fwb mb10 ph2-5'>플랜선택</div>
 
         <Carousel
+          className='slick-prev-left-0 slick-next-right-0 ph16 mb40'
           arrows={true}
-          prevArrow={<LeftOutlined />}
-          nextArrow={<RightOutlined />}
+          prevArrow={<Icon component={ArrowLeftIcon} />}
+          nextArrow={<Icon component={ArrowRightIcon} />}
           draggable={true}
           slidesPerRow={4}
           dots={false}
           infinite={false}
         >
           {planTypes.map((item: any, i: number) => (
-            <CheckableTag
-              checked={selectedPlanTypes[i]}
-              onChange={(e) => {
-                selectedPlanTypes[i] = e;
-                setSelectedPlanTypes([...selectedPlanTypes]);
-              }}
-            >
-              {item}
-            </CheckableTag>
+            <div>
+              <div className='f-jc-c ph2-5'>
+                <CheckableTag
+                  className={
+                    selectedPlanTypes[i]
+                      ? 'h70 wp100 br4 f-fd-c f-jc-sb f-ai-c pv8'
+                      : 'h70 wp100 br4 f-fd-c f-jc-c f-ai-c pv8'
+                  }
+                  checked={selectedPlanTypes[i]}
+                  onChange={(e) => {
+                    selectedPlanTypes[i] = e;
+                    setSelectedPlanTypes([...selectedPlanTypes]);
+                  }}
+                >
+                  {selectedPlanTypes[i] ? (
+                    <CheckboxIcon className='pt2' />
+                  ) : null}
+                  <div
+                    className={
+                      selectedPlanTypes[i] ? 'fs14 fls7 fwb' : 'fs14 fls7'
+                    }
+                  >
+                    {item}
+                  </div>
+                </CheckableTag>
+              </div>
+            </div>
           ))}
         </Carousel>
-        <Row justify='start'>
-          <Col>회사선택</Col>
-        </Row>
-        <Row gutter={[0, 0]}>
+        <div className='fs12 fls60 fwb mb10 ph2-5'>회사 선택</div>
+        <Row gutter={[7, 7]}>
           {companies.map((item: any, i: number) => (
-            <Col style={{ width: '20%' }}>
+            <Col className='wp20'>
               <CheckableTag
                 checked={selectedCompanies[i]}
-                style={{ width: '100%' }}
+                className={
+                  selectedCompanies[i]
+                    ? 'h60 wp100 br4 f-fd-c f-jc-sb f-ai-c pv8'
+                    : 'h60 wp100 br4 f-fd-c f-jc-c f-ai-c pv8'
+                }
                 onChange={(e) => {
                   selectedCompanies[i] = e;
                   setSelectedCompanies([...selectedCompanies]);
                 }}
               >
-                {item}
+                {selectedCompanies[i] ? <CheckboxIcon className='pt2' /> : null}
+                <div
+                  className={
+                    selectedCompanies[i] ? 'fs14 fls7 fwb' : 'fs14 fls7'
+                  }
+                >
+                  {item}
+                </div>
               </CheckableTag>
             </Col>
           ))}

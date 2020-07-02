@@ -1,5 +1,6 @@
 .ant-override {
   each(range(25), {
+    @half : -5;
     .p@{value} {
       padding: @value * 1px;
     }
@@ -23,8 +24,31 @@
         padding-top: @value * 1px;
         padding-bottom: @value * 1px;
       }
-      
 
+
+      .p@{value}@{half} {
+        padding: @value * 1px + .5;
+      }
+      .pt@{value}@{half} {
+          padding-top: @value * 1px + .5;
+        }
+        .pr@{value}@{half} {
+          padding-right: @value * 1px + .5;
+        }
+        .pb@{value}@{half} {
+          padding-bottom: @value * 1px + .5;
+        }
+        .pl@{value}@{half} {
+          padding-left: @value * 1px + .5;
+        }
+        .ph@{value}@{half} {
+          padding-left: @value * 1px + .5;
+          padding-right: @value * 1px + .5;
+        }
+        .pv@{value}@{half} {
+          padding-top: @value * 1px + .5;
+          padding-bottom: @value * 1px + .5;
+        }
   });
 
   each(range(25, 50, 5), {
@@ -51,7 +75,5 @@
         padding-top: @value * 1px;
         padding-bottom: @value * 1px;
       }
-      
-
   });
 }

@@ -247,10 +247,10 @@ const MyManagerScreen: FC = (props: any) => {
             total={total}
             itemRender={(page, type, originalElement) => {
               if (type === 'prev') {
-                return <Icon component={() => <PaginationLeftIcon />} />;
+                return <Icon component={PaginationLeftIcon} />;
               }
               if (type === 'next') {
-                return <Icon component={() => <PaginationRightIcon />} />;
+                return <Icon component={PaginationRightIcon} />;
               }
               return originalElement;
             }}

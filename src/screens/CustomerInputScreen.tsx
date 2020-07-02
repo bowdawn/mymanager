@@ -170,7 +170,7 @@ const CustomerInputScreen: FC = (props: any) => {
                         />
                         <Icon
                           onClick={() => setDatePickerVisible(true)}
-                          component={() => <Calendar />}
+                          component={Calendar}
                         />
                       </div>
                     </Form.Item>

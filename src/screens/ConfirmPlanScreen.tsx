@@ -172,8 +172,8 @@ const PlanConfirmScreen: FC = (props: any) => {
           <TabPane tab={<div className='w78 f-jc-c'>{item.title}</div>} key={i}>
             <Carousel
               arrows={true}
-              prevArrow={<Icon component={() => <PrevArrow />} />}
-              nextArrow={<Icon component={() => <NextArrow />} />}
+              prevArrow={<Icon component={PrevArrow} />}
+              nextArrow={<Icon component={NextArrow} />}
               draggable={true}
               appendDots={(dots) => <div className='custom-dots'>{dots}</div>}
             >
@@ -222,14 +222,11 @@ const PlanConfirmScreen: FC = (props: any) => {
                   </Space>
 
                   <Icon
-                    component={() => (
-                      <DeleteIcon
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          message.info('delete card: to be implemented');
-                        }}
-                      />
-                    )}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      message.info('delete card: to be implemented');
+                    }}
+                    component={DeleteIcon}
                   />
                 </div>
 
