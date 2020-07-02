@@ -49,11 +49,8 @@ each(@ls-values, {
   text-decoration: underline;
 }
 
-@o-values: 2, 9;
-each(@o-values, {
-  
+each(range(10), {  
   .fo@{value} {
-    letter-spacing: @value * 0.1; 
+    opacity: @value * 0.1; 
   }
-
 });

@@ -305,7 +305,7 @@ const PlanConfirmScreen: FC = (props: any) => {
               >
                 <div className='mr4'>연령별 설계</div>
                 <CaretDownOutlined
-                  className='ml4 rotate-transition fs7'
+                  className='ml4 fs7'
                   rotate={collapsedKeyArray[i] === '1' ? 360 : 0}
                 />
               </div>

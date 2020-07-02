@@ -1,0 +1,37 @@
+.abs {
+  position: absolute;
+}
+.rel {
+  position: absolute;
+}
+
+each( range(25) , {
+    .t@{value} {
+        top: @value * 1px;
+    }
+    .b@{value} {
+        bottom: @value * 1px;
+    }
+    .l@{value} {
+        left: @value * 1px;
+    }
+    .r@{value} {
+        right: @value * 1px;
+    }
+    .t-@{value} {
+        top: @value * -1px;
+    }
+    .b-@{value} {
+        bottom: @value * -1px;
+    }
+    .l-@{value} {
+        left: @value * -1px;
+    }
+    .r-@{value} {
+        right: @value * -1px;
+    }
+});
+
+.l12-5 {
+  left: 12.5px;
+}

@@ -1,22 +1,18 @@
 @import '../index.less';
 
 .ant-tag-checkable:not(.ant-tag-checkable-checked) {
-  color: @primary-5;
   background: white;
-  border-color: @primary-5;
+  border: 1px solid @white;
 }
 
-.ant-tag-checkable:not(.ant-tag-checkable-checked):hover {
-  border-color: @primary-color;
+.ant-tag-checkable-checked {
+  background-color: @peacock-blue-7;
+  color: @peacock-blue;
+  border: 1px solid @primary-color;
 }
 
 .ant-tag-checkable {
   margin: 0;
-}
-
-.ant-tag:not(.ant-tag-has-color) {
-  color: @primary-color;
-  border-color: @primary-color;
 }
 
 .ant-tag.rounded-tag {
@@ -24,10 +20,7 @@
 }
 
 .ant-tag {
+  padding: 0;
   margin: 0;
   border-radius: 0px;
-}
-
-.ant-tag-has-color {
-  color: #ffffff;
 }

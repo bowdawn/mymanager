@@ -14,7 +14,7 @@ import {
   Button,
   Modal,
 } from 'antd';
-import {
+import Icon, {
   SaveOutlined,
   LeftOutlined,
   RightOutlined,
@@ -23,6 +23,23 @@ import {
   PlusOutlined,
   RedoOutlined,
 } from '@ant-design/icons';
+
+import { ReactComponent as AllIcon } from 'src/assets/icons/all.svg';
+import { ReactComponent as FourMajorDiseasesIcon } from 'src/assets/icons/four-major-diseases.svg';
+import { ReactComponent as ThreeMajorDiseasesIcon } from 'src/assets/icons/three-major-diseases.svg';
+import { ReactComponent as TwoMajorDiseasesIcon } from 'src/assets/icons/two-major-diseases.svg';
+import { ReactComponent as CancerPlanIcon } from 'src/assets/icons/cancer-plan.svg';
+import { ReactComponent as SurgeryIcon } from 'src/assets/icons/surgery.svg';
+import { ReactComponent as CaregiverIcon } from 'src/assets/icons/caregiver.svg';
+import { ReactComponent as ChildrenIcon } from 'src/assets/icons/children.svg';
+import { ReactComponent as FinancialLossIcon } from 'src/assets/icons/financial-loss.svg';
+import { ReactComponent as BasicFinancialLossIcon } from 'src/assets/icons/basic-financial-loss.svg';
+import { ReactComponent as DementiaIcon } from 'src/assets/icons/dementia.svg';
+import { ReactComponent as DriverIcon } from 'src/assets/icons/driver.svg';
+import { ReactComponent as DentalIcon } from 'src/assets/icons/dental.svg';
+import { ReactComponent as CheckboxIcon } from 'src/assets/icons/checkbox.svg';
+import { ReactComponent as ArrowUpIcon } from 'src/assets/icons/arrow-up.svg';
+
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
 const { CheckableTag } = Tag;
@@ -62,19 +79,59 @@ const tabs = [
 ];
 
 const tagsData = [
-  '종합',
-  '4대질병',
-  '3대질병',
-  '2대질병',
-  '임플랜',
-  '수술/입원',
-  '간병인',
-  '어린이',
-  '실손',
-  '간편실손',
-  '치매',
-  '운전자',
-  '치아',
+  {
+    label: '종합',
+    icon: <AllIcon />,
+  },
+  {
+    label: '4대질병',
+    icon: <FourMajorDiseasesIcon />,
+  },
+  {
+    label: '3대질병',
+    icon: <ThreeMajorDiseasesIcon />,
+  },
+  {
+    label: '2대질병',
+    icon: <TwoMajorDiseasesIcon />,
+  },
+  {
+    label: '임플랜',
+    icon: <CancerPlanIcon />,
+  },
+  {
+    label: '수술/입원',
+    icon: <SurgeryIcon />,
+  },
+  {
+    label: '간병인',
+    icon: <CaregiverIcon />,
+  },
+  {
+    label: '어린이',
+    icon: <ChildrenIcon />,
+  },
+  {
+    label: '실손',
+    icon: <FinancialLossIcon />,
+  },
+  {
+    label: '간편실손',
+    icon: <BasicFinancialLossIcon />,
+  },
+
+  {
+    label: '치매',
+    icon: <DementiaIcon />,
+  },
+  {
+    label: '운전자',
+    icon: <DriverIcon />,
+  },
+  {
+    label: '치아',
+    icon: <DentalIcon />,
+  },
 ];
 
 const productTypes = [
@@ -137,11 +194,13 @@ const AddPlanScreen: FC = (props: any) => {
         <div className='f-jc-sb f-ai-c ph16 pt20 pb10'>
           <div className='fs12 fls60 fwb'>빠른 설계</div>
 
-          <DownOutlined
-            className='rotate-transition'
-            rotate={quickPlanCollapse ? 0 : -360}
+          <Icon
+            className='rotation-transition'
+            rotate={quickPlanCollapse ? 180 : 0}
+            component={ArrowUpIcon}
           />
         </div>
+        <div className='h1 fo1 bc-bt' />
         <Collapse
           className='transparent-collapse'
           activeKey={[quickPlanCollapse ? '1' : '0']}
@@ -150,16 +209,26 @@ const AddPlanScreen: FC = (props: any) => {
             <Row className='bc-wt p16' gutter={[7, 7]}>
               {tagsData.map((item: any, i: number) => (
                 <Col className='wp20 f-jc-c'>
-                  <div onClick={(e) => e.stopPropagation()}>
+                  <div className='f f1' onClick={(e) => e.stopPropagation()}>
                     <CheckableTag
-                      className='w60 h78 br4'
+                      className='h78 f1 br4 pv8'
                       checked={quickPlanOptions[i]}
                       onChange={(e) => {
                         quickPlanOptions[i] = e;
                         setQuickPlanOptions([...quickPlanOptions]);
                       }}
                     >
-                      <div className='fs12 fls110'>{item}</div>
+                      {quickPlanOptions[i] ? (
+                        <div className='rel '>
+                          <div className='abs f l8'>
+                            <CheckboxIcon className='h11 w11' />
+                          </div>
+                        </div>
+                      ) : null}
+                      <div className='f-fd-c f-ai-c f-jc-sb'>
+                        {item.icon}
+                        <div className='fs12 fls110'>{item.label}</div>
+                      </div>
                     </CheckableTag>
                   </div>
                 </Col>

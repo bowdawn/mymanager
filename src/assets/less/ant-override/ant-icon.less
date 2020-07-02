@@ -21,15 +21,12 @@
   }
 }
 
-.rotate-transition {
-  &.anticon svg {
+.anticon {
+  & * {
     -moz-transition: all 0.3s linear;
     -webkit-transition: all 0.3s linear;
     transition: all 0.3s linear;
   }
-}
-
-.anticon {
   &:hover {
     path {
       fill: lighten(#000, 50%);

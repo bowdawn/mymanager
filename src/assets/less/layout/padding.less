@@ -1,4 +1,5 @@
-each(range(25), {
+.ant-override {
+  each(range(25), {
     .p@{value} {
       padding: @value * 1px;
     }
@@ -26,7 +27,7 @@ each(range(25), {
 
   });
 
-each(range(25, 50, 5), {
+  each(range(25, 50, 5), {
     .p@{value} {
       padding: @value * 1px;
     }
@@ -53,3 +54,4 @@ each(range(25, 50, 5), {
       
 
   });
+}
