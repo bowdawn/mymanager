@@ -13,6 +13,15 @@
 
 .ant-tag-checkable {
   margin: 0;
+  &.ant-tag-checkable-disabled {
+    pointer-events: none;
+    border-color: @white;
+    background-color: @white-three;
+    color: @warm-grey-two;
+  }
+  &:active {
+    background-color: white;
+  }
 }
 
 .ant-tag.rounded-tag {

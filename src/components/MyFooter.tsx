@@ -11,7 +11,7 @@ const Footer: FC<any> = (props: {
   const { title, subTitle } = props;
 
   return (
-    <div className='f-fd-c f-jc-fe my-footer ph16 pb5 pt45'>
+    <div className='f-fd-c f-jc-fe my-footer ph16 pb5 pt45 pb16'>
       <div>
         <div>
           주소 (04778) 서울특별시 강서구 마곡중앙로 757 두산더랜드 파크 c동

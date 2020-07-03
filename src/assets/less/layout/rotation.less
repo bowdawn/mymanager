@@ -1,20 +1,19 @@
-each(range(-360, 360, 90), {
-    
+@deg-values: -360, 360;
+each(@deg-values, {
     .rot@{value}{
-       &:active{
-
-      
-            svg{ 
-                transform: rotate(@value * 1deg);  
-             }
+        svg{
+            animation: spin 0.3s linear;
+            -webkit-animation: spin 0.3s linear;
+            @-webkit-keyframes spin { 
+                100% { 
+                    transform: rotate(-360deg);
+                } 
             }
-       
-    }
-})
-  .transition3 {
-  & * {
-    -moz-transition: all 3s linear;
-    -webkit-transition: all 3s linear;
-    transition: all 3s linear;
-  }
-}
+            @keyframes spin { 
+                100% { 
+                    transform: rotate(-360deg);
+                } 
+            }
+        }
+    } 
+});

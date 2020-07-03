@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 import Header from 'src/components/MyHeader';
+import Footer from 'src/components/MyFooter';
 import {
   message,
   Space,
@@ -14,15 +15,7 @@ import {
   Button,
   Modal,
 } from 'antd';
-import Icon, {
-  SaveOutlined,
-  LeftOutlined,
-  RightOutlined,
-  DeleteOutlined,
-  DownOutlined,
-  PlusOutlined,
-  RedoOutlined,
-} from '@ant-design/icons';
+import Icon, { PlusOutlined } from '@ant-design/icons';
 
 import { ReactComponent as AllIcon } from 'src/assets/icons/all.svg';
 import { ReactComponent as FourMajorDiseasesIcon } from 'src/assets/icons/four-major-diseases.svg';
@@ -41,6 +34,9 @@ import { ReactComponent as CheckboxIcon } from 'src/assets/icons/checkbox.svg';
 import { ReactComponent as ArrowUpIcon } from 'src/assets/icons/arrow-up.svg';
 import { ReactComponent as ArrowLeftIcon } from 'src/assets/icons/arrow-left.svg';
 import { ReactComponent as ArrowRightIcon } from 'src/assets/icons/arrow-right.svg';
+import { ReactComponent as ResetIcon } from 'src/assets/icons/reset.svg';
+import { ReactComponent as StandardIcon } from 'src/assets/icons/standard.svg';
+import { ReactComponent as PremiumIcon } from 'src/assets/icons/premium.svg';
 
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
@@ -172,6 +168,20 @@ const companies = [
   '메트',
 ];
 
+const expirationOptions = [
+  { label: '10년', expiry: '만기', disabled: true },
+  { label: '80세', expiry: '만기', disabled: false },
+  { label: '90세', expiry: '만기', disabled: false },
+  { label: '95세', expiry: '만기', disabled: false },
+  { label: '100세', expiry: '만기', disabled: false },
+  { label: '갱신', expiry: null, disabled: true },
+];
+
+const pricePlans = [
+  { label: '표준형', icon: <StandardIcon />, disabled: false },
+  { label: '고급형', icon: <PremiumIcon />, disabled: true },
+];
+
 const AddPlanScreen: FC = (props: any) => {
   const [saveModal, setSaveModal] = useState(0);
   const [quickPlanCollapse, setQuickPlanCollapse] = useState(false);
@@ -187,6 +197,13 @@ const AddPlanScreen: FC = (props: any) => {
   const [selectedCompanies, setSelectedCompanies] = useState([
     ...companies.map((item: any) => false),
   ]);
+  const [selectedExpirations, setSelectedExpirations] = useState([
+    ...expirationOptions.map((item: any) => false),
+  ]);
+  const [selectedPricePlans, setSelectedPricePlans] = useState([
+    ...pricePlans.map((item: any) => false),
+  ]);
+  const [rotate, setRotate] = useState(false);
 
   return (
     <div>
@@ -321,81 +338,142 @@ const AddPlanScreen: FC = (props: any) => {
             </div>
           ))}
         </Carousel>
-        <div className='fs12 fls60 fwb mb10 ph2-5'>회사 선택</div>
-        <Row gutter={[7, 7]}>
-          {companies.map((item: any, i: number) => (
-            <Col className='wp20'>
-              <CheckableTag
-                checked={selectedCompanies[i]}
-                className={
-                  selectedCompanies[i]
-                    ? 'h60 wp100 br4 f-fd-c f-jc-sb f-ai-c pv8'
-                    : 'h60 wp100 br4 f-fd-c f-jc-c f-ai-c pv8'
-                }
-                onChange={(e) => {
-                  selectedCompanies[i] = e;
-                  setSelectedCompanies([...selectedCompanies]);
-                }}
-              >
-                {selectedCompanies[i] ? <CheckboxIcon className='pt2' /> : null}
-                <div
+        <div className='mb40'>
+          <div className='fs12 fls60 fwb mb10 ph2-5'>회사 선택</div>
+          <Row gutter={[7, 7]}>
+            {companies.map((item: any, i: number) => (
+              <Col className='wp20'>
+                <CheckableTag
+                  checked={selectedCompanies[i]}
                   className={
-                    selectedCompanies[i] ? 'fs14 fls7 fwb' : 'fs14 fls7'
+                    selectedCompanies[i]
+                      ? 'h60 wp100 br4 f-fd-c f-jc-sb f-ai-c pv8'
+                      : 'h60 wp100 br4 f-fd-c f-jc-c f-ai-c pv8'
                   }
+                  onChange={(e) => {
+                    selectedCompanies[i] = e;
+                    setSelectedCompanies([...selectedCompanies]);
+                  }}
                 >
-                  {item}
-                </div>
-              </CheckableTag>
-            </Col>
-          ))}
-        </Row>
-      </div>
-
-      <div
-        style={{
-          paddingRight: 25,
-          paddingLeft: 25,
-          paddingTop: 0,
-          paddingBottom: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <Space direction='vertical' style={{ width: '100%' }}>
-          <Card
-            className='ant-card-hover-primary-border'
-            onClick={() => message.info('add product: to be implemented')}
-          >
-            <div>상품 추가하기</div>
-            <PlusOutlined style={{ fontSize: 25 }} />
-          </Card>
-
-          <Row gutter={[8, 25]}>
-            <Col>
-              <Button
-                size='large'
-                onClick={() => message.info('reset button: to be implemented')}
-              >
-                <RedoOutlined rotate={-90} />
-              </Button>
-            </Col>
-            <Col flex={1}>
-              <Button
-                type='primary'
-                size='large'
-                style={{ width: '100%' }}
-                onClick={() =>
-                  message.info('send to kakaotalk button: to be implemented')
-                }
-              >
-                카카오톡으로 보내기
-              </Button>
-            </Col>
+                  {selectedCompanies[i] ? (
+                    <CheckboxIcon className='pt2' />
+                  ) : null}
+                  <div
+                    className={
+                      selectedCompanies[i] ? 'fs14 fls7 fwb' : 'fs14 fls7'
+                    }
+                  >
+                    {item}
+                  </div>
+                </CheckableTag>
+              </Col>
+            ))}
           </Row>
-        </Space>
+        </div>
+
+        <div className='mb40'>
+          <div className='fs12 fls60 fwb mb10 ph2-5'>만기선택</div>
+          <Row gutter={[7, 7]}>
+            {expirationOptions.map((item: any, i: number) => (
+              <Col span={8}>
+                <CheckableTag
+                  checked={selectedExpirations[i]}
+                  className={
+                    item.disabled
+                      ? 'h70 wp100 br4 f-fd-c f-jc-c f-ai-c pv10 ant-tag-checkable-disabled'
+                      : selectedExpirations[i]
+                      ? 'h70 wp100 br4 f-fd-c f-jc-sb f-ai-c pv10'
+                      : 'h70 wp100 br4 f-fd-c f-jc-c f-ai-c pv10'
+                  }
+                  onChange={(e) => {
+                    selectedExpirations[i] = e;
+                    setSelectedExpirations([...selectedExpirations]);
+                  }}
+                >
+                  {selectedExpirations[i] ? <CheckboxIcon /> : null}
+                  <div
+                    className={
+                      selectedExpirations[i] ? 'fs14 fls7 fwb' : 'fs14 fls7'
+                    }
+                  >
+                    <div className='f-fd-c f-jc-sb f-ai-c h28 flh100 mv4'>
+                      <div className='fls7 fs14 fwb '>{item.label}</div>
+                      <div className='fls6 fs12'>{item.expiry}</div>
+                    </div>
+                  </div>
+                </CheckableTag>
+              </Col>
+            ))}
+          </Row>
+        </div>
+
+        <div className='mb40'>
+          <div className='fs12 fls60 fwb mb10 ph2-5'>가격종류</div>
+          <Row gutter={[7, 7]}>
+            {pricePlans.map((item: any, i: number) => (
+              <Col span={12}>
+                <CheckableTag
+                  checked={selectedPricePlans[i]}
+                  className={
+                    item.disabled
+                      ? 'h92 wp100 br4 pv15 ant-tag-checkable-disabled'
+                      : selectedPricePlans[i]
+                      ? 'h92 wp100 br4 fill-primary-hover fill-primary pv15'
+                      : 'h92 wp100 br4 fill-primary-hover  pv15'
+                  }
+                  onChange={(e) => {
+                    selectedPricePlans[i] = e;
+                    setSelectedPricePlans([...selectedPricePlans]);
+                  }}
+                >
+                  <div className='f-fd-c f-jc-sb f-ai-c '>
+                    {selectedPricePlans[i] ? (
+                      <div className='rel '>
+                        <div className='abs f l-39'>
+                          <CheckboxIcon className='h11 w11' />
+                        </div>
+                      </div>
+                    ) : null}
+                    {item.icon}
+                    <div
+                      className={
+                        selectedPricePlans[i] ? 'fs14 fls7 fwb' : 'fs14 fls7'
+                      }
+                    >
+                      {item.label}
+                    </div>
+                  </div>
+                </CheckableTag>
+              </Col>
+            ))}
+          </Row>
+        </div>
+
+        <div className='f f-ai-c h55 mb50'>
+          <Button
+            className={rotate ? 'hp100 mr8 br4 rot-360' : 'hp100 mr8 br4'}
+            onAnimationEnd={() => setRotate(false)}
+            onClick={() => {
+              setRotate(true);
+              message.info('reset button: to be implemented');
+            }}
+          >
+            <ResetIcon />
+          </Button>
+
+          <Button
+            type='primary'
+            className='f1 fls8 fs18 fwb hp100 br4'
+            onClick={() =>
+              message.info('send to kakaotalk button: to be implemented')
+            }
+          >
+            간편 보험료 설계
+          </Button>
+        </div>
       </div>
+
+      <Footer />
     </div>
   );
 };

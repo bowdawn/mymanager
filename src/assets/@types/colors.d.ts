@@ -14,5 +14,6 @@ declare var black: string;
 declare var blackTwo: string;
 declare var white: string;
 declare var whiteTwo: string;
+declare var whiteThree: string;
 declare var peacockBlue7: string;
 declare var sunflowerYellow: string;

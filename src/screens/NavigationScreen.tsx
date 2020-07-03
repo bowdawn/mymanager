@@ -19,7 +19,9 @@ const NavigationPage: FC = (props: any) => {
         <Link href={screenPath3} style={{ color: 'green' }}>
           페이지3 으로 이동 (디자인 완료)
         </Link>
-        <Link href={screenPath4}>페이지4 으로 이동 (디자인 진행중)</Link>
+        <Link href={screenPath4} style={{ color: 'green' }}>
+          페이지4 으로 이동 (디자인 완료)
+        </Link>
       </Space>
     </div>
   );

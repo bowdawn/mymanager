@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="44" height="44" viewBox="0 0 44 44">
+    <defs>
+        <filter id="prefix__a" width="119.8%" height="134.8%" x="-9.9%" y="-15.2%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="5"/>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+      
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        
+        <g>
+            <g fill-rule="nonzero" transform="translate(-75 -1266) translate(0 539)">
+               
+            </g>
+            <g>
+              
+                <path fill="#555" d="M37.342 6.667v28.477h3.357v2.19H3.333v-2.19H6.69v-13.72h8.758v13.72h2.19V14.441h8.757v20.703h2.19V6.667h8.757zm-2.19 2.189h-4.378v26.288h4.378V8.856zM24.206 16.63h-4.38v18.514h4.38V16.63zm-10.948 6.983H8.88v11.531h4.378v-11.53z" transform="translate(-75 -1266) translate(0 539) translate(75 727)"/>
+            </g>
+        </g>
+    </g>
+</svg>
