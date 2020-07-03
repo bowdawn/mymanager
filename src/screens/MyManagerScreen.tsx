@@ -168,7 +168,7 @@ const MyManagerScreen: FC = (props: any) => {
                   <div className='f1'>
                     <Space size={10}>
                       <Tag
-                        className='w41 f-jc-c f-ai-c fls6'
+                        className='ph10 fls6'
                         color={item.type === '신규' ? darkSkyBlue : grapefruit}
                       >
                         {item.type}
@@ -180,9 +180,7 @@ const MyManagerScreen: FC = (props: any) => {
                   </div>
                   <div className='f1 f-jc-sb f-ai-c '>
                     <Space align='center' size={8}>
-                      <Tag className='br10 w25 f-jc-c f-ai-c bpc fc-pc'>
-                        {item.gender}
-                      </Tag>
+                      <Tag className='br10 ph7 bpc fc-pc'>{item.gender}</Tag>
                       <div className='h20 fs14 fls70'>
                         {(item.birthdate
                           ? [item.birthdate]

@@ -207,9 +207,7 @@ const PlanConfirmScreen: FC = (props: any) => {
               className='ant-card-no-padding'
               key={`productcard-${i}`}
               hoverable
-              onClick={() =>
-                message.info('product card on click: to be implemented')
-              }
+              onClick={() => history.push(screenPath5)}
             >
               <div className='p16'>
                 <div className='f-jc-sb'>
