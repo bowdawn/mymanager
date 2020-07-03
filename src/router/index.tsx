@@ -5,6 +5,7 @@ import MyManagerScreen from 'src/screens/MyManagerScreen';
 import CustomerScreeen from 'src/screens/CustomerInputScreen';
 import ConfirmPlanScreen from 'src/screens/ConfirmPlanScreen';
 import AddPlanScreen from 'src/screens/AddPlanScreen';
+import ProductDetailScreen from 'src/screens/ProductDetailScreen';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const MainNavigator: FC = (props: any) => {
@@ -17,6 +18,7 @@ const MainNavigator: FC = (props: any) => {
           <Route exact path={screenPath2} component={CustomerScreeen} />
           <Route exact path={screenPath3} component={ConfirmPlanScreen} />
           <Route exact path={screenPath4} component={AddPlanScreen} />
+          <Route exact path={screenPath5} component={ProductDetailScreen} />
         </Switch>
       </Router>
     </div>

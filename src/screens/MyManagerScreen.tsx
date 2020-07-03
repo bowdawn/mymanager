@@ -168,6 +168,7 @@ const MyManagerScreen: FC = (props: any) => {
                   <div className='f1'>
                     <Space size={10}>
                       <Tag
+                        className='w41 f-jc-c f-ai-c fls6'
                         color={item.type === '신규' ? darkSkyBlue : grapefruit}
                       >
                         {item.type}
@@ -179,7 +180,9 @@ const MyManagerScreen: FC = (props: any) => {
                   </div>
                   <div className='f1 f-jc-sb f-ai-c '>
                     <Space align='center' size={8}>
-                      <Tag className='rounded-tag'>{item.gender}</Tag>
+                      <Tag className='br10 w25 f-jc-c f-ai-c bpc fc-pc'>
+                        {item.gender}
+                      </Tag>
                       <div className='h20 fs14 fls70'>
                         {(item.birthdate
                           ? [item.birthdate]
@@ -247,10 +250,12 @@ const MyManagerScreen: FC = (props: any) => {
             total={total}
             itemRender={(page, type, originalElement) => {
               if (type === 'prev') {
-                return <Icon component={PaginationLeftIcon} />;
+                return <Icon className='fs38' component={PaginationLeftIcon} />;
               }
               if (type === 'next') {
-                return <Icon component={PaginationRightIcon} />;
+                return (
+                  <Icon className='fs38' component={PaginationRightIcon} />
+                );
               }
               return originalElement;
             }}

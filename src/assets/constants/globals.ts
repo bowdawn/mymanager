@@ -5,4 +5,5 @@
 (global as any)["screenPath2"] = "/customer";
 (global as any)["screenPath3"] = "/confirmplan";
 (global as any)["screenPath4"] = "/addplan";
+(global as any)["screenPath5"] = "/productdetails";
 export {};
