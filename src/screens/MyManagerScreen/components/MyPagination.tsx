@@ -9,15 +9,21 @@ import { ReactComponent as PaginationLastIcon } from 'src/assets/icons/paginatio
 
 interface Props {
   className?: string;
+  current: number;
+  setCurrent: (value: number) => void;
+  total: number;
+  pageSize: number;
 }
 
-const MyPagination: FC<Props> = (props: any) => {
-  const [current, setCurrent] = useState(1);
-  const total = 100;
-  const pageSize = 5;
-
+const MyPagination: FC<Props> = ({
+  className,
+  current,
+  setCurrent,
+  total,
+  pageSize,
+}) => {
   return (
-    <div className='f-jc-c f-ai-c p16'>
+    <div className={`f-jc-c f-ai-c ${className}`}>
       <Icon
         {...(current === 1
           ? { className: 'ant-pagination-disabled f-ai-c mr5' }
@@ -43,11 +49,11 @@ const MyPagination: FC<Props> = (props: any) => {
         }}
       />
       <Icon
-        {...(current === Math.floor(total / pageSize)
+        {...(current === Math.ceil(total / pageSize)
           ? { className: 'ant-pagination-disabled f-ai-c ml5' }
           : { className: 'f-ai-c ml5' })}
         component={() => <PaginationLastIcon className='f-ai-c' />}
-        onClick={() => setCurrent(Math.floor(total / pageSize))}
+        onClick={() => setCurrent(Math.ceil(total / pageSize))}
       />
     </div>
   );
