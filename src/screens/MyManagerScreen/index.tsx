@@ -236,14 +236,16 @@ const MyManagerScreen: FC = (props: any) => {
           />
         ) : null}
       </div>
+      {customers.length > 0 ? (
+        <CustomPagination
+          className='p16'
+          current={current}
+          setCurrent={(value: number) => setCurrent(value)}
+          pageSize={pageSize}
+          total={customers.length}
+        />
+      ) : null}
 
-      <CustomPagination
-        className='p16'
-        current={current}
-        setCurrent={(value: number) => setCurrent(value)}
-        pageSize={pageSize}
-        total={customers.length}
-      />
       <div className='f-jc-c'>
         <Button
           type='primary'
@@ -254,7 +256,6 @@ const MyManagerScreen: FC = (props: any) => {
           설계 시작하기
         </Button>
       </div>
-
       <CustomFooter />
     </div>
   );

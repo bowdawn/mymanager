@@ -13,11 +13,6 @@
   color: @primary-color;
 }
 
-.ant-carousel .slick-prev {
-  left: 16px;
-  z-index: 1;
-}
-
 .slick-slide > div {
   display: flex;
 }
@@ -66,14 +61,16 @@
 }
 
 each(range(-25,25,1), {
-  .slick-prev-left-@{value}{
+  .slick-prev-left@{value}{
      .slick-prev{
       left: @value * 1px;
+      z-index: 1;
     }
   }
-  .slick-next-right-@{value} { 
+  .slick-next-right@{value} { 
      .slick-next {
       right: @value * 1px;
+      z-index: 1;
     }
   }
 }

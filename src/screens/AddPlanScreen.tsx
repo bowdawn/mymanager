@@ -243,7 +243,7 @@ const AddPlanScreen: FC = (props: any) => {
         <div className='fs12 fls60 fwb mb10 ph2-5'>성품군 선택</div>
 
         <Carousel
-          className='slick-prev-left-0 slick-next-right-0 ph16  mb40'
+          className='slick-prev-left0 slick-next-right0 ph16  mb40'
           arrows={true}
           prevArrow={<Icon component={ArrowLeftIcon} />}
           nextArrow={<Icon component={ArrowRightIcon} />}
@@ -285,7 +285,7 @@ const AddPlanScreen: FC = (props: any) => {
         <div className='fs12 fls60 fwb mb10 ph2-5'>플랜선택</div>
 
         <Carousel
-          className='slick-prev-left-0 slick-next-right-0 ph16 mb40'
+          className='slick-prev-left0 slick-next-right0 ph16 mb40'
           arrows={true}
           prevArrow={<Icon component={ArrowLeftIcon} />}
           nextArrow={<Icon component={ArrowRightIcon} />}

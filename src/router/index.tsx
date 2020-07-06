@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 
-import NavigationScreen from 'src/screens/NavigationScreen';
 import MyManagerScreen from 'src/screens/MyManagerScreen/index';
 import CustomerInputScreen from 'src/screens/CustomerInputScreen/index';
 import ConfirmPlanScreen from 'src/screens/ConfirmPlanScreen';

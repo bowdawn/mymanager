@@ -135,7 +135,7 @@ const PlanConfirmScreen: FC<any> = (props: any) => {
           </div>
         }
         subHeader={{ name: name, age: 46 }}
-      ></Header>
+      />
 
       <div className='ph16 pt20 f-fd-c f-jc-sb '>
         <div className='pb10'>나의 플랜</div>
@@ -167,46 +167,44 @@ const PlanConfirmScreen: FC<any> = (props: any) => {
       </div>
 
       <Divider />
-
-      <Tabs
-        defaultActiveKey='0'
-        tabPosition={'top'}
-        tabBarGutter={0}
-        onTabScroll={(event) => console.log(event)}
-        className='mb24'
-      >
-        {tabs.map((item: any, i: number) => (
-          <TabPane tab={<div className='w78 f-jc-c'>{item.title}</div>} key={i}>
-            <Carousel
-              arrows={true}
-              prevArrow={<Icon component={PrevArrow} />}
-              nextArrow={<Icon component={NextArrow} />}
-              draggable={true}
-              appendDots={(dots) => <div className='custom-dots'>{dots}</div>}
+      <div className='mb24'>
+        <Tabs defaultActiveKey='0' tabPosition={'top'} tabBarGutter={0}>
+          {tabs.map((item: any, i: number) => (
+            <TabPane
+              tab={<div className='w78 f-jc-c'>{item.title}</div>}
+              key={i}
             >
-              {item.cards.map((item: any, j: number) => (
-                <div
-                  key={`card${i}-${j}`}
-                  onClick={() =>
-                    message.info(
-                      'selected card news on click: to be implemented'
-                    )
-                  }
-                >
-                  <div className='f-jc-c f-ai-c fc-pc fu fls70 '>
-                    {item.img ? (
-                      <img className='wp100' src={img} />
-                    ) : (
-                      <div className='hp100'>{item.content}</div>
-                    )}
+              <Carousel
+                className='slick-prev-left16 slick-next-right16 '
+                arrows={true}
+                prevArrow={<Icon component={PrevArrow} />}
+                nextArrow={<Icon component={NextArrow} />}
+                draggable={true}
+                appendDots={(dots) => <div className='custom-dots'>{dots}</div>}
+              >
+                {item.cards.map((item: any, j: number) => (
+                  <div
+                    key={`card${i}-${j}`}
+                    onClick={() =>
+                      message.info(
+                        'selected card news on click: to be implemented'
+                      )
+                    }
+                  >
+                    <div className='f-jc-c f-ai-c fc-pc fu fls70 '>
+                      {item.img ? (
+                        <img className='wp100' src={img} />
+                      ) : (
+                        <div className='hp100'>{item.content}</div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </Carousel>
-          </TabPane>
-        ))}
-      </Tabs>
-
+                ))}
+              </Carousel>
+            </TabPane>
+          ))}
+        </Tabs>
+      </div>
       <div className='ph16 f-fd-c f-jc-sb f-ai-c'>
         <Space direction='vertical' size={10} className='wp100'>
           {productCards.map((item: any, i: number) => (
