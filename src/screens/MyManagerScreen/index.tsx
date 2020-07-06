@@ -213,6 +213,7 @@ const MyManagerScreen: FC = (props: any) => {
                   customers.splice(index, 1);
                   setCustomers([...customers]);
                 }}
+                onClick={() => history.push(screenPath3, item)}
                 className='mb10'
                 name={item.name}
                 birthdate={item.birthdate}

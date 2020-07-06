@@ -1,21 +1,8 @@
 import React, { FC, useState } from 'react';
 import Header from 'src/components/MyHeader';
 import Footer from 'src/components/MyFooter';
-import {
-  message,
-  Space,
-  Row,
-  Col,
-  Radio,
-  Tabs,
-  Carousel,
-  Card,
-  Tag,
-  Collapse,
-  Button,
-  Modal,
-} from 'antd';
-import Icon, { PlusOutlined } from '@ant-design/icons';
+import { message, Row, Col, Carousel, Tag, Collapse, Button } from 'antd';
+import Icon from '@ant-design/icons';
 
 import { ReactComponent as AllIcon } from 'src/assets/icons/all.svg';
 import { ReactComponent as FourMajorDiseasesIcon } from 'src/assets/icons/four-major-diseases.svg';
@@ -38,7 +25,6 @@ import { ReactComponent as ResetIcon } from 'src/assets/icons/reset.svg';
 import { ReactComponent as StandardIcon } from 'src/assets/icons/standard.svg';
 import { ReactComponent as PremiumIcon } from 'src/assets/icons/premium.svg';
 
-const { TabPane } = Tabs;
 const { Panel } = Collapse;
 const { CheckableTag } = Tag;
 const tabs = [

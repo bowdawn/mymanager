@@ -31,10 +31,7 @@ const App: FC = () => {
               width > parseInt(maxScreenWidth)
                 ? parseInt(maxScreenWidth)
                 : width,
-            height:
-              height > parseInt(maxScreenHeight)
-                ? parseInt(maxScreenHeight)
-                : height,
+            height: height,
           }}
         >
           <MainNavigator />

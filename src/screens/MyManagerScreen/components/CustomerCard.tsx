@@ -6,7 +6,7 @@ import { ReactComponent as DeleteIcon } from 'src/assets/icons/delete-icon.svg';
 
 interface Props {
   className?: string;
-
+  onClick: () => void;
   deleteCard: () => void;
   type: string;
   name: string;
@@ -23,7 +23,7 @@ const MyManagerScreen: FC<Props> = (item: any) => {
       className={`ant-card-no-padding ${item.className}`}
       hoverable
       onClick={() => {
-        message.info('card click: to be implemented');
+        item.onClick();
       }}
     >
       <div className='f pv12 ph16'>

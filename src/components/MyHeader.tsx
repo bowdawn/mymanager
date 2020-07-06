@@ -29,8 +29,8 @@ const Header: FC<Props> = ({ title, extra, subHeader }) => {
         <Row className='ant-row-midnight ' justify='center'>
           <Col>
             <div className='pv10 fs18'>
-              <span className='fc-dsb'>김백호</span>님 보험연령
-              <span className='fc-dsb'>46</span>세
+              <span className='fc-dsb'>{subHeader.name}</span>님 보험연령
+              <span className='fc-dsb'>&nbsp;{subHeader.age}</span>세
             </div>
           </Col>
         </Row>

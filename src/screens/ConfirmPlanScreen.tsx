@@ -105,7 +105,7 @@ const productCards = [
   },
 ];
 
-const PlanConfirmScreen: FC = (props: any) => {
+const PlanConfirmScreen: FC<any> = (props: any) => {
   const [collapsedKeyArray, setCollapsedKeyArray] = useState([
     ...productCards.map((item: any) => '0'),
   ]);
@@ -117,6 +117,13 @@ const PlanConfirmScreen: FC = (props: any) => {
 
   const history = useHistory();
 
+  let name = '';
+  if (props.location.state && props.location.state.name) {
+    name = props.location.state.name;
+  } else {
+    history.replace(screenPath1);
+  }
+
   return (
     <div className='f-fd-c hp100'>
       <Header
@@ -127,7 +134,7 @@ const PlanConfirmScreen: FC = (props: any) => {
             <div className='fs12 fls60'>플랜저장</div>
           </div>
         }
-        subHeader={{ name: '김백호', age: 46 }}
+        subHeader={{ name: name, age: 46 }}
       ></Header>
 
       <div className='ph16 pt20 f-fd-c f-jc-sb '>
