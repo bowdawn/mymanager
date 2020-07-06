@@ -9,7 +9,6 @@ import { useHistory } from 'react-router-dom';
 interface Props {
   title: string;
   extra?: ReactChild | string;
-
   subHeader?: { name: string; age: string | number };
 }
 
@@ -19,7 +18,7 @@ const Header: FC<Props> = ({ title, extra, subHeader }) => {
     <div {...(subHeader ? { className: 'my-header-background' } : {})}>
       <PageHeader
         className='my-header'
-        backIcon={<Icon className='arrow-left' component={ArrowLeft} />}
+        backIcon={<Icon className='arrow-left fs24' component={ArrowLeft} />}
         onBack={() => history.goBack()}
         title={null}
         extra={extra ? <div>{extra}</div> : <div></div>}

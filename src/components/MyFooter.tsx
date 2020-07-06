@@ -1,15 +1,7 @@
-import React, { FC, ReactHTMLElement } from 'react';
-import { message, PageHeader } from 'antd';
-import { ReactComponent as ArrowLeft } from 'src/assets/icons/arrow-left.svg';
-import Icon from '@ant-design/icons';
+import React, { FC } from 'react';
 import 'src/assets/less/components/footer.less';
 
-const Footer: FC<any> = (props: {
-  title: string;
-  subTitle: ReactHTMLElement<HTMLElement>;
-}) => {
-  const { title, subTitle } = props;
-
+const Footer: FC<any> = () => {
   return (
     <div className='f-fd-c f-jc-fe my-footer ph16 pb5 pt45 pb16'>
       <div>
