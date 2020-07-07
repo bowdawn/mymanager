@@ -23,6 +23,11 @@ const DatePickerModal: FC<Props> = ({ date, setDate, visible, setVisible }) => {
       closable={false}
       onCancel={() => setVisible(false)}
       footer={false}
+      width={
+        window.innerWidth > parseInt(maxScreenWidth)
+          ? parseInt(maxScreenWidth) - 32
+          : window.innerWidth - 32
+      }
     >
       <div className='custom-date-picker-styling ant-override'>
         <DatePicker
