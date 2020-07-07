@@ -1,5 +1,7 @@
-import React, { FC, useState } from 'react';
-import { Pagination } from 'antd';
+import React, { FC, useState, useRef, useLayoutEffect } from 'react';
+import ReactDOM from 'react-dom';
+
+import { Pagination, InputNumber } from 'antd';
 import Icon from '@ant-design/icons';
 
 import { ReactComponent as PaginationRightIcon } from 'src/assets/icons/pagination-right.svg';
@@ -22,6 +24,20 @@ const MyPagination: FC<Props> = ({
   total,
   pageSize,
 }) => {
+  const inputContainer = useRef<HTMLDivElement>(null);
+  const customInputRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const input: any =
+      inputContainer.current?.children[0].children[1].children[0];
+    const updateValue = (e: any) => {
+      if (e.data === '0') {
+        console.log('attribute set');
+        input.value = '';
+      }
+    };
+    input.oninput = updateValue;
+  });
   return (
     <div className={`f-jc-c f-ai-c ${className}`}>
       <Icon
@@ -31,23 +47,28 @@ const MyPagination: FC<Props> = ({
         component={() => <PaginationFirstIcon />}
         onClick={() => setCurrent(1)}
       />
-
-      <Pagination
-        simple
-        current={current}
-        onChange={(page, pageSize) => setCurrent(page)}
-        pageSize={pageSize}
-        total={total}
-        itemRender={(page, type, originalElement) => {
-          if (type === 'prev') {
-            return <Icon className='fs38' component={PaginationLeftIcon} />;
-          }
-          if (type === 'next') {
-            return <Icon className='fs38' component={PaginationRightIcon} />;
-          }
-          return originalElement;
-        }}
-      />
+      <div ref={inputContainer}>
+        <Pagination
+          simple
+          current={current}
+          onChange={(page, pageSize) => {
+            if (page !== 0) {
+              setCurrent(page);
+            }
+          }}
+          pageSize={pageSize}
+          total={total}
+          itemRender={(page, type, originalElement) => {
+            if (type === 'prev') {
+              return <Icon className='fs38' component={PaginationLeftIcon} />;
+            }
+            if (type === 'next') {
+              return <Icon className='fs38' component={PaginationRightIcon} />;
+            }
+            return originalElement;
+          }}
+        />
+      </div>
       <Icon
         {...(current === Math.ceil(total / pageSize)
           ? { className: 'ant-pagination-disabled f-ai-c ml5' }

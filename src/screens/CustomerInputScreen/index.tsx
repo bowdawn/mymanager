@@ -2,14 +2,14 @@ import React, { FC, useState } from 'react';
 import { message, Input, Button, Form, Radio, InputNumber } from 'antd';
 import Header from 'src/components/MyHeader';
 import Footer from 'src/components/MyFooter';
-import DatePickerModal from 'src/components/DatePickerModal';
+import DatePickerModal from 'src/screens/CustomerInputScreen/components/DatePickerModal';
 import { ReactComponent as Checkbox } from 'src/assets/icons/checkbox.svg';
 import { ReactComponent as Calendar } from 'src/assets/icons/calendar.svg';
 import Icon from '@ant-design/icons';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 
-const genders = [
+const genders: Array<{ label: string; value: string }> = [
   { label: '남', value: 'male' },
   { label: '여', value: 'female' },
 ];
@@ -143,22 +143,22 @@ const CustomerInputScreen: FC = (props: any) => {
                         value={form.getFieldValue('age')}
                         placeholder='보험 나이를 입력해주세요.'
                         className='mr8 f1'
-                        formatter={(value) => {
-                          if (value) {
+                        formatter={(value: string | number | undefined) => {
+                          if (value || value === 0) {
                             return `${value}`;
                           } else {
                             return '';
                           }
                         }}
                         parser={(value: string | undefined) => {
-                          let result: number = 0;
                           if (value) {
-                            result = parseInt(value);
-                            if (result > 150) {
-                              result = 150;
+                            if (parseInt(value) > 150) {
+                              return 150;
+                            } else if (parseInt(value) >= 0) {
+                              return parseInt(value);
                             }
                           }
-                          return result;
+                          return '';
                         }}
                         min={0}
                         max={150}
@@ -177,7 +177,6 @@ const CustomerInputScreen: FC = (props: any) => {
             </div>
           </Input.Group>
         </Form.Item>
-
         <div className='fs12 fc-pc fls60 mb12'>
           *최대 10개까지 설계가 가능합니다.
         </div>
@@ -192,20 +191,19 @@ const CustomerInputScreen: FC = (props: any) => {
             </Button>
           </Form.Item>
         </div>
-
-        <DatePickerModal
-          date={birthdate}
-          setDate={(date: Date) => {
-            setBirthdate(date);
-            form.setFieldsValue({
-              age: Math.floor(moment().diff(moment(date), 'years', true)),
-            });
-          }}
-          visible={datePickerVisible}
-          setVisible={(value: boolean) => setDatePickerVisible(value)}
-        ></DatePickerModal>
       </Form>
       <Footer />
+      <DatePickerModal
+        date={birthdate}
+        setDate={(date: Date) => {
+          setBirthdate(date);
+          form.setFieldsValue({
+            age: Math.floor(moment().diff(moment(date), 'years', true)),
+          });
+        }}
+        visible={datePickerVisible}
+        setVisible={(value: boolean) => setDatePickerVisible(value)}
+      ></DatePickerModal>
     </div>
   );
 };
