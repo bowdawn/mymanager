@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import MyManagerScreen from 'src/screens/MyManagerScreen/index';
 import CustomerInputScreen from 'src/screens/CustomerInputScreen/index';
-import ConfirmPlanScreen from 'src/screens/ConfirmPlanScreen';
+import ConfirmPlanScreen from 'src/screens/ConfirmPlanScreen/index';
 import AddPlanScreen from 'src/screens/AddPlanScreen';
 import ProductDetailScreen from 'src/screens/ProductDetailScreen';
 import {

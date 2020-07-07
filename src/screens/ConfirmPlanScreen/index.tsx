@@ -1,13 +1,12 @@
 import React, { FC, useState } from 'react';
 import Header from 'src/components/MyHeader';
+import { TogglePlan, NewsCardCarousel } from './components/index';
 import {
   message,
   Space,
   Row,
   Col,
   Radio,
-  Tabs,
-  Carousel,
   Card,
   Tag,
   Collapse,
@@ -17,67 +16,20 @@ import {
   Table,
 } from 'antd';
 import Icon, { CaretDownOutlined } from '@ant-design/icons';
-import { ReactComponent as Checkbox } from 'src/assets/icons/checkbox.svg';
 import { ReactComponent as SaveIcon } from 'src/assets/icons/save.svg';
-import { ReactComponent as PrevArrow } from 'src/assets/icons/carousel-arrow-left.svg';
-import { ReactComponent as NextArrow } from 'src/assets/icons/carousel-arrow-right.svg';
 import { ReactComponent as DeleteIcon } from 'src/assets/icons/delete-icon.svg';
 import { ReactComponent as PlusIcon } from 'src/assets/icons/plus-icon.svg';
 import { ReactComponent as KakaoIcon } from 'src/assets/icons/kakao.svg';
 import Footer from 'src/components/MyFooter';
-import img from 'src/assets/images/card.jpg';
 
 import { useHistory } from 'react-router-dom';
-const { TabPane } = Tabs;
+
 const { Panel } = Collapse;
 
 const myPlans = [
   { label: '나의 플랜 1', value: 'a' },
   { label: '나의 플랜 2', value: 'b' },
   { label: '나의 플랜 3', value: 'c' },
-];
-
-const tabs = [
-  {
-    title: '3대질병',
-    cards: [
-      { content: '', img: true },
-      { content: '카드를 선택하세요' },
-      { content: '다른 카드를 선택하세요' },
-    ],
-  },
-  {
-    title: '4대질병',
-    cards: [
-      { content: '4대질병 카드를 선택하세요' },
-      { content: '', img: true },
-      { content: '다른 4대질병 카드를 선택하세요' },
-    ],
-  },
-  {
-    title: '운전자보험',
-    cards: [
-      { content: '운전자보험 카드를 선택하세요' },
-      { content: '다른 운전자보험 카드를 선택하세요 ' },
-      { content: '', img: true },
-    ],
-  },
-  {
-    title: '암보혐',
-    cards: [
-      { content: '', img: true },
-      { content: '암보혐 카드를 선택하세요' },
-      { content: '다른 암보혐 카드를 선택하세요' },
-    ],
-  },
-  {
-    title: '실손보험',
-    cards: [
-      { content: '실손보험 카드를 선택하세요' },
-      { content: '다른 실손보험 카드를 선택하세요' },
-      { content: '', img: true },
-    ],
-  },
 ];
 
 const productCards = [
@@ -118,8 +70,12 @@ const PlanConfirmScreen: FC<any> = (props: any) => {
   const history = useHistory();
 
   let name = '';
+  let age = 0;
   if (props.location.state && props.location.state.name) {
     name = props.location.state.name;
+    if (props.location.state.age) {
+      age = props.location.state.age;
+    }
   } else {
     history.replace(screenPath1);
   }
@@ -134,76 +90,26 @@ const PlanConfirmScreen: FC<any> = (props: any) => {
             <div className='fs12 fls60'>플랜저장</div>
           </div>
         }
-        subHeader={{ name: name, age: 46 }}
+        subHeader={{ name: name, age: age }}
       />
 
       <div className='ph16 pt20 f-fd-c f-jc-sb '>
         <div className='pb10'>나의 플랜</div>
-        <Radio.Group
-          className='f wp100 pb40'
-          value={myPlan}
-          onChange={(event) => setMyPlan(event.target.value)}
-        >
-          {myPlans.map((item: any, index: number) => (
-            <Radio.Button
-              value={item.value}
-              className={
-                index === myPlans.length - 1
-                  ? 'h70 f-ai-c f-jc-c f-fd-c wp100'
-                  : 'h70 f-ai-c f-jc-c f-fd-c wp100 mr10'
-              }
-              onClick={() =>
-                message.info('plan toggle button: to be implemented')
-              }
-            >
-              <div className='f-jc-c'>
-                {item.value === myPlan ? <Checkbox /> : null}
-              </div>
-              <div>{item.label}</div>
-            </Radio.Button>
-          ))}
-        </Radio.Group>
-        <div className='pb10'>카드 뉴스</div>
+        <TogglePlan
+          myPlan={myPlan}
+          setMyPlan={setMyPlan}
+          myPlans={[
+            { label: '나의 플랜 1', value: 'plan1' },
+            { label: '나의 플랜 2', value: 'plan2' },
+            { label: '나의 플랜 3', value: 'plan3' },
+          ]}
+        />
       </div>
 
+      <div className='ph16 pb10'>카드 뉴스</div>
       <Divider />
       <div className='mb24'>
-        <Tabs defaultActiveKey='0' tabPosition={'top'} tabBarGutter={0}>
-          {tabs.map((item: any, i: number) => (
-            <TabPane
-              tab={<div className='w78 f-jc-c'>{item.title}</div>}
-              key={i}
-            >
-              <Carousel
-                className='slick-prev-left16 slick-next-right16 '
-                arrows={true}
-                prevArrow={<Icon component={PrevArrow} />}
-                nextArrow={<Icon component={NextArrow} />}
-                draggable={true}
-                appendDots={(dots) => <div className='custom-dots'>{dots}</div>}
-              >
-                {item.cards.map((item: any, j: number) => (
-                  <div
-                    key={`card${i}-${j}`}
-                    onClick={() =>
-                      message.info(
-                        'selected card news on click: to be implemented'
-                      )
-                    }
-                  >
-                    <div className='f-jc-c f-ai-c fc-pc fu fls70 '>
-                      {item.img ? (
-                        <img className='wp100' src={img} />
-                      ) : (
-                        <div className='hp100'>{item.content}</div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </Carousel>
-            </TabPane>
-          ))}
-        </Tabs>
+        <NewsCardCarousel />
       </div>
       <div className='ph16 f-fd-c f-jc-sb f-ai-c'>
         <Space direction='vertical' size={10} className='wp100'>

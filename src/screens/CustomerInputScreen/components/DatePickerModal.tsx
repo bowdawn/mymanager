@@ -19,6 +19,7 @@ const DatePickerModal: FC<Props> = ({ date, setDate, visible, setVisible }) => {
 
   return (
     <Modal
+      className='ant-override'
       visible={visible}
       closable={false}
       onCancel={() => setVisible(false)}
@@ -29,7 +30,7 @@ const DatePickerModal: FC<Props> = ({ date, setDate, visible, setVisible }) => {
           : window.innerWidth - 32
       }
     >
-      <div className='custom-date-picker-styling ant-override'>
+      <div className='custom-date-picker-styling'>
         <DatePicker
           value={time}
           headerFormat={`YYYY년 MM월 DD일 ${moment(time).format('dddd')}`}
@@ -39,8 +40,9 @@ const DatePickerModal: FC<Props> = ({ date, setDate, visible, setVisible }) => {
           theme='android'
           showFooter={false}
           isPopup={false}
+          flex
         />
-        <div className='f wp100 ant-modal-footer'>
+        <div className=' wp100 f ant-modal-footer'>
           <Button
             className='f1'
             onClick={() => {

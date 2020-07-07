@@ -9,6 +9,7 @@ import {
   CustomPagination,
 } from 'src/screens/MyManagerScreen/components/index';
 import { useHistory } from 'react-router-dom';
+import moment from 'moment';
 
 const data: Array<{
   name: string;
@@ -23,14 +24,14 @@ const data: Array<{
     name: '티머시',
     type: '신규',
     gender: '남',
-    birthdate: '1973.01.01',
+    birthdate: '1963.01.01',
     sendTime: '20.05.20 / 16:32',
   },
   {
     name: '오복단',
     type: '신규',
     gender: '남',
-    birthdate: '1973.01.01',
+    birthdate: '1997.01.01',
     sendTime: '20.05.20 / 16:32',
   },
   {
@@ -39,7 +40,7 @@ const data: Array<{
     gender: '여',
     sendTime: '20.05.20 / 16:32',
     applyTime: '20.01.22 / 14:30',
-    age: 50,
+    age: 32,
   },
 
   {
@@ -48,7 +49,7 @@ const data: Array<{
     gender: '여',
     sendTime: '20.05.20 / 16:32',
     applyTime: '20.01.22 / 14:30',
-    age: 50,
+    age: 13,
   },
   {
     name: '이사벨라',
@@ -56,20 +57,20 @@ const data: Array<{
     gender: '여',
     sendTime: '20.05.20/16:32',
     applyTime: '20.01.22/14:30',
-    age: 50,
+    age: 80,
   },
   {
     name: '윌리엄',
     type: '신규',
     gender: '남',
-    birthdate: '1973.01.01',
+    birthdate: '1993.01.01',
     sendTime: '20.05.20 / 16:32',
   },
   {
     name: '니콜라스',
     type: '신규',
     gender: '남',
-    birthdate: '1973.01.01',
+    birthdate: '1995.01.01',
     sendTime: '20.05.20 / 16:32',
   },
   {
@@ -78,7 +79,7 @@ const data: Array<{
     gender: '여',
     sendTime: '20.05.20 / 16:32',
     applyTime: '20.01.22 / 14:30',
-    age: 50,
+    age: 40,
   },
 
   {
@@ -87,20 +88,20 @@ const data: Array<{
     gender: '여',
     sendTime: '20.05.20 / 16:32',
     applyTime: '20.01.22 / 14:30',
-    age: 50,
+    age: 45,
   },
   {
     name: '제임스',
     type: '신규',
     gender: '남',
-    birthdate: '1973.01.01',
+    birthdate: '1983.01.01',
     sendTime: '20.05.20 / 16:32',
   },
   {
     name: '매슈',
     type: '신규',
     gender: '남',
-    birthdate: '1973.01.01',
+    birthdate: '1985.01.01',
     sendTime: '20.05.20 / 16:32',
   },
   {
@@ -109,21 +110,21 @@ const data: Array<{
     gender: '여',
     sendTime: '20.05.20 / 16:32',
     applyTime: '20.01.22 / 14:30',
-    age: 50,
+    age: 37,
   },
 
   {
     name: '데이브',
     type: '신규',
     gender: '남',
-    birthdate: '1973.01.01',
+    birthdate: '1981.01.01',
     sendTime: '20.05.20 / 16:32',
   },
   {
     name: '앤드류',
     type: '신규',
     gender: '남',
-    birthdate: '1973.01.01',
+    birthdate: '1986.01.01',
     sendTime: '20.05.20 / 16:32',
   },
   {
@@ -132,7 +133,7 @@ const data: Array<{
     gender: '여',
     sendTime: '20.05.20 / 16:32',
     applyTime: '20.01.22 / 14:30',
-    age: 50,
+    age: 29,
   },
 
   {
@@ -141,7 +142,7 @@ const data: Array<{
     gender: '여',
     sendTime: '20.05.20 / 16:32',
     applyTime: '20.01.22 / 14:30',
-    age: 50,
+    age: 15,
   },
   {
     name: '한나',
@@ -149,7 +150,7 @@ const data: Array<{
     gender: '여',
     sendTime: '20.05.20/16:32',
     applyTime: '20.01.22/14:30',
-    age: 50,
+    age: 65,
   },
 ];
 
@@ -179,7 +180,16 @@ const MyManagerScreen: FC = (props: any) => {
                   customers.splice(index, 1);
                   setCustomers([...customers]);
                 }}
-                onClick={() => history.push(screenPath3, item)}
+                onClick={() =>
+                  history.push(screenPath3, {
+                    ...item,
+                    age: item.age
+                      ? item.age
+                      : Math.floor(
+                          moment().diff(moment(item.birthdate), 'years', true)
+                        ),
+                  })
+                }
                 className='mb10'
                 name={item.name}
                 birthdate={item.birthdate}
