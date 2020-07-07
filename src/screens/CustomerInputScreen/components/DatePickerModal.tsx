@@ -22,8 +22,20 @@ const DatePickerModal: FC<Props> = ({ date, setDate, visible, setVisible }) => {
       visible={visible}
       closable={false}
       onCancel={() => setVisible(false)}
-      footer={
-        <div className='f'>
+      footer={false}
+    >
+      <div className='custom-date-picker-styling ant-override'>
+        <DatePicker
+          value={time}
+          headerFormat={`YYYY년 MM월 DD일 ${moment(time).format('dddd')}`}
+          onChange={(time: Date) => setTime(time)}
+          min={new Date(1980, 1, 1)}
+          max={new Date()}
+          theme='android'
+          showFooter={false}
+          isPopup={false}
+        />
+        <div className='f wp100 ant-modal-footer'>
           <Button
             className='f1'
             onClick={() => {
@@ -43,19 +55,6 @@ const DatePickerModal: FC<Props> = ({ date, setDate, visible, setVisible }) => {
             설정
           </Button>
         </div>
-      }
-    >
-      <div className='custom-date-picker-styling'>
-        <DatePicker
-          value={time}
-          headerFormat={`YYYY년 MM월 DD일 ${moment(time).format('dddd')}`}
-          onChange={(time: Date) => setTime(time)}
-          min={new Date(1980, 1, 1)}
-          max={new Date()}
-          theme='android'
-          showFooter={false}
-          isPopup={false}
-        />
       </div>
     </Modal>
   );

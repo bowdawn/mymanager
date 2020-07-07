@@ -1,9 +1,6 @@
-import React, { FC, useState, useRef, useLayoutEffect } from 'react';
-import ReactDOM from 'react-dom';
-
-import { Pagination, InputNumber } from 'antd';
+import React, { FC, useRef, useLayoutEffect } from 'react';
+import { Pagination } from 'antd';
 import Icon from '@ant-design/icons';
-
 import { ReactComponent as PaginationRightIcon } from 'src/assets/icons/pagination-right.svg';
 import { ReactComponent as PaginationLeftIcon } from 'src/assets/icons/pagination-left.svg';
 import { ReactComponent as PaginationFirstIcon } from 'src/assets/icons/pagination-first.svg';
@@ -25,19 +22,18 @@ const MyPagination: FC<Props> = ({
   pageSize,
 }) => {
   const inputContainer = useRef<HTMLDivElement>(null);
-  const customInputRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const input: any =
       inputContainer.current?.children[0].children[1].children[0];
-    const updateValue = (e: any) => {
+    const updateValue = (e: { data: string }) => {
       if (e.data === '0') {
-        console.log('attribute set');
         input.value = '';
       }
     };
     input.oninput = updateValue;
   });
+
   return (
     <div className={`f-jc-c f-ai-c ${className}`}>
       <Icon
