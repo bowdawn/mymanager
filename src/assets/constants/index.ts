@@ -1,5 +1,5 @@
 import { default as myPlans } from './plans';
-import { default as productCards } from './productCards';
+import { productCards } from './productCards';
 import { default as tabs } from './newsCardTabs';
 import { default as quickSetup } from './quickSetup';
 import { default as productTypes } from './productTypes';
