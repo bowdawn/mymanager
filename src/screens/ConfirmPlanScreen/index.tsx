@@ -1,20 +1,19 @@
 import React, { FC, useState } from 'react';
 import Header from 'src/components/MyHeader';
+import ProductCard from 'src/components/ProductCard';
+import Footer from 'src/components/MyFooter';
 import {
   TogglePlan,
   NewsCardCarousel,
-  ProductCard,
   SaveModalBody,
 } from 'src/screens/ConfirmPlanScreen/components/index';
-import { message, Space, Radio, Button, Modal, Divider } from 'antd';
+import { message, Button, Modal, Divider } from 'antd';
 import Icon from '@ant-design/icons';
 import { ReactComponent as SaveIcon } from 'src/assets/icons/save.svg';
-
 import { ReactComponent as PlusIcon } from 'src/assets/icons/plus-icon.svg';
 import { ReactComponent as KakaoIcon } from 'src/assets/icons/kakao.svg';
-import Footer from 'src/components/MyFooter';
-import { myPlans, productCards } from 'src/assets/constants/index';
 
+import { productCards } from 'src/assets/constants/index';
 import { useHistory } from 'react-router-dom';
 
 const ConfirmPlanScreen: FC<any> = (props: any) => {
@@ -55,12 +54,12 @@ const ConfirmPlanScreen: FC<any> = (props: any) => {
       <NewsCardCarousel className='mb24' />
       <div className='ph16'>
         {productCards.map((item: any, i: number) => (
-          <ProductCard productCard={item} index={i} className='mb10' />
+          <ProductCard productCard={item} key={i} className='mb10' active />
         ))}
         <Button
           className='f-jc-c f-ai-c h76 wp100 mb40 fwb fls70 primary-border-button-hover br5'
           style={{ backgroundColor: peacockBlue7 }}
-          onClick={() => history.push(screenPath4)}
+          onClick={() => history.push(screenPath4, props.location.state)}
         >
           <div className='mr4'>상품 추가하기</div>
           <PlusIcon className='ml4' />
@@ -91,8 +90,7 @@ const ConfirmPlanScreen: FC<any> = (props: any) => {
       <Modal
         closable={false}
         title={null}
-        style={{ borderRadius: 4 }}
-        bodyStyle={{ padding: 16 }}
+        bodyStyle={{ padding: 16, borderRadius: 4 }}
         visible={showSaveModal}
         footer={null}
         onCancel={() => setShowSaveModal(false)}

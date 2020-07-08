@@ -1,14 +1,14 @@
 import React, { FC, useState } from 'react';
-import { message, Space, Radio, Button, Modal } from 'antd';
+import { message, Space, Radio, Button } from 'antd';
 import { myPlans } from 'src/assets/constants/index';
+import { ReactComponent as Checkbox } from 'src/assets/icons/checkbox.svg';
 
 interface Props {
   setVisible: (value: boolean) => void;
 }
-
 const SaveModalBody: FC<Props> = ({ setVisible }) => {
   const [savedClicked, setSavedClicked] = useState(false);
-
+  const [myPlan, setMyPlan] = useState('');
   return (
     <div className='ant-override'>
       {(!savedClicked
@@ -17,15 +17,15 @@ const SaveModalBody: FC<Props> = ({ setVisible }) => {
             <div className='fls70 mb24'>
               * 이전 데이터가 있을 경우 사라질 수 있습니다.
             </div>,
-            <Radio.Group className='wp100'>
-              <Space
-                direction='vertical'
-                className='wp100 mb24'
-                align='center'
-                size={10}
-              >
+            <Radio.Group
+              className='wp100'
+              value={myPlan}
+              onChange={(event) => setMyPlan(event.target.value)}
+            >
+              <div className='f-fd-c f-ai-c mb14'>
                 {myPlans.map((item: any, index: number) => (
                   <Radio.Button
+                    className='h48 w136 mb10 f-jc-c f-ai-c'
                     value={item.value}
                     key={`save-plan-${index + 1}`}
                     onClick={() =>
@@ -34,14 +34,20 @@ const SaveModalBody: FC<Props> = ({ setVisible }) => {
                       )
                     }
                   >
-                    {item.label}
+                    <div className='f-fd-r f-jc-c f-ai-c'>
+                      {item.value === myPlan ? (
+                        <Checkbox className='mr6' />
+                      ) : null}
+
+                      {item.label}
+                    </div>
                   </Radio.Button>
                 ))}
-              </Space>
+              </div>
             </Radio.Group>,
             <div className='f '>
               <Button
-                className='f1 mr8 primary-border-button-hover br4'
+                className='f1 mr8 h55 primary-border-button-hover br4 w128'
                 onClick={() => setVisible(false)}
               >
                 취소
@@ -49,7 +55,7 @@ const SaveModalBody: FC<Props> = ({ setVisible }) => {
 
               <Button
                 type='primary'
-                className='f1 br4'
+                className='f1 br4 h55 w128'
                 onClick={() => setSavedClicked(true)}
               >
                 저장
