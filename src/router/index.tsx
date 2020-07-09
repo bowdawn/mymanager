@@ -25,25 +25,13 @@ const MainNavigator: FC<any> = (props: any) => {
         <PrivateRoute
           exact
           path={screenPath3}
-          component={(props: any) => (
-            <ConfirmPlanScreen
-              {...props}
-              name={props.location.state.name}
-              age={props.location.state.age}
-            />
-          )}
+          component={(props: any) => <ConfirmPlanScreen {...props} />}
           state={['name', 'age']}
         />
         <PrivateRoute
           exact
           path={screenPath4}
-          component={(props: any) => (
-            <AddPlanScreen
-              {...props}
-              name={props.location.state.name}
-              age={props.location.state.age}
-            />
-          )}
+          component={(props: any) => <AddPlanScreen {...props} />}
           state={['name', 'age']}
         />
 

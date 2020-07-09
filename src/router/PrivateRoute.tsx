@@ -12,18 +12,27 @@ const PrivateRoute: FC<IPrivateRouteProps> = ({
 }) => {
   console.log(rest);
   const state: any = rest.location?.state;
+  let stateProps: any = {};
+
   return (
     <Route
       {...rest}
-      render={(props) =>
-        state && rest.state.every((element: string) => state[element]) ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{ pathname: screenPath6, state: { from: props.location } }}
-          />
-        )
-      }
+      render={(props) => {
+        if (state) {
+          if (rest.state.every((element: string) => state[element])) {
+            rest.state.forEach((element: string) => {
+              stateProps[element] = state[element];
+            });
+            return <Component {...props} {...stateProps} />;
+          }
+        } else {
+          return (
+            <Redirect
+              to={{ pathname: screenPath6, state: { from: props.location } }}
+            />
+          );
+        }
+      }}
     />
   );
 };

@@ -10,7 +10,7 @@ const PageNotFoundScreen: FC<any> = (props: any) => {
       <Result
         status='403'
         title='403'
-        subTitle='해당되는 페이지로 들어갈 수 없습니다. 권인이 없습니다'
+        subTitle='해당되는 페이지로 들어갈 수 없습니다. 권한이 없습니다'
         extra={
           <Button type='primary' onClick={() => history.goBack()}>
             이전 페이지로 돌아가기
