@@ -14,24 +14,16 @@ import { ReactComponent as PlusIcon } from 'src/assets/icons/plus-icon.svg';
 import { ReactComponent as KakaoIcon } from 'src/assets/icons/kakao.svg';
 
 import { productCards } from 'src/assets/constants/index';
-import { useHistory } from 'react-router-dom';
+import { useHistory, RouteComponentProps } from 'react-router-dom';
 
-const ConfirmPlanScreen: FC<any> = (props: any) => {
+interface Props extends RouteComponentProps {
+  name: string;
+  age: string;
+}
+const ConfirmPlanScreen: FC<Props> = ({ name, age, location }) => {
   const [myPlan, setMyPlan] = useState('');
   const [showSaveModal, setShowSaveModal] = useState(false);
-
   const history = useHistory();
-
-  let name = '';
-  let age = 0;
-  if (props.location.state && props.location.state.name) {
-    name = props.location.state.name;
-    if (props.location.state.age) {
-      age = props.location.state.age;
-    }
-  } else {
-    history.replace(screenPath1);
-  }
 
   return (
     <div className='f-fd-c hp100'>
@@ -59,7 +51,7 @@ const ConfirmPlanScreen: FC<any> = (props: any) => {
         <Button
           className='f-jc-c f-ai-c h76 wp100 mb40 fwb fls70 primary-border-button-hover br5'
           style={{ backgroundColor: peacockBlue7 }}
-          onClick={() => history.push(screenPath4, props.location.state)}
+          onClick={() => history.push(screenPath4, location.state)}
         >
           <div className='mr4'>상품 추가하기</div>
           <PlusIcon className='ml4' />

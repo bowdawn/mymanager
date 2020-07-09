@@ -3,30 +3,29 @@ import Header from 'src/components/MyHeader';
 import Footer from 'src/components/MyFooter';
 import { message, Button } from 'antd';
 import { ReactComponent as ResetIcon } from 'src/assets/icons/reset.svg';
+import { planTypes, productTypes } from 'src/assets/constants/index';
 
 import {
   QuickSetup,
-  ProductTypeChoice,
-  PlanTypeChoice,
+  CarouselChoice,
   CompanyChoice,
   ExpirationChoice,
   PricePlanChoice,
 } from 'src/screens/AddPlanScreen/components/index';
-import { useHistory } from 'react-router-dom';
+import { useHistory, RouteComponentProps } from 'react-router-dom';
 
-const AddPlanScreen: FC = (props: any) => {
-  const history = useHistory();
+interface Props extends RouteComponentProps {
+  name: string;
+  age: string;
+}
+const AddPlanScreen: FC<Props> = ({ name, age, history }) => {
+  const [selectedPlanTypes, setSelectedPlanTypes] = useState([
+    ...planTypes.map((item: any) => false),
+  ]);
 
-  let name = '';
-  let age = 0;
-  if (props.location.state && props.location.state.name) {
-    name = props.location.state.name;
-    if (props.location.state.age) {
-      age = props.location.state.age;
-    }
-  } else {
-    history.replace(screenPath1);
-  }
+  const [selectedProductedTypes, setSelectedProductTypes] = useState([
+    ...productTypes.map((item: any) => false),
+  ]);
 
   const [rotate, setRotate] = useState(false);
   return (
@@ -36,11 +35,15 @@ const AddPlanScreen: FC = (props: any) => {
 
       <div className='ph16 pt40'>
         <div className='fs12 fls60 fwb mb10 ph2-5'>성품군 선택</div>
-
-        <ProductTypeChoice />
+        <CarouselChoice
+          selectedChoices={selectedProductedTypes}
+          setSelectedChoices={setSelectedProductTypes}
+        />
         <div className='fs12 fls60 fwb mb10 ph2-5'>플랜선택</div>
-
-        <PlanTypeChoice />
+        <CarouselChoice
+          selectedChoices={selectedPlanTypes}
+          setSelectedChoices={setSelectedPlanTypes}
+        />
         <div className='mb40'>
           <div className='fs12 fls60 fwb mb10 ph2-5'>회사 선택</div>
           <CompanyChoice />
