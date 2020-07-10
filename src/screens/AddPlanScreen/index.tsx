@@ -22,7 +22,6 @@ const AddPlanScreen: FC<Props> = ({ name, age, history }) => {
   const [selectedPlanTypes, setSelectedPlanTypes] = useState([
     ...planTypes.map((item: any) => false),
   ]);
-
   const [selectedProductedTypes, setSelectedProductTypes] = useState([
     ...productTypes.map((item: any) => false),
   ]);
@@ -36,11 +35,13 @@ const AddPlanScreen: FC<Props> = ({ name, age, history }) => {
       <div className='ph16 pt40'>
         <div className='fs12 fls60 fwb mb10 ph2-5'>성품군 선택</div>
         <CarouselChoice
+          labels={productTypes}
           selectedChoices={selectedProductedTypes}
           setSelectedChoices={setSelectedProductTypes}
         />
         <div className='fs12 fls60 fwb mb10 ph2-5'>플랜선택</div>
         <CarouselChoice
+          labels={planTypes}
           selectedChoices={selectedPlanTypes}
           setSelectedChoices={setSelectedPlanTypes}
         />
@@ -65,6 +66,10 @@ const AddPlanScreen: FC<Props> = ({ name, age, history }) => {
             onAnimationEnd={() => setRotate(false)}
             onClick={() => {
               setRotate(true);
+              setSelectedPlanTypes([...planTypes.map((item: any) => false)]);
+              setSelectedProductTypes([
+                ...productTypes.map((item: any) => false),
+              ]);
               message.info('reset button: to be implemented');
             }}
           >
