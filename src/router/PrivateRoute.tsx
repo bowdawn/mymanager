@@ -18,13 +18,16 @@ const PrivateRoute: FC<IPrivateRouteProps> = ({
     <Route
       {...rest}
       render={(props) => {
-        if (state) {
-          if (rest.state.every((element: string) => state[element])) {
-            rest.state.forEach((element: string) => {
-              stateProps[element] = state[element];
-            });
-            return <Component {...props} {...stateProps} />;
-          }
+        if (
+          state &&
+          rest.state.every(
+            (element: string) => state[element] || state[element] === 0
+          )
+        ) {
+          rest.state.forEach((element: string) => {
+            stateProps[element] = state[element];
+          });
+          return <Component {...props} {...stateProps} />;
         } else {
           return (
             <Redirect
