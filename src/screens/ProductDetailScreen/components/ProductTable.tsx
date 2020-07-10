@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Input, Tag, Table } from 'antd';
-import { productCardType } from 'src/assets/@types/productCardType';
+import { ProductCardType } from 'src/assets/@types/productCardType';
 
 const data = [
   { feeName: '일반암진단비', subscriptionFee: 1000, insuranceCost: 590 },
@@ -16,7 +16,7 @@ const data = [
 ];
 
 interface Props {
-  item: productCardType;
+  item: ProductCardType;
 }
 
 const ProductTable: FC<Props> = ({ item }) => {

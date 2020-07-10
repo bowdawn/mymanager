@@ -1,8 +1,8 @@
 //This data is dummy data and was used for displaying data while unconnected to the api
 
-import { productCardType } from '../@types/productCardType';
+import { ProductCardType } from '../@types/productCardType';
 
-const productCards: Array<productCardType> = [
+const productCards: Array<ProductCardType> = [
   {
     title: '무)간편건강보험과건강하게사는이야기(20.4)',
     tags: ['#100세만기', '#장기종합', '#암플랜(고)'],

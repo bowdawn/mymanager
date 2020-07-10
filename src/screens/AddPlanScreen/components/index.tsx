@@ -1,13 +1,16 @@
 import { default as QuickSetup } from './QuickSetup';
-
-import { default as CarouselChoice } from './CarouselChoice';
-import { default as CompanyChoice } from './CompanyChoice';
-import { default as ExpirationChoice } from './ExpirationChoice';
 import { default as PricePlanChoice } from './PricePlanChoice';
+import { default as ChoiceLayout } from './ChoiceLayout';
+import { default as QuickCard } from './QuickCard';
+import { default as CheckableCard } from './CheckableCard';
+import { default as ExpiryCard } from './ExpiryCard';
+import { default as PricePlanCard } from './PricePlanCard';
 export {
   QuickSetup,
-  CarouselChoice,
-  CompanyChoice,
-  ExpirationChoice,
   PricePlanChoice,
+  QuickCard,
+  CheckableCard,
+  ExpiryCard,
+  PricePlanCard,
+  ChoiceLayout,
 };

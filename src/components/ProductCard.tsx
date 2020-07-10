@@ -3,14 +3,14 @@ import { message, Space, Row, Col, Card, Tag, Collapse, Table } from 'antd';
 import Icon, { CaretDownOutlined } from '@ant-design/icons';
 import { ReactComponent as DeleteIcon } from 'src/assets/icons/delete-icon.svg';
 import { useHistory } from 'react-router-dom';
-import { productCardType } from 'src/assets/@types/productCardType';
+import { ProductCardType } from 'src/assets/@types/productCardType';
 
 const { Panel } = Collapse;
 
 interface Props {
   className?: string;
   deleteCard?: () => void;
-  productCard: productCardType;
+  productCard: ProductCardType;
   key: number | string;
   active: boolean;
 }

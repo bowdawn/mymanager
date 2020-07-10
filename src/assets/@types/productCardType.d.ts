@@ -1,4 +1,4 @@
-export interface productCardType {
+export interface ProductCardType {
   title: string;
   tags: Array<string>;
   type: string;
