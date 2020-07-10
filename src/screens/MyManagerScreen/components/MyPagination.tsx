@@ -12,6 +12,8 @@ interface Props {
   setCurrent: (value: number) => void;
   total: number;
   pageSize: number;
+  minPageShowEndButtons: number;
+  minPageVisible: number;
 }
 
 const MyPagination: FC<Props> = ({
@@ -20,29 +22,40 @@ const MyPagination: FC<Props> = ({
   setCurrent,
   total,
   pageSize,
+  minPageShowEndButtons,
+  minPageVisible,
 }) => {
   const inputContainer = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const input: any =
       inputContainer.current?.children[0].children[1].children[0];
-    const updateValue = (e: { data: string }) => {
-      if (e.data === '0') {
-        input.value = '';
-      }
-    };
-    input.oninput = updateValue;
+    if (input) {
+      const updateValue = (e: { data: string }) => {
+        if (e.data === '0') {
+          input.value = '';
+        }
+      };
+      input.oninput = updateValue;
+    }
   });
 
-  return (
+  const totalPages = Math.ceil(total / pageSize);
+  if (totalPages < current) {
+    setCurrent(totalPages);
+  }
+  return totalPages >= minPageVisible ? (
     <div className={`f-jc-c f-ai-c ${className}`}>
-      <Icon
-        {...(current === 1
-          ? { className: 'ant-pagination-disabled f-ai-c mr5' }
-          : { className: 'f-ai-c mr5' })}
-        component={() => <PaginationFirstIcon />}
-        onClick={() => setCurrent(1)}
-      />
+      {totalPages >= minPageShowEndButtons ? (
+        <Icon
+          {...(current === 1
+            ? { className: 'ant-pagination-disabled f-ai-c mr5' }
+            : { className: 'f-ai-c mr5' })}
+          component={() => <PaginationFirstIcon />}
+          onClick={() => setCurrent(1)}
+        />
+      ) : null}
+
       <div ref={inputContainer}>
         <Pagination
           simple
@@ -65,15 +78,17 @@ const MyPagination: FC<Props> = ({
           }}
         />
       </div>
-      <Icon
-        {...(current === Math.ceil(total / pageSize)
-          ? { className: 'ant-pagination-disabled f-ai-c ml5' }
-          : { className: 'f-ai-c ml5' })}
-        component={() => <PaginationLastIcon className='f-ai-c' />}
-        onClick={() => setCurrent(Math.ceil(total / pageSize))}
-      />
+      {totalPages >= minPageShowEndButtons ? (
+        <Icon
+          {...(current === totalPages
+            ? { className: 'ant-pagination-disabled f-ai-c ml5' }
+            : { className: 'f-ai-c ml5' })}
+          component={() => <PaginationLastIcon className='f-ai-c' />}
+          onClick={() => setCurrent(totalPages)}
+        />
+      ) : null}
     </div>
-  );
+  ) : null;
 };
 
 export default MyPagination;

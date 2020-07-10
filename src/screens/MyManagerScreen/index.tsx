@@ -219,6 +219,8 @@ const MyManagerScreen: FC = (props: any) => {
           setCurrent={(value: number) => setCurrent(value)}
           pageSize={pageSize}
           total={customers.length}
+          minPageShowEndButtons={3}
+          minPageVisible={2}
         />
       ) : null}
 
