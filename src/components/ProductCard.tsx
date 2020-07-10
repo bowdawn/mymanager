@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { message, Space, Row, Col, Card, Tag, Collapse, Table } from 'antd';
+import { Space, Row, Col, Card, Tag, Collapse, Table } from 'antd';
 import Icon, { CaretDownOutlined } from '@ant-design/icons';
 import { ReactComponent as DeleteIcon } from 'src/assets/icons/delete-icon.svg';
 import { useHistory } from 'react-router-dom';

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { message, Radio } from 'antd';
 import { ReactComponent as Checkbox } from 'src/assets/icons/checkbox.svg';
 import { myPlans } from 'src/assets/constants/index';

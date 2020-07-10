@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react';
+import React, { FC } from 'react';
 
 import MyManagerScreen from 'src/screens/MyManagerScreen/index';
 import CustomerInputScreen from 'src/screens/CustomerInputScreen/index';

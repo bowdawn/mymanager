@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import Header from 'src/components/MyHeader';
 import Footer from 'src/components/MyFooter';
-import { message, Button } from 'antd';
+import { Button } from 'antd';
 import { ReactComponent as ResetIcon } from 'src/assets/icons/reset.svg';
 import {
   planTypes,

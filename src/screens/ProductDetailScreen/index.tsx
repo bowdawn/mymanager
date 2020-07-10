@@ -1,6 +1,4 @@
 import React, { FC } from 'react';
-import { Tag } from 'antd';
-
 import Header from 'src/components/MyHeader';
 import ProductCard from 'src/components/ProductCard';
 import Footer from 'src/components/MyFooter';

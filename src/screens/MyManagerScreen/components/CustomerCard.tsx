@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { message, Space, Card, Tag, Divider } from 'antd';
+import { Space, Card, Tag, Divider } from 'antd';
 import Icon from '@ant-design/icons';
 
 import { ReactComponent as DeleteIcon } from 'src/assets/icons/delete-icon.svg';

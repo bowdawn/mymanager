@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { message, Input, Button, Form, Radio, InputNumber } from 'antd';
+import { Input, Button, Form, Radio, InputNumber } from 'antd';
 import Header from 'src/components/MyHeader';
 import Footer from 'src/components/MyFooter';
 import { DatePickerModal } from 'src/screens/CustomerInputScreen/components/index';
