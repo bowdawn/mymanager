@@ -1,25 +1,13 @@
-import React, {
-  FC,
-  useState,
-  FunctionComponent,
-  ReactComponentElement,
-  ReactChild,
-} from 'react';
-import { Row, Col, Tag, Collapse } from 'antd';
+import React, { FC, useState } from 'react';
+import { Collapse } from 'antd';
 import Icon from '@ant-design/icons';
-import { ReactComponent as CheckboxIcon } from 'src/assets/icons/checkbox.svg';
 import { ReactComponent as ArrowUpIcon } from 'src/assets/icons/arrow-up.svg';
-import { quickSetup } from 'src/assets/constants/index';
-import { QuickCard } from './index';
-
 const { Panel } = Collapse;
-const { CheckableTag } = Tag;
-
 interface Props {
   title: string;
   collapsedBody: any;
 }
-const QuickSetup: FC<Props> = ({ title, collapsedBody }) => {
+const CollapsibleLayout: FC<Props> = ({ title, collapsedBody }) => {
   const [quickPlanCollapse, setQuickPlanCollapse] = useState(false);
   return (
     <div onClick={() => setQuickPlanCollapse(!quickPlanCollapse)}>
@@ -39,4 +27,4 @@ const QuickSetup: FC<Props> = ({ title, collapsedBody }) => {
     </div>
   );
 };
-export default QuickSetup;
+export default CollapsibleLayout;

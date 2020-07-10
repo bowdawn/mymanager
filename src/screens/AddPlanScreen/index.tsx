@@ -13,8 +13,7 @@ import {
 } from 'src/assets/constants/index';
 
 import {
-  QuickSetup,
-  PricePlanChoice,
+  CollapsibleLayout,
   CheckableCard,
   ExpiryCard,
   ChoiceLayout,
@@ -51,7 +50,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, history }) => {
   return (
     <div>
       <Header title='빠른 설계' subHeader={{ name: name, age: age }} />
-      <QuickSetup
+      <CollapsibleLayout
         title='빠른 설계'
         collapsedBody={
           <ChoiceLayout
