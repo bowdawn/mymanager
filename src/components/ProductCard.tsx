@@ -68,7 +68,7 @@ const ProductCard: FC<Props> = ({ className, productCard, key, active }) => {
             <Collapse activeKey={[collapsedKey]}>
               <Panel showArrow={false} header={null} key='1'>
                 <Table
-                  className='clean-style-table'
+                  className='clean-style-table product-card-table'
                   dataSource={productCard.ageGroupPlan}
                   pagination={false}
                 >
@@ -78,7 +78,9 @@ const ProductCard: FC<Props> = ({ className, productCard, key, active }) => {
                     dataIndex='age'
                     key='age'
                     render={(value) => (
-                      <div className='fs14 fls70'> {value}세</div>
+                      <div className='fs14 fls70 f-ai-c f-jc-c'>
+                        <div className='h4 w4 bc-pg br2 mr6' /> {value}세
+                      </div>
                     )}
                   ></Table.Column>
                   <Table.Column
