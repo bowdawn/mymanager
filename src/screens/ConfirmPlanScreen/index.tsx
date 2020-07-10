@@ -13,7 +13,7 @@ import { ReactComponent as SaveIcon } from 'src/assets/icons/save.svg';
 import { ReactComponent as PlusIcon } from 'src/assets/icons/plus-icon.svg';
 import { ReactComponent as KakaoIcon } from 'src/assets/icons/kakao.svg';
 
-import { productCards } from 'src/assets/constants/index';
+import { productCards as cards } from 'src/assets/constants/index';
 import { useHistory, RouteComponentProps } from 'react-router-dom';
 
 interface Props extends RouteComponentProps {
@@ -23,6 +23,7 @@ interface Props extends RouteComponentProps {
 const ConfirmPlanScreen: FC<Props> = ({ name, age, location }) => {
   const [myPlan, setMyPlan] = useState('');
   const [showSaveModal, setShowSaveModal] = useState(false);
+  const [productCards, setProductCards] = useState(cards);
   const history = useHistory();
 
   return (
@@ -46,11 +47,19 @@ const ConfirmPlanScreen: FC<Props> = ({ name, age, location }) => {
       <NewsCardCarousel className='mb24' />
       <div className='ph16'>
         {productCards.map((item: any, i: number) => (
-          <ProductCard productCard={item} key={i} className='mb10' active />
+          <ProductCard
+            productCard={item}
+            key={i}
+            className='mb10'
+            active
+            deleteCard={() => {
+              productCards.splice(i, 1);
+              setProductCards([...productCards]);
+            }}
+          />
         ))}
         <Button
-          className='f-jc-c f-ai-c h76 wp100 mb40 fwb fls70 primary-border-button-hover br5'
-          style={{ backgroundColor: peacockBlue7 }}
+          className='f-jc-c f-ai-c h76 wp100 mb40 fwb fls70 primary-border-button-hover br5 bc-pc-f7'
           onClick={() => history.push(screenPath4, location.state)}
         >
           <div className='mr4'>상품 추가하기</div>

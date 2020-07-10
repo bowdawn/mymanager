@@ -9,11 +9,18 @@ const { Panel } = Collapse;
 
 interface Props {
   className?: string;
+  deleteCard?: () => void;
   productCard: productCardType;
   key: number | string;
   active: boolean;
 }
-const ProductCard: FC<Props> = ({ className, productCard, key, active }) => {
+const ProductCard: FC<Props> = ({
+  className,
+  productCard,
+  key,
+  active,
+  deleteCard = () => {},
+}) => {
   const history = useHistory();
   const [collapsedKey, setCollapsedKey] = useState('0');
 
@@ -43,7 +50,7 @@ const ProductCard: FC<Props> = ({ className, productCard, key, active }) => {
               className='fs24'
               onClick={(e) => {
                 e.stopPropagation();
-                message.info('delete card: to be implemented');
+                deleteCard();
               }}
               component={DeleteIcon}
             />

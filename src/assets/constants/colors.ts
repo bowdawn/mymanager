@@ -15,6 +15,5 @@
 (global as any)["white"] = "#e8e8e8";
 (global as any)["whiteTwo"] = "#faf9f9";
 (global as any)["whiteThree"] = "#f6f6f6";
-(global as any)["peacockBlue7"] = "rgba(3, 90, 166, 0.07)";
 (global as any)["sunflowerYellow"] = "#ffdd00";
 export {};
