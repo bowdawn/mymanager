@@ -18,7 +18,7 @@ const CheckableCard: FC<CheckableCardType> = ({ label, checked, onChange }) => {
         onChange(e);
       }}
     >
-      {checked ? <CheckboxIcon className='pt2' /> : null}
+      {checked ? <CheckboxIcon className='pt2 fs14' /> : null}
       <div className={checked ? 'fs14 fls7 fwb' : 'fs14 fls7'}>{label}</div>
     </CheckableTag>
   );

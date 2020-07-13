@@ -25,7 +25,7 @@ const ExpiryCard: FC<CheckableCardType> = ({
         onChange(e);
       }}
     >
-      {checked ? <CheckboxIcon /> : null}
+      {checked ? <CheckboxIcon className='fs14' /> : null}
 
       <div
         className={`f-fd-c f-jc-sb f-ai-c h28 flh100 mv4 ${

@@ -30,7 +30,7 @@ const CheckableCard: FC<CheckableCardType> = ({
         {checked ? (
           <div className='rel '>
             <div className='abs f l-39'>
-              <CheckboxIcon className='h11 w11' />
+              <CheckboxIcon className='fs14' />
             </div>
           </div>
         ) : null}
