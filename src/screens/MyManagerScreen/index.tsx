@@ -20,13 +20,18 @@ const MyManagerScreen: FC = (props: any) => {
   const pageSize = 5;
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getDesign();
-      if (response) {
+      const response = await getDesign().catch(() => {
         setTimeout(() => {
-          setCustomers(response);
           setLoading(false);
-        }, 2000);
-      }
+          message.error('고객 리스트 불러오기 실패하였습니다');
+        }, 3000);
+      });
+      setTimeout(() => {
+        if (response) {
+          setCustomers(response);
+        }
+        setLoading(false);
+      }, 1000);
     };
 
     fetchData();

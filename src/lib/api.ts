@@ -8,6 +8,7 @@ const instance = axios.create({
   headers: {
     'Authorization': `Bearer ${token}`,
     'Access-Control-Allow-Origin': '*',
+    'Content-Security-Policy': 'upgrade-insecure-requests',
   },
 });
 
