@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
-import { Button, Empty, Spin } from 'antd';
+import { Button, Empty, Spin, message } from 'antd';
 import CustomHeader from 'src/components/MyHeader';
 import CustomFooter from 'src/components/MyFooter';
 import {
@@ -10,7 +10,7 @@ import {
 } from 'src/screens/MyManagerScreen/components/index';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
-import { getDesign } from 'src/lib/design/index';
+import { getDesign, deleteDesign } from 'src/lib/design/index';
 
 const MyManagerScreen: FC = (props: any) => {
   const history = useHistory();
@@ -49,8 +49,14 @@ const MyManagerScreen: FC = (props: any) => {
             return (
               <CustomerCard
                 deleteCard={() => {
-                  customers.splice(index, 1);
-                  setCustomers([...customers]);
+                  deleteDesign(item.designId)
+                    .then(() => {
+                      customers.splice(index, 1);
+                      setCustomers([...customers]);
+                    })
+                    .catch(() => {
+                      message.error('삭제 실패하였습니다');
+                    });
                 }}
                 onClick={() =>
                   history.push(screenPath3, {
