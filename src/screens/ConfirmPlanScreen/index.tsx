@@ -16,6 +16,10 @@ import { ReactComponent as KakaoIcon } from 'src/assets/icons/kakao.svg';
 import { productCards as cards } from 'src/assets/constants/index';
 import { useHistory, RouteComponentProps } from 'react-router-dom';
 
+import { useLocation } from 'react-router-dom';
+
+import { useEffect } from 'react';
+
 interface Props extends RouteComponentProps {
   name: string;
   age: string;
@@ -25,6 +29,7 @@ const ConfirmPlanScreen: FC<Props> = ({ name, age, location }) => {
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [productCards, setProductCards] = useState(cards);
   const history = useHistory();
+  const { pathname } = useLocation();
 
   return (
     <div className='f-fd-c hp100'>

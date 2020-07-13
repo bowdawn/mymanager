@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useLayoutEffect, useRef } from 'react';
 
 import MyManagerScreen from 'src/screens/MyManagerScreen/index';
 import CustomerInputScreen from 'src/screens/CustomerInputScreen/index';
@@ -14,31 +14,69 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
+function useWindowSize() {
+  const [size, setSize] = useState([0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+  return size;
+}
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 const MainNavigator: FC<any> = (props: any) => {
+  const appContainer = useRef<HTMLDivElement>(null);
+
+  const [width, height] = useWindowSize();
   return (
     <Router>
-      <Switch>
-        <Redirect exact from='/' to={screenPath1} />
-        <Route exact path={screenPath1} component={MyManagerScreen} />
-        <Route exact path={screenPath2} component={CustomerInputScreen} />
-        <PrivateRoute
-          exact
-          path={screenPath3}
-          component={(props: any) => <ConfirmPlanScreen {...props} />}
-          state={['name', 'age']}
-        />
-        <PrivateRoute
-          exact
-          path={screenPath4}
-          component={(props: any) => <AddPlanScreen {...props} />}
-          state={['name', 'age']}
-        />
+      <ScrollToTop />
+      <div ref={appContainer} className='App ant-override'>
+        <div
+          style={{
+            width:
+              width > parseInt(maxScreenWidth)
+                ? parseInt(maxScreenWidth)
+                : width,
+            height: height,
+          }}
+        >
+          <Switch>
+            <Redirect exact from='/' to={screenPath1} />
+            <Route exact path={screenPath1} component={MyManagerScreen} />
+            <Route exact path={screenPath2} component={CustomerInputScreen} />
+            <PrivateRoute
+              exact
+              path={screenPath3}
+              component={(props: any) => <ConfirmPlanScreen {...props} />}
+              state={['name', 'age']}
+            />
+            <PrivateRoute
+              exact
+              path={screenPath4}
+              component={(props: any) => <AddPlanScreen {...props} />}
+              state={['name', 'age']}
+            />
 
-        <Route exact path={screenPath5} component={ProductDetailScreen} />
-        <Route exact path={screenPath6} component={NotAuthorizedScreen} />
-        <Route component={PageNotFoundScreen} />
-      </Switch>
+            <Route exact path={screenPath5} component={ProductDetailScreen} />
+            <Route exact path={screenPath6} component={NotAuthorizedScreen} />
+            <Route component={PageNotFoundScreen} />
+          </Switch>
+        </div>
+      </div>
     </Router>
   );
 };

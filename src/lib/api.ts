@@ -5,4 +5,4 @@ const instance = axios.create({
   baseURL: 'http://nortina.io:5000',
 });
 
-export {};
+export default instance;
