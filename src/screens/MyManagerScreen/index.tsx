@@ -1,5 +1,5 @@
-import React, { FC, useState } from 'react';
-import { Button, Empty } from 'antd';
+import React, { FC, useState, useEffect } from 'react';
+import { Button, Empty, Spin } from 'antd';
 import CustomHeader from 'src/components/MyHeader';
 import CustomFooter from 'src/components/MyFooter';
 import {
@@ -10,155 +10,27 @@ import {
 } from 'src/screens/MyManagerScreen/components/index';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
-
-const data: Array<{
-  name: string;
-  type: string;
-  gender: string;
-  birthdate?: string | null;
-  sendTime: string;
-  applyTime?: string | null;
-  age?: number | null;
-}> = [
-  {
-    name: '티머시',
-    type: '신규',
-    gender: '남',
-    birthdate: '1963.01.01',
-    sendTime: '20.05.20 / 16:32',
-  },
-  {
-    name: '오복단',
-    type: '신규',
-    gender: '남',
-    birthdate: '1997.01.01',
-    sendTime: '20.05.20 / 16:32',
-  },
-  {
-    name: '사만다',
-    type: '신청',
-    gender: '여',
-    sendTime: '20.05.20 / 16:32',
-    applyTime: '20.01.22 / 14:30',
-    age: 32,
-  },
-
-  {
-    name: '에밀리',
-    type: '신청',
-    gender: '여',
-    sendTime: '20.05.20 / 16:32',
-    applyTime: '20.01.22 / 14:30',
-    age: 13,
-  },
-  {
-    name: '이사벨라',
-    type: '신청',
-    gender: '여',
-    sendTime: '20.05.20/16:32',
-    applyTime: '20.01.22/14:30',
-    age: 80,
-  },
-  {
-    name: '윌리엄',
-    type: '신규',
-    gender: '남',
-    birthdate: '1993.01.01',
-    sendTime: '20.05.20 / 16:32',
-  },
-  {
-    name: '니콜라스',
-    type: '신규',
-    gender: '남',
-    birthdate: '1995.01.01',
-    sendTime: '20.05.20 / 16:32',
-  },
-  {
-    name: '올리비아',
-    type: '신청',
-    gender: '여',
-    sendTime: '20.05.20 / 16:32',
-    applyTime: '20.01.22 / 14:30',
-    age: 40,
-  },
-
-  {
-    name: '매디슨',
-    type: '신청',
-    gender: '여',
-    sendTime: '20.05.20 / 16:32',
-    applyTime: '20.01.22 / 14:30',
-    age: 45,
-  },
-  {
-    name: '제임스',
-    type: '신규',
-    gender: '남',
-    birthdate: '1983.01.01',
-    sendTime: '20.05.20 / 16:32',
-  },
-  {
-    name: '매슈',
-    type: '신규',
-    gender: '남',
-    birthdate: '1985.01.01',
-    sendTime: '20.05.20 / 16:32',
-  },
-  {
-    name: '안젤리나',
-    type: '신청',
-    gender: '여',
-    sendTime: '20.05.20 / 16:32',
-    applyTime: '20.01.22 / 14:30',
-    age: 37,
-  },
-
-  {
-    name: '데이브',
-    type: '신규',
-    gender: '남',
-    birthdate: '1981.01.01',
-    sendTime: '20.05.20 / 16:32',
-  },
-  {
-    name: '앤드류',
-    type: '신규',
-    gender: '남',
-    birthdate: '1986.01.01',
-    sendTime: '20.05.20 / 16:32',
-  },
-  {
-    name: '그레이스',
-    type: '신청',
-    gender: '여',
-    sendTime: '20.05.20 / 16:32',
-    applyTime: '20.01.22 / 14:30',
-    age: 29,
-  },
-
-  {
-    name: '제인',
-    type: '신청',
-    gender: '여',
-    sendTime: '20.05.20 / 16:32',
-    applyTime: '20.01.22 / 14:30',
-    age: 15,
-  },
-  {
-    name: '한나',
-    type: '신청',
-    gender: '여',
-    sendTime: '20.05.20/16:32',
-    applyTime: '20.01.22/14:30',
-    age: 65,
-  },
-];
+import { getDesign } from 'src/lib/design/index';
 
 const MyManagerScreen: FC = (props: any) => {
   const history = useHistory();
-  const [customers, setCustomers] = useState(data);
+  const [customers, setCustomers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [current, setCurrent] = useState(1);
   const pageSize = 5;
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getDesign();
+      if (response) {
+        setTimeout(() => {
+          setCustomers(response);
+          setLoading(false);
+        }, 2000);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className='f-fd-c f-jc-sb hp100'>
@@ -192,12 +64,12 @@ const MyManagerScreen: FC = (props: any) => {
                 }
                 className='mb10'
                 name={item.name}
-                birthdate={item.birthdate}
+                birthdate={item.birthDay}
                 age={item.age}
                 gender={item.gender}
-                type={item.type}
-                sendTime={item.sendTime}
-                applyTime={item.applyTime}
+                type={item.status}
+                sendTime={item.createdDate}
+                applyTime={item.applyDate}
                 key={`customer-card-${index}`}
               />
             );
@@ -205,11 +77,15 @@ const MyManagerScreen: FC = (props: any) => {
             return null;
           }
         })}
-        {customers.length === 0 ? (
+        {customers.length === 0 && !loading ? (
           <Empty
             className='f1 f-jc-c f-ai-c f-fd-c'
             image={Empty.PRESENTED_IMAGE_SIMPLE}
           />
+        ) : null}
+
+        {loading ? (
+          <Spin className='f1 f-jc-c f-ai-c f-fd-c' tip='로딩중입니다 ' />
         ) : null}
       </div>
       {customers.length > 0 ? (
