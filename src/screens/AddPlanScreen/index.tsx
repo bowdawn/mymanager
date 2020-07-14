@@ -11,7 +11,6 @@ import {
   quickSetup,
   expirationOptions,
 } from 'src/assets/constants/index';
-
 import {
   CollapsibleLayout,
   CheckableCard,
@@ -114,7 +113,10 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
         <ChoiceLayout
           columns={4}
           card={CheckableCard}
-          labels={planTypes}
+          labels={planTypes.map((item: any) => item.label)}
+          disabledValues={planTypes.map((item: any) =>
+            options.products.every((option: string) => option !== item.value)
+          )}
           selectedChoices={selectedPlanTypes}
           setSelectedChoices={setSelectedPlanTypes}
           type='carousel'
@@ -123,7 +125,10 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
           <div className='fs12 fls60 fwb mb10 '>회사 선택</div>
           <ChoiceLayout
             columns={5}
-            labels={companies}
+            labels={companies.map((item: any) => item.label)}
+            disabledValues={companies.map((item: any) =>
+              options.products.every((option: string) => option !== item.value)
+            )}
             selectedChoices={selectedCompanies}
             setSelectedChoices={setSelectedCompanies}
             card={CheckableCard}
