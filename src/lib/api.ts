@@ -1,14 +1,20 @@
 import axios from 'axios';
 
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyIiwidW5pcXVlX25hbWUiOiIyIiwibmJmIjoxNTk0NjI3MTUxLCJleHAiOjE1OTQ3MTM1NTEsImlhdCI6MTU5NDYyNzE1MX0.FOauC95cquD5fKEi8kEIM9_0AV455aN4oBV1xi-TrNo';
-
 const instance = axios.create({
   baseURL: 'https://mymanager.jinjoosoft.io/',
   headers: {
-    'Authorization': `Bearer ${token}`,
     'Access-Control-Allow-Origin': '*',
   },
 });
 
 export default instance;
+
+const setAuth = (token?: string | null) => {
+  if (token) {
+    instance.defaults.headers.authorization = `Bearer ${token}`;
+  } else {
+    instance.defaults.headers.authorization = null;
+  }
+};
+
+export { setAuth };

@@ -8,12 +8,21 @@ import {
   CustomerCard,
   CustomPagination,
 } from 'src/screens/MyManagerScreen/components/index';
-import { useHistory } from 'react-router-dom';
+import { RouteComponentProps, useLocation } from 'react-router-dom';
 import moment from 'moment';
 import { getDesign, deleteDesign } from 'src/lib/design/index';
+import { postAuth } from 'src/lib/auth/index';
 
-const MyManagerScreen: FC = (props: any) => {
-  const history = useHistory();
+// A custom hook that builds on useLocation to parse
+// the query string for you.
+
+interface Props extends RouteComponentProps {}
+
+const MyManagerScreen: FC<Props> = ({ match, history, ...props }) => {
+  var params = new URLSearchParams(window.location.search);
+  const serviceName: any = params.get('serviceName');
+  const key: any = params.get('key');
+
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [current, setCurrent] = useState(1);
@@ -34,7 +43,7 @@ const MyManagerScreen: FC = (props: any) => {
       }, 1000);
     };
 
-    fetchData();
+    postAuth({ serviceName: serviceName, key: key }).then(fetchData);
   }, []);
 
   return (

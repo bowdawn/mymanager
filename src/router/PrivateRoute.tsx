@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
+import axios from 'src/lib/api';
 
 interface IPrivateRouteProps extends RouteProps {
   component: any;
-  state: Array<string>;
+  state?: Array<string>;
 }
 
 const PrivateRoute: FC<IPrivateRouteProps> = ({
@@ -18,15 +19,12 @@ const PrivateRoute: FC<IPrivateRouteProps> = ({
     <Route
       {...rest}
       render={(props) => {
-        if (
-          state &&
-          rest.state.every(
-            (element: string) => state[element] || state[element] === 0
-          )
-        ) {
+        if (rest.state) {
           rest.state.forEach((element: string) => {
             stateProps[element] = state[element];
           });
+          return <Component {...props} {...stateProps} />;
+        } else if (axios.defaults.headers.authorization) {
           return <Component {...props} {...stateProps} />;
         } else {
           return (
