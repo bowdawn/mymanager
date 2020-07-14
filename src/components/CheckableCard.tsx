@@ -4,15 +4,18 @@ import { ReactComponent as CheckboxIcon } from 'src/assets/icons/checkbox.svg';
 import { CheckableCardType } from 'src/assets/@types/checkableCardType';
 
 const { CheckableTag } = Tag;
-const CheckableCard: FC<CheckableCardType> = ({ label, checked, onChange }) => {
+const CheckableCard: FC<CheckableCardType> = ({
+  label,
+  checked,
+  onChange,
+  disabled,
+}) => {
   return (
     <CheckableTag
       checked={checked}
-      className={
-        checked
-          ? 'h60 wp100 br4 f-fd-c f-jc-sb f-ai-c pv8'
-          : 'h60 wp100 br4 f-fd-c f-jc-c f-ai-c pv8'
-      }
+      className={`h60 wp100 br4 f-fd-c  f-ai-c pv8 
+      ${disabled ? ' ant-tag-checkable-disabled ' : ' '}
+      ${checked ? ' f-jc-sb ' : ' f-jc-c '}`}
       onChange={(e) => {
         checked = e;
         onChange(e);

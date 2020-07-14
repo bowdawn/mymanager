@@ -12,4 +12,34 @@ const deleteDesign = async (id: number) => {
   });
 };
 
-export { getDesign, deleteDesign };
+const putDesign = async (params: {
+  name: string;
+  gender: 'M' | 'F';
+  birthDay?: Date | null;
+  age?: number;
+  cardType?: string;
+  data?: Array<{
+    name: string;
+    plan: string;
+    product: string;
+    company: string;
+    expiration: string;
+    amount: number;
+    premium: Array<{
+      age: number;
+      amount: number;
+      difference: number;
+    }>;
+    guarantee: Array<{
+      name: string;
+      subscriptionFee: string;
+      premium: number;
+    }>;
+  }>;
+}) => {
+  return await axios.put(`/Design`, params).then((res) => {
+    return res.data;
+  });
+};
+
+export { getDesign, deleteDesign, putDesign };

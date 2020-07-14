@@ -14,19 +14,14 @@ const ExpiryCard: FC<CheckableCardType> = ({
   return (
     <CheckableTag
       checked={checked}
-      className={`h70 wp100 br4 f-fd-c pv10 f-ai-c ${
-        disabled
-          ? 'ant-tag-checkable-disabled f-jc-c'
-          : checked
-          ? 'f-jc-sb'
-          : ' f-jc-c '
-      }`}
+      className={`h70 wp100 br4 f-fd-c pv10 f-ai-c 
+      ${disabled ? ' ant-tag-checkable-disabled ' : ' '}
+      ${checked ? ' f-jc-sb ' : ' f-jc-c '}`}
       onChange={(e) => {
         onChange(e);
       }}
     >
       {checked ? <CheckboxIcon className='fs14' /> : null}
-
       <div
         className={`f-fd-c f-jc-sb f-ai-c h28 flh100 mv4 ${
           extraLabel ? 'f-jc-sb' : 'f-jc-c'

@@ -38,13 +38,11 @@ function ScrollToTop() {
 }
 
 const MainNavigator: FC<any> = (props: any) => {
-  const appContainer = useRef<HTMLDivElement>(null);
-
   const [width, height] = useWindowSize();
   return (
     <Router>
       <ScrollToTop />
-      <div ref={appContainer} className='App ant-override'>
+      <div className='App ant-override'>
         <div
           style={{
             width:
@@ -68,7 +66,7 @@ const MainNavigator: FC<any> = (props: any) => {
               exact
               path={screenPath4}
               component={(props: any) => <AddPlanScreen {...props} />}
-              state={['name', 'age']}
+              state={['name', 'age', 'gender']}
             />
 
             <Route exact path={screenPath5} component={ProductDetailScreen} />

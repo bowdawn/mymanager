@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Row, Col, Carousel } from 'antd';
+import { Row, Col, Carousel, message } from 'antd';
 import Icon from '@ant-design/icons';
 import { ReactComponent as ArrowLeftIcon } from 'src/assets/icons/arrow-left.svg';
 import { ReactComponent as ArrowRightIcon } from 'src/assets/icons/arrow-right.svg';
@@ -15,8 +15,26 @@ const ChoiceLayout: FC<ChoiceLayout> = ({
   extraLabels = labels.map((item: any) => ''),
   disabledValues = labels.map((item: any) => false),
   type,
+  maxCheckableOptions = 1,
 }) => {
   let ColProps = getColProps(columns);
+  let checkedOptions = selectedChoices.reduce(
+    (count: number, item: boolean) => count + (item ? 1 : 0),
+    0
+  );
+  let newOptionSelectable = checkedOptions < maxCheckableOptions;
+
+  const onChangeIndex = (value: boolean, index: number) => {
+    if (maxCheckableOptions === 1) {
+      selectedChoices = selectedChoices.map((item: any) => false);
+      selectedChoices[index] = value;
+      setSelectedChoices([...selectedChoices]);
+    } else if (newOptionSelectable) {
+      selectedChoices[index] = value;
+      setSelectedChoices([...selectedChoices]);
+    } else {
+    }
+  };
 
   if (type === 'grid') {
     return (
@@ -30,8 +48,7 @@ const ChoiceLayout: FC<ChoiceLayout> = ({
               disabled={disabledValues[i]}
               icon={icons[i]}
               onChange={(e: boolean) => {
-                selectedChoices[i] = e;
-                setSelectedChoices([...selectedChoices]);
+                onChangeIndex(e, i);
               }}
             />
           </Col>
@@ -57,9 +74,9 @@ const ChoiceLayout: FC<ChoiceLayout> = ({
                 label={item}
                 checked={selectedChoices[i]}
                 onChange={(e: boolean) => {
-                  selectedChoices[i] = e;
-                  setSelectedChoices([...selectedChoices]);
+                  onChangeIndex(e, i);
                 }}
+                disabled={disabledValues[i]}
               />
             </div>
           </div>

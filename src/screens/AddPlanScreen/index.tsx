@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import Header from 'src/components/MyHeader';
 import Footer from 'src/components/MyFooter';
 import { Button } from 'antd';
@@ -21,12 +21,14 @@ import {
   PricePlanCard,
 } from 'src/screens/AddPlanScreen/components/index';
 import { RouteComponentProps } from 'react-router-dom';
+import { searchPlan } from 'src/lib/plan/index';
 
 interface Props extends RouteComponentProps {
   name: string;
   age: string;
+  gender: string;
 }
-const AddPlanScreen: FC<Props> = ({ name, age, history }) => {
+const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
   const [selectedQuickPlans, setSelectedQuickPlans] = useState([
     ...quickSetup.map((item: any) => false),
   ]);
@@ -46,6 +48,34 @@ const AddPlanScreen: FC<Props> = ({ name, age, history }) => {
     ...pricePlans.map((item: any) => false),
   ]);
 
+  const getCheckedOptions = (selected: Array<boolean>) =>
+    selected.reduce(
+      (count: number, item: boolean) => count + (item ? 1 : 0),
+      0
+    );
+  const [options, setOptions] = useState({
+    companies: [],
+    products: [],
+    plans: [],
+    expirations: [],
+    types: [],
+  });
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await searchPlan({ Age: age, Gender: gender }).catch(
+        (error) => {
+          console.error(error);
+        }
+      );
+      if (response) {
+        console.log(response);
+        setOptions(response);
+      }
+    };
+    fetchData();
+  }, []);
+
   const [rotate, setRotate] = useState(false);
   return (
     <div>
@@ -62,6 +92,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, history }) => {
             setSelectedChoices={setSelectedQuickPlans}
             card={QuickCard}
             type='grid'
+            maxCheckableOptions={Infinity}
           />
         }
       />
@@ -71,7 +102,10 @@ const AddPlanScreen: FC<Props> = ({ name, age, history }) => {
         <ChoiceLayout
           columns={4}
           card={CheckableCard}
-          labels={productTypes}
+          labels={productTypes.map((item: any) => item.label)}
+          disabledValues={productTypes.map((item: any) =>
+            options.products.every((option: string) => option !== item.value)
+          )}
           selectedChoices={selectedProductedTypes}
           setSelectedChoices={setSelectedProductTypes}
           type='carousel'
@@ -94,6 +128,12 @@ const AddPlanScreen: FC<Props> = ({ name, age, history }) => {
             setSelectedChoices={setSelectedCompanies}
             card={CheckableCard}
             type='grid'
+            maxCheckableOptions={
+              getCheckedOptions(selectedExpirations) > 1 ||
+              getCheckedOptions(selectedPricePlans) > 1
+                ? 1
+                : Infinity
+            }
           />
         </div>
 
@@ -108,6 +148,9 @@ const AddPlanScreen: FC<Props> = ({ name, age, history }) => {
             setSelectedChoices={setSelectedExpirations}
             card={ExpiryCard}
             type='grid'
+            maxCheckableOptions={
+              getCheckedOptions(selectedCompanies) > 1 ? 1 : Infinity
+            }
           />
         </div>
 
@@ -122,6 +165,9 @@ const AddPlanScreen: FC<Props> = ({ name, age, history }) => {
             card={PricePlanCard}
             icons={pricePlans.map((item: any) => item.icon)}
             type='grid'
+            maxCheckableOptions={
+              getCheckedOptions(selectedCompanies) > 1 ? 1 : Infinity
+            }
           />
         </div>
 

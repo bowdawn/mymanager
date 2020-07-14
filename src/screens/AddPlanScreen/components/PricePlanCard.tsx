@@ -4,7 +4,7 @@ import { Tag } from 'antd';
 import { ReactComponent as CheckboxIcon } from 'src/assets/icons/checkbox.svg';
 import { CheckableCardType } from 'src/assets/@types/checkableCardType';
 const { CheckableTag } = Tag;
-//to do reorganize class name
+
 const CheckableCard: FC<CheckableCardType> = ({
   label,
   checked,
@@ -15,13 +15,10 @@ const CheckableCard: FC<CheckableCardType> = ({
   return (
     <CheckableTag
       checked={checked}
-      className={
-        disabled
-          ? 'h92 wp100 br4 pv15 ant-tag-checkable-disabled'
-          : checked
-          ? 'h92 wp100 br4 fill-primary-hover fill-primary pv15'
-          : 'h92 wp100 br4 fill-primary-hover  pv15'
-      }
+      className={`h92 wp100 br4 pv15 fill-primary-hover  
+      ${disabled ? ' ant-tag-checkable-disabled ' : ' '}
+      ${checked ? '  fill-primary ' : ' '}
+      `}
       onChange={(e) => {
         onChange(e);
       }}
