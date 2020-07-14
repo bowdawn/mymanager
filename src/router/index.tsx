@@ -64,7 +64,7 @@ const MainNavigator: FC<any> = (props: any) => {
               exact
               path={screenPath3}
               component={(props: any) => <ConfirmPlanScreen {...props} />}
-              state={['name', 'age']}
+              state={['name', 'age', 'gender']}
             />
             <PrivateRoute
               exact

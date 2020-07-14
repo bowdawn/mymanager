@@ -31,7 +31,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
   const [selectedQuickPlans, setSelectedQuickPlans] = useState([
     ...quickSetup.map((item: any) => false),
   ]);
-  const [selectedProductedTypes, setSelectedProductTypes] = useState([
+  const [selectedProductTypes, setSelectedProductTypes] = useState([
     ...productTypes.map((item: any) => false),
   ]);
   const [selectedPlanTypes, setSelectedPlanTypes] = useState([
@@ -61,23 +61,19 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
   });
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await searchPlan({ Age: age, Gender: gender }).catch(
-        (error) => {
-          console.error(error);
-        }
-      );
-      if (response) {
-        console.log(response);
-        setOptions(response);
-      }
-    };
-    fetchData();
+    console.log('useEffect');
+    searchPlan({ Age: age, Gender: gender })
+      .then((res) => {
+        setOptions(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   const [rotate, setRotate] = useState(false);
   return (
-    <div>
+    <div className='f-fd-c hp100'>
       <Header title='빠른 설계' subHeader={{ name: name, age: age }} />
       <CollapsibleLayout
         title='빠른 설계'
@@ -97,6 +93,9 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
       />
 
       <div className='ph16 pt40'>
+        <div className='fs12 fls60 fwb mb10 fc-pc'>
+          *상품군 또는 플랜을 선택해주세요.
+        </div>
         <div className='fs12 fls60 fwb mb10 '>성품군 선택</div>
         <ChoiceLayout
           columns={4}
@@ -105,7 +104,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
           disabledValues={productTypes.map((item: any) =>
             options.products.every((option: string) => option !== item.value)
           )}
-          selectedChoices={selectedProductedTypes}
+          selectedChoices={selectedProductTypes}
           setSelectedChoices={setSelectedProductTypes}
           type='carousel'
         />
@@ -121,92 +120,109 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
           setSelectedChoices={setSelectedPlanTypes}
           type='carousel'
         />
-        <div className='mb40'>
-          <div className='fs12 fls60 fwb mb10 '>회사 선택</div>
-          <ChoiceLayout
-            columns={5}
-            labels={companies.map((item: any) => item.label)}
-            disabledValues={companies.map((item: any) =>
-              options.products.every((option: string) => option !== item.value)
-            )}
-            selectedChoices={selectedCompanies}
-            setSelectedChoices={setSelectedCompanies}
-            card={CheckableCard}
-            type='grid'
-            maxCheckableOptions={
-              getCheckedOptions(selectedExpirations) > 1 ||
-              getCheckedOptions(selectedPricePlans) > 1
-                ? 1
-                : Infinity
-            }
-          />
-        </div>
+        {getCheckedOptions(selectedPlanTypes) > 0 ||
+        getCheckedOptions(selectedProductTypes) > 0 ? (
+          <div>
+            <div className='mb40'>
+              <div className='fs12 fls60 fwb mb10 '>회사 선택</div>
+              <ChoiceLayout
+                columns={5}
+                labels={companies.map((item: any) => item.label)}
+                disabledValues={companies.map((item: any) =>
+                  options.products.every(
+                    (option: string) => option !== item.value
+                  )
+                )}
+                selectedChoices={selectedCompanies}
+                setSelectedChoices={setSelectedCompanies}
+                card={CheckableCard}
+                type='grid'
+                maxCheckableOptions={
+                  getCheckedOptions(selectedExpirations) > 1 ||
+                  getCheckedOptions(selectedPricePlans) > 1
+                    ? 1
+                    : Infinity
+                }
+              />
+            </div>
 
-        <div className='mb40'>
-          <div className='fs12 fls60 fwb mb10 '>만기선택</div>
-          <ChoiceLayout
-            columns={3}
-            labels={expirationOptions.map((item: any) => item.label)}
-            extraLabels={expirationOptions.map((item: any) => item.expiry)}
-            disabledValues={expirationOptions.map((item: any) => item.disabled)}
-            selectedChoices={selectedExpirations}
-            setSelectedChoices={setSelectedExpirations}
-            card={ExpiryCard}
-            type='grid'
-            maxCheckableOptions={
-              getCheckedOptions(selectedCompanies) > 1 ? 1 : Infinity
-            }
-          />
-        </div>
+            <div className='mb40'>
+              <div className='fs12 fls60 fwb mb10 '>만기선택</div>
+              <ChoiceLayout
+                columns={3}
+                labels={expirationOptions.map((item: any) => item.label)}
+                extraLabels={expirationOptions.map((item: any) => item.expiry)}
+                disabledValues={expirationOptions.map(
+                  (item: any) => item.disabled
+                )}
+                selectedChoices={selectedExpirations}
+                setSelectedChoices={setSelectedExpirations}
+                card={ExpiryCard}
+                type='grid'
+                maxCheckableOptions={
+                  getCheckedOptions(selectedCompanies) > 1 ? 1 : Infinity
+                }
+              />
+            </div>
 
-        <div className='mb40'>
-          <div className='fs12 fls60 fwb mb10 '>가격종류</div>
-          <ChoiceLayout
-            columns={2}
-            labels={pricePlans.map((item: any) => item.label)}
-            disabledValues={pricePlans.map((item: any) => item.disabled)}
-            selectedChoices={selectedPricePlans}
-            setSelectedChoices={setSelectedPricePlans}
-            card={PricePlanCard}
-            icons={pricePlans.map((item: any) => item.icon)}
-            type='grid'
-            maxCheckableOptions={
-              getCheckedOptions(selectedCompanies) > 1 ? 1 : Infinity
-            }
-          />
-        </div>
+            <div className='mb40'>
+              <div className='fs12 fls60 fwb mb10 '>가격종류</div>
+              <ChoiceLayout
+                columns={2}
+                labels={pricePlans.map((item: any) => item.label)}
+                disabledValues={pricePlans.map((item: any) => item.disabled)}
+                selectedChoices={selectedPricePlans}
+                setSelectedChoices={setSelectedPricePlans}
+                card={PricePlanCard}
+                icons={pricePlans.map((item: any) => item.icon)}
+                type='grid'
+                maxCheckableOptions={
+                  getCheckedOptions(selectedCompanies) > 1 ? 1 : Infinity
+                }
+              />
+            </div>
 
-        <div className='f f-ai-c h55 mb50'>
-          <Button
-            className={rotate ? 'hp100 mr8 br4 rot-360' : 'hp100 mr8 br4'}
-            onAnimationEnd={() => setRotate(false)}
-            onClick={() => {
-              setRotate(true);
-              setSelectedQuickPlans([...quickSetup.map((item: any) => false)]);
-              setSelectedProductTypes([
-                ...productTypes.map((item: any) => false),
-              ]);
-              setSelectedPlanTypes([...planTypes.map((item: any) => false)]);
-              setSelectedCompanies([...companies.map((item: any) => false)]);
-              setSelectedExpirations([
-                ...expirationOptions.map((item: any) => false),
-              ]);
-              setSelectedPricePlans([...pricePlans.map((item: any) => false)]);
-            }}
-          >
-            <ResetIcon />
-          </Button>
+            <div className='f f-ai-c h55 mb50'>
+              <Button
+                className={rotate ? 'hp100 mr8 br4 rot-360' : 'hp100 mr8 br4'}
+                onAnimationEnd={() => setRotate(false)}
+                onClick={() => {
+                  setRotate(true);
+                  setSelectedQuickPlans([
+                    ...quickSetup.map((item: any) => false),
+                  ]);
+                  setSelectedProductTypes([
+                    ...productTypes.map((item: any) => false),
+                  ]);
+                  setSelectedPlanTypes([
+                    ...planTypes.map((item: any) => false),
+                  ]);
+                  setSelectedCompanies([
+                    ...companies.map((item: any) => false),
+                  ]);
+                  setSelectedExpirations([
+                    ...expirationOptions.map((item: any) => false),
+                  ]);
+                  setSelectedPricePlans([
+                    ...pricePlans.map((item: any) => false),
+                  ]);
+                }}
+              >
+                <ResetIcon />
+              </Button>
 
-          <Button
-            type='primary'
-            className='f1 fls8 fs18 fwb hp100 br4'
-            onClick={() => history.push}
-          >
-            간편 보험료 설계
-          </Button>
-        </div>
+              <Button
+                type='primary'
+                className='f1 fls8 fs18 fwb hp100 br4'
+                onClick={() => history.push}
+              >
+                간편 보험료 설계
+              </Button>
+            </div>
+          </div>
+        ) : null}
       </div>
-
+      <div className='f1' />
       <Footer />
     </div>
   );

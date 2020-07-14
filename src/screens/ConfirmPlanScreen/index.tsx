@@ -23,13 +23,13 @@ import { useEffect } from 'react';
 interface Props extends RouteComponentProps {
   name: string;
   age: string;
+  gender: string;
 }
 const ConfirmPlanScreen: FC<Props> = ({ name, age, location }) => {
   const [myPlan, setMyPlan] = useState('');
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [productCards, setProductCards] = useState(cards);
   const history = useHistory();
-  const { pathname } = useLocation();
 
   return (
     <div className='f-fd-c hp100'>
