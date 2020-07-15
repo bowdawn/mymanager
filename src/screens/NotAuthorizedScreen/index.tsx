@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 
 import { Result, Button } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 
-const PageNotFoundScreen: FC<any> = (props: any) => {
-  const history = useHistory();
+interface Props extends RouteComponentProps {}
+const PageNotFoundScreen: FC<Props> = ({ history }) => {
+  page403Visited = true;
   return (
     <div className='f-fd-c hp100'>
       <Result

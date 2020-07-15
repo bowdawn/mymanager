@@ -13,6 +13,7 @@ import {
   Switch,
   Route,
   Redirect,
+  useHistory,
 } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -39,6 +40,7 @@ function ScrollToTop() {
 
 const MainNavigator: FC<any> = (props: any) => {
   const [width, height] = useWindowSize();
+
   return (
     <Router>
       <ScrollToTop />

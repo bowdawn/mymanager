@@ -11,38 +11,37 @@ const PrivateRoute: FC<IPrivateRouteProps> = ({
   component: Component,
   ...rest
 }) => {
-  console.log(rest);
+  console.log(window);
   const state: any = rest.location?.state;
   let stateProps: any = {};
 
-  return (
-    <Route
-      {...rest}
-      render={(props) => {
-        if (axios.defaults.headers.authorization) {
-          if (rest.state) {
-            if (
-              state &&
-              rest.state.every(
-                (element: string) => state[element] || state[element] === 0
-              )
-            ) {
-              rest.state.forEach((element: string) => {
-                stateProps[element] = state[element];
-              });
-              return <Component {...props} {...stateProps} />;
-            }
-          } else {
-            return <Component {...props} {...stateProps} />;
-          }
-        }
+  if (axios.defaults.headers.authorization) {
+    if (rest.state) {
+      if (
+        state &&
+        rest.state.every(
+          (element: string) => state[element] || state[element] === 0
+        )
+      ) {
+        rest.state.forEach((element: string) => {
+          stateProps[element] = state[element];
+        });
         return (
-          <Redirect
-            to={{ pathname: screenPath6, state: { from: props.location } }}
+          <Route
+            {...rest}
+            render={(props) => <Component {...props} {...stateProps} />}
           />
         );
-      }}
-    />
+      }
+    } else {
+      return <Route {...rest} render={(props) => <Component {...props} />} />;
+    }
+  }
+  if (page403Visited) {
+    globalThis.history.back();
+  }
+  return (
+    <Redirect to={{ pathname: screenPath6, state: { from: screenPath6 } }} />
   );
 };
 

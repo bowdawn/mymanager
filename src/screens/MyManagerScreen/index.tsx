@@ -13,9 +13,6 @@ import moment from 'moment';
 import { getDesign, deleteDesign } from 'src/lib/design/index';
 import { postAuth } from 'src/lib/auth/index';
 
-// A custom hook that builds on useLocation to parse
-// the query string for you.
-
 interface Props extends RouteComponentProps {}
 
 const MyManagerScreen: FC<Props> = ({ match, history, ...props }) => {

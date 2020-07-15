@@ -8,13 +8,13 @@ const instance = axios.create({
 });
 
 export default instance;
-
 const setAuth = (token?: string | null) => {
   if (token) {
     instance.defaults.headers.authorization = `Bearer ${token}`;
   } else {
     instance.defaults.headers.authorization = null;
   }
+  page403Visited = false;
 };
 
 export { setAuth };
