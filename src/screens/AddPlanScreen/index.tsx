@@ -127,12 +127,13 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
               <div className='fs12 fls60 fwb mb10 '>회사 선택</div>
               <ChoiceLayout
                 columns={5}
-                labels={companies.map((item: any) => item.label)}
-                disabledValues={companies.map((item: any) =>
-                  options.products.every(
-                    (option: string) => option !== item.value
+                labels={companies
+                  .filter((item: any) =>
+                    options.companies.some(
+                      (companyCode: string) => item.value === companyCode
+                    )
                   )
-                )}
+                  .map((company: any) => company.label)}
                 selectedChoices={selectedCompanies}
                 setSelectedChoices={setSelectedCompanies}
                 card={CheckableCard}
@@ -152,8 +153,10 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
                 columns={3}
                 labels={expirationOptions.map((item: any) => item.label)}
                 extraLabels={expirationOptions.map((item: any) => item.expiry)}
-                disabledValues={expirationOptions.map(
-                  (item: any) => item.disabled
+                disabledValues={expirationOptions.map((item: any) =>
+                  options.expirations.every(
+                    (option: string) => option !== item.value
+                  )
                 )}
                 selectedChoices={selectedExpirations}
                 setSelectedChoices={setSelectedExpirations}
@@ -170,7 +173,9 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
               <ChoiceLayout
                 columns={2}
                 labels={pricePlans.map((item: any) => item.label)}
-                disabledValues={pricePlans.map((item: any) => item.disabled)}
+                disabledValues={pricePlans.map((item: any) =>
+                  options.types.every((option: string) => option !== item.value)
+                )}
                 selectedChoices={selectedPricePlans}
                 setSelectedChoices={setSelectedPricePlans}
                 card={PricePlanCard}
