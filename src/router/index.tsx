@@ -53,7 +53,11 @@ const MainNavigator: FC<any> = (props: any) => {
           }}
         >
           <Switch>
-            <Redirect exact from='/' to={screenPath1} />
+            <Redirect
+              exact
+              from='/'
+              to={screenPath1 + '?serviceName=test&key=test'}
+            />
             <Route exact path={screenPath1} component={MyManagerScreen} />
             <PrivateRoute
               exact

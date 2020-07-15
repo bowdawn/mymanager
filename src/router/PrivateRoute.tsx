@@ -19,20 +19,28 @@ const PrivateRoute: FC<IPrivateRouteProps> = ({
     <Route
       {...rest}
       render={(props) => {
-        if (rest.state) {
-          rest.state.forEach((element: string) => {
-            stateProps[element] = state[element];
-          });
-          return <Component {...props} {...stateProps} />;
-        } else if (axios.defaults.headers.authorization) {
-          return <Component {...props} {...stateProps} />;
-        } else {
-          return (
-            <Redirect
-              to={{ pathname: screenPath6, state: { from: props.location } }}
-            />
-          );
+        if (axios.defaults.headers.authorization) {
+          if (rest.state) {
+            if (
+              state &&
+              rest.state.every(
+                (element: string) => state[element] || state[element] === 0
+              )
+            ) {
+              rest.state.forEach((element: string) => {
+                stateProps[element] = state[element];
+              });
+              return <Component {...props} {...stateProps} />;
+            }
+          } else {
+            return <Component {...props} {...stateProps} />;
+          }
         }
+        return (
+          <Redirect
+            to={{ pathname: screenPath6, state: { from: props.location } }}
+          />
+        );
       }}
     />
   );
