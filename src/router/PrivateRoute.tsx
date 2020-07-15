@@ -15,7 +15,7 @@ const PrivateRoute: FC<IPrivateRouteProps> = ({
   const state: any = rest.location?.state;
   let stateProps: any = {};
 
-  if (axios.defaults.headers.authorization) {
+  if (axios.defaults.headers.common['Authorization']) {
     if (rest.state) {
       if (
         state &&

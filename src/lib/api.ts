@@ -6,13 +6,20 @@ const instance = axios.create({
     'Access-Control-Allow-Origin': '*',
   },
 });
-
+instance.defaults.headers.common['Authorization'] = sessionStorage.getItem(
+  'OhMyManager_Token'
+);
 export default instance;
+
 const setAuth = (token?: string | null) => {
   if (token) {
-    instance.defaults.headers.authorization = `Bearer ${token}`;
+    sessionStorage.setItem('OhMyManager_Token', `Bearer ${token}`);
+    instance.defaults.headers.common['Authorization'] = sessionStorage.getItem(
+      'OhMyManager_Token'
+    );
   } else {
-    instance.defaults.headers.authorization = null;
+    sessionStorage.removeItem('OhMyManager_Token');
+    instance.defaults.headers.common['Authorization'] = null;
   }
   page403Visited = false;
 };
