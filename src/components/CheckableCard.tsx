@@ -17,7 +17,6 @@ const CheckableCard: FC<CheckableCardType> = ({
       ${disabled ? ' ant-tag-checkable-disabled ' : ' '}
       ${checked ? ' f-jc-sb ' : ' f-jc-c '}`}
       onChange={(e) => {
-        checked = e;
         onChange(e);
       }}
     >

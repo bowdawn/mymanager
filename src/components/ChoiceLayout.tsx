@@ -14,25 +14,33 @@ const ChoiceLayout: FC<ChoiceLayout> = ({
   icons = labels.map((item: any) => null),
   extraLabels = labels.map((item: any) => ''),
   disabledValues = labels.map((item: any) => false),
+  values = labels.map((item: any) => item),
   type,
   maxCheckableOptions = 1,
 }) => {
   let ColProps = getColProps(columns);
-  let checkedOptions = selectedChoices.reduce(
-    (count: number, item: boolean) => count + (item ? 1 : 0),
-    0
-  );
-  let newOptionSelectable = checkedOptions < maxCheckableOptions;
 
-  const onChangeIndex = (value: boolean, index: number) => {
+  let newOptionSelectable = selectedChoices.length < maxCheckableOptions;
+
+  const onChangeIndex = (checked: boolean, index: number) => {
     if (maxCheckableOptions === 1) {
-      selectedChoices = selectedChoices.map((item: any) => false);
-      selectedChoices[index] = value;
-      setSelectedChoices([...selectedChoices]);
+      if (checked) {
+        setSelectedChoices([values[index]]);
+      } else {
+        setSelectedChoices([]);
+      }
     } else if (newOptionSelectable) {
-      selectedChoices[index] = value;
-      setSelectedChoices([...selectedChoices]);
+      if (checked) {
+        selectedChoices.push(values[index]);
+        setSelectedChoices([...selectedChoices]);
+      } else {
+        selectedChoices = selectedChoices.filter(
+          (choice: string) => choice != values[index]
+        );
+        setSelectedChoices([...selectedChoices]);
+      }
     } else {
+      //to do write an error message if needed
     }
   };
 
@@ -44,7 +52,9 @@ const ChoiceLayout: FC<ChoiceLayout> = ({
             <Card
               label={item}
               extraLabel={extraLabels[i]}
-              checked={selectedChoices[i]}
+              checked={selectedChoices.some(
+                (choice: any) => choice === values[i]
+              )}
               disabled={disabledValues[i]}
               icon={icons[i]}
               onChange={(e: boolean) => {
@@ -72,10 +82,14 @@ const ChoiceLayout: FC<ChoiceLayout> = ({
             <div className='f-jc-c ph2-5'>
               <Card
                 label={item}
-                checked={selectedChoices[i]}
-                onChange={(e: boolean) => {
-                  onChangeIndex(e, i);
+                checked={selectedChoices.some(
+                  (choice: any) => choice === values[i]
+                )}
+                extraLabel={extraLabels[i]}
+                onChange={(checked: boolean) => {
+                  onChangeIndex(checked, i);
                 }}
+                icon={icons[i]}
                 disabled={disabledValues[i]}
               />
             </div>

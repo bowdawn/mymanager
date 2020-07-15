@@ -28,30 +28,21 @@ interface Props extends RouteComponentProps {
   gender: string;
 }
 const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
-  const [selectedQuickPlans, setSelectedQuickPlans] = useState([
-    ...quickSetup.map((item: any) => false),
-  ]);
-  const [selectedProductTypes, setSelectedProductTypes] = useState([
-    ...productTypes.map((item: any) => false),
-  ]);
-  const [selectedPlanTypes, setSelectedPlanTypes] = useState([
-    ...planTypes.map((item: any) => false),
-  ]);
-  const [selectedCompanies, setSelectedCompanies] = useState([
-    ...companies.map((item: any) => false),
-  ]);
-  const [selectedExpirations, setSelectedExpirations] = useState([
-    ...expirationOptions.map((item: any) => false),
-  ]);
-  const [selectedPricePlans, setSelectedPricePlans] = useState([
-    ...pricePlans.map((item: any) => false),
-  ]);
+  const [selectedQuickPlans, setSelectedQuickPlans] = useState<Array<string>>(
+    []
+  );
+  const [selectedProductTypes, setSelectedProductTypes] = useState<
+    Array<string>
+  >([]);
+  const [selectedPlanTypes, setSelectedPlanTypes] = useState<Array<string>>([]);
+  const [selectedCompanies, setSelectedCompanies] = useState<Array<string>>([]);
+  const [selectedExpirations, setSelectedExpirations] = useState<Array<string>>(
+    []
+  );
+  const [selectedPricePlans, setSelectedPricePlans] = useState<Array<string>>(
+    []
+  );
 
-  const getCheckedOptions = (selected: Array<boolean>) =>
-    selected.reduce(
-      (count: number, item: boolean) => count + (item ? 1 : 0),
-      0
-    );
   const [options, setOptions] = useState({
     companies: [],
     products: [],
@@ -62,14 +53,28 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     console.log('useEffect');
-    searchPlan({ Age: age, Gender: gender })
+    searchPlan({
+      Age: age,
+      Gender: gender,
+      product: selectedProductTypes,
+      plan: selectedPlanTypes,
+      company: selectedCompanies,
+      expiration: selectedExpirations,
+      type: selectedExpirations,
+    })
       .then((res) => {
         setOptions(res);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [
+    selectedProductTypes,
+    selectedPlanTypes,
+    selectedCompanies,
+    selectedExpirations,
+    selectedPricePlans,
+  ]);
 
   const [rotate, setRotate] = useState(false);
   return (
@@ -82,6 +87,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
             className='p16 bc-wt'
             columns={5}
             labels={quickSetup.map((item: any) => item.label)}
+            values={quickSetup.map((item: any) => item.label)}
             icons={quickSetup.map((item: any) => item.icon)}
             selectedChoices={selectedQuickPlans}
             setSelectedChoices={setSelectedQuickPlans}
@@ -101,6 +107,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
           columns={4}
           card={CheckableCard}
           labels={productTypes.map((item: any) => item.label)}
+          values={productTypes.map((item: any) => item.value)}
           disabledValues={productTypes.map((item: any) =>
             options.products.every((option: string) => option !== item.value)
           )}
@@ -113,6 +120,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
           columns={4}
           card={CheckableCard}
           labels={planTypes.map((item: any) => item.label)}
+          values={planTypes.map((item: any) => item.value)}
           disabledValues={planTypes.map((item: any) =>
             options.products.every((option: string) => option !== item.value)
           )}
@@ -120,8 +128,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
           setSelectedChoices={setSelectedPlanTypes}
           type='carousel'
         />
-        {getCheckedOptions(selectedPlanTypes) > 0 ||
-        getCheckedOptions(selectedProductTypes) > 0 ? (
+        {selectedPlanTypes.length > 0 || selectedProductTypes.length > 0 ? (
           <div>
             <div className='mb40'>
               <div className='fs12 fls60 fwb mb10 '>회사 선택</div>
@@ -134,13 +141,20 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
                     )
                   )
                   .map((company: any) => company.label)}
+                values={companies
+                  .filter((item: any) =>
+                    options.companies.some(
+                      (companyCode: string) => item.value === companyCode
+                    )
+                  )
+                  .map((company: any) => company.value)}
                 selectedChoices={selectedCompanies}
                 setSelectedChoices={setSelectedCompanies}
                 card={CheckableCard}
                 type='grid'
                 maxCheckableOptions={
-                  getCheckedOptions(selectedExpirations) > 1 ||
-                  getCheckedOptions(selectedPricePlans) > 1
+                  selectedExpirations.length > 1 ||
+                  selectedPricePlans.length > 1
                     ? 1
                     : Infinity
                 }
@@ -152,6 +166,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
               <ChoiceLayout
                 columns={3}
                 labels={expirationOptions.map((item: any) => item.label)}
+                values={expirationOptions.map((item: any) => item.value)}
                 extraLabels={expirationOptions.map((item: any) => item.expiry)}
                 disabledValues={expirationOptions.map((item: any) =>
                   options.expirations.every(
@@ -163,7 +178,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
                 card={ExpiryCard}
                 type='grid'
                 maxCheckableOptions={
-                  getCheckedOptions(selectedCompanies) > 1 ? 1 : Infinity
+                  selectedCompanies.length > 1 ? 1 : Infinity
                 }
               />
             </div>
@@ -173,6 +188,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
               <ChoiceLayout
                 columns={2}
                 labels={pricePlans.map((item: any) => item.label)}
+                values={pricePlans.map((item: any) => item.value)}
                 disabledValues={pricePlans.map((item: any) =>
                   options.types.every((option: string) => option !== item.value)
                 )}
@@ -182,7 +198,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
                 icons={pricePlans.map((item: any) => item.icon)}
                 type='grid'
                 maxCheckableOptions={
-                  getCheckedOptions(selectedCompanies) > 1 ? 1 : Infinity
+                  selectedCompanies.length > 1 ? 1 : Infinity
                 }
               />
             </div>
@@ -193,24 +209,12 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
                 onAnimationEnd={() => setRotate(false)}
                 onClick={() => {
                   setRotate(true);
-                  setSelectedQuickPlans([
-                    ...quickSetup.map((item: any) => false),
-                  ]);
-                  setSelectedProductTypes([
-                    ...productTypes.map((item: any) => false),
-                  ]);
-                  setSelectedPlanTypes([
-                    ...planTypes.map((item: any) => false),
-                  ]);
-                  setSelectedCompanies([
-                    ...companies.map((item: any) => false),
-                  ]);
-                  setSelectedExpirations([
-                    ...expirationOptions.map((item: any) => false),
-                  ]);
-                  setSelectedPricePlans([
-                    ...pricePlans.map((item: any) => false),
-                  ]);
+                  setSelectedQuickPlans([]);
+                  setSelectedProductTypes([]);
+                  setSelectedPlanTypes([]);
+                  setSelectedCompanies([]);
+                  setSelectedExpirations([]);
+                  setSelectedPricePlans([]);
                 }}
               >
                 <ResetIcon />
