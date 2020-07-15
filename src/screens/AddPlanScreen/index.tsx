@@ -63,6 +63,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
       type: selectedExpirations,
     })
       .then((res) => {
+        console.log(res);
         setOptions(res);
       })
       .catch((error) => {
@@ -108,8 +109,9 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
           card={CheckableCard}
           labels={productTypes.map((item: any) => item.label)}
           values={productTypes.map((item: any) => item.value)}
-          disabledValues={productTypes.map((item: any) =>
-            options.products.every((option: string) => option !== item.value)
+          disabledValues={productTypes.map(
+            (item: any) =>
+              !options.products.find((option: string) => option === item.value)
           )}
           selectedChoices={selectedProductTypes}
           setSelectedChoices={setSelectedProductTypes}
@@ -121,8 +123,9 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
           card={CheckableCard}
           labels={planTypes.map((item: any) => item.label)}
           values={planTypes.map((item: any) => item.value)}
-          disabledValues={planTypes.map((item: any) =>
-            options.products.every((option: string) => option !== item.value)
+          disabledValues={planTypes.map(
+            (item: any) =>
+              !options.plans.find((option: string) => option === item.value)
           )}
           selectedChoices={selectedPlanTypes}
           setSelectedChoices={setSelectedPlanTypes}
@@ -168,10 +171,11 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
                 labels={expirationOptions.map((item: any) => item.label)}
                 values={expirationOptions.map((item: any) => item.value)}
                 extraLabels={expirationOptions.map((item: any) => item.expiry)}
-                disabledValues={expirationOptions.map((item: any) =>
-                  options.expirations.every(
-                    (option: string) => option !== item.value
-                  )
+                disabledValues={expirationOptions.map(
+                  (item: any) =>
+                    !options.expirations.find(
+                      (option: string) => option === item.value
+                    )
                 )}
                 selectedChoices={selectedExpirations}
                 setSelectedChoices={setSelectedExpirations}
@@ -189,8 +193,11 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
                 columns={2}
                 labels={pricePlans.map((item: any) => item.label)}
                 values={pricePlans.map((item: any) => item.value)}
-                disabledValues={pricePlans.map((item: any) =>
-                  options.types.every((option: string) => option !== item.value)
+                disabledValues={pricePlans.map(
+                  (item: any) =>
+                    !options.types.find(
+                      (option: string) => option === item.value
+                    )
                 )}
                 selectedChoices={selectedPricePlans}
                 setSelectedChoices={setSelectedPricePlans}
