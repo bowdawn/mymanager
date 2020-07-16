@@ -27,6 +27,14 @@ interface Props extends RouteComponentProps {
   age: string;
   gender: string;
 }
+interface SearchPlanResponse {
+  companies: never[];
+  products: never[];
+  plans: never[];
+  expirations: never[];
+  types: never[];
+}
+
 const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
   const [selectedQuickPlans, setSelectedQuickPlans] = useState<Array<string>>(
     []
@@ -44,7 +52,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
   );
   const [updateOptions, setUpdateOptions] = useState(true);
 
-  const [options, setOptions] = useState({
+  const [options, setOptions] = useState<SearchPlanResponse>({
     companies: [],
     products: [],
     plans: [],
@@ -101,15 +109,11 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
       expiration: expirations,
       type: types,
     };
-    const response: {
-      companies: never[];
-      products: never[];
-      plans: never[];
-      expirations: never[];
-      types: never[];
-    } = await searchPlan(params).catch((error) => {
-      console.error(error);
-    });
+    const response: SearchPlanResponse = await searchPlan(params).catch(
+      (error) => {
+        console.error(error);
+      }
+    );
 
     if (
       response &&
@@ -128,7 +132,6 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
     } else {
       message.error('선택한 설계는 존재하지 않습니다');
     }
-    //setOptions(response);
   };
 
   useEffect(() => {
@@ -174,8 +177,6 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
           quickSet(['90'], ['10'], [], ['5'], ['1']);
           break;
       }
-    } else {
-      quickSet([], [], [], [], []);
     }
   }, [selectedQuickPlans]);
 
