@@ -294,6 +294,15 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
                 type='primary'
                 className='f1 fls8 fs18 fwb hp100 br4'
                 onClick={() => history.push}
+                disabled={
+                  !(
+                    selectedProductTypes.length &&
+                    selectedPlanTypes.length &&
+                    selectedCompanies.length &&
+                    selectedExpirations.length &&
+                    selectedPricePlans.length
+                  )
+                }
               >
                 간편 보험료 설계
               </Button>
