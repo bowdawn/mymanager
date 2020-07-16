@@ -1,4 +1,4 @@
-import React, { FC, useState, useLayoutEffect } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import Header from 'src/components/MyHeader';
 import Footer from 'src/components/MyFooter';
 import { Button, message } from 'antd';
@@ -50,8 +50,8 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
     expirations: [],
     types: [],
   });
-  const [loading, setLoading] = useState(true);
-  useLayoutEffect(() => {
+
+  useEffect(() => {
     const params = {
       Age: age,
       Gender: gender,
@@ -61,14 +61,17 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
       expiration: selectedExpirations,
       type: selectedExpirations,
     };
-    searchPlan(params)
-      .then((res) => {
-        console.log(res);
-        setOptions(res);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const fetchData = async () => {
+      await searchPlan(params)
+        .then((res) => {
+          console.log(res);
+          setOptions(res);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+    fetchData();
   }, []);
 
   const [rotate, setRotate] = useState(false);
