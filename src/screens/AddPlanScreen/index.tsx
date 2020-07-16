@@ -69,13 +69,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
       .catch((error) => {
         console.error(error);
       });
-  }, [
-    selectedProductTypes,
-    selectedPlanTypes,
-    selectedCompanies,
-    selectedExpirations,
-    selectedPricePlans,
-  ]);
+  }, []);
 
   const [rotate, setRotate] = useState(false);
   return (
