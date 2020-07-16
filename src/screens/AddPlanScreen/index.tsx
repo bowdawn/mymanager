@@ -20,7 +20,7 @@ import {
   PricePlanCard,
 } from 'src/screens/AddPlanScreen/components/index';
 import { RouteComponentProps } from 'react-router-dom';
-import { searchPlan } from 'src/lib/plan/index';
+import { searchPlan, selectPlan } from 'src/lib/plan/index';
 
 interface Props extends RouteComponentProps {
   name: string;
@@ -70,7 +70,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
         plan: selectedPlanTypes,
         company: selectedCompanies,
         expiration: selectedExpirations,
-        type: selectedExpirations,
+        type: selectedPricePlans,
       };
 
       searchPlan(params)
@@ -109,6 +109,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
       expiration: expirations,
       type: types,
     };
+    console.log(params);
     const response: SearchPlanResponse = await searchPlan(params).catch(
       (error) => {
         console.error(error);
@@ -124,12 +125,18 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
       ) &&
       response.types.some((type: string) => types[0] === type)
     ) {
+      //setOptions(response);
+      console.log(response);
+      setUpdateOptions(false);
       setSelectedProductTypes(products);
+      setUpdateOptions(false);
       setSelectedPlanTypes(plans);
+      setUpdateOptions(false);
       setSelectedCompanies(companies);
+      setUpdateOptions(false);
       setSelectedExpirations(expirations);
+
       setSelectedPricePlans(types);
-      setOptions(response);
     } else {
       message.error('선택한 설계는 존재하지 않습니다');
     }
@@ -365,7 +372,17 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
         <Button
           type='primary'
           className='f1 fls8 fs18 fwb hp100 br4'
-          onClick={() => history.push}
+          onClick={() =>
+            selectPlan({
+              Age: age,
+              Gender: gender,
+              product: options.products,
+              plan: options.plans,
+              company: options.companies,
+              expiration: options.expirations,
+              type: options.types,
+            })
+          }
           disabled={
             !(
               selectedProductTypes.length &&
