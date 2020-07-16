@@ -61,7 +61,6 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
       expiration: selectedExpirations,
       type: selectedExpirations,
     };
-    message.info(JSON.stringify(params));
     searchPlan(params)
       .then((res) => {
         console.log(res);
