@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useLayoutEffect } from 'react';
 import Header from 'src/components/MyHeader';
 import Footer from 'src/components/MyFooter';
 import { Button, message } from 'antd';
@@ -51,7 +51,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
     types: [],
   });
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
+  useLayoutEffect(() => {
     const params = {
       Age: age,
       Gender: gender,
