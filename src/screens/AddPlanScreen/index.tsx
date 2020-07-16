@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import Header from 'src/components/MyHeader';
 import Footer from 'src/components/MyFooter';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import { ReactComponent as ResetIcon } from 'src/assets/icons/reset.svg';
 import {
   planTypes,
@@ -52,8 +52,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
   });
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    console.log('useEffect');
-    searchPlan({
+    const params = {
       Age: age,
       Gender: gender,
       product: selectedProductTypes,
@@ -61,7 +60,9 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
       company: selectedCompanies,
       expiration: selectedExpirations,
       type: selectedExpirations,
-    })
+    };
+    message.info(JSON.stringify(params));
+    searchPlan(params)
       .then((res) => {
         console.log(res);
         setOptions(res);
