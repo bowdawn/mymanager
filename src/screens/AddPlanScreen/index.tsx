@@ -42,6 +42,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
   const [selectedPricePlans, setSelectedPricePlans] = useState<Array<string>>(
     []
   );
+  const [updateOptions, setUpdateOptions] = useState(true);
 
   const [options, setOptions] = useState({
     companies: [],
@@ -50,26 +51,32 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
     expirations: [],
     types: [],
   });
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
-    const params = {
-      Age: age,
-      Gender: gender,
-      product: selectedProductTypes,
-      plan: selectedPlanTypes,
-      company: selectedCompanies,
-      expiration: selectedExpirations,
-      type: selectedExpirations,
-    };
+    setLoading(true);
+    if (updateOptions) {
+      const params = {
+        Age: age,
+        Gender: gender,
+        product: selectedProductTypes,
+        plan: selectedPlanTypes,
+        company: selectedCompanies,
+        expiration: selectedExpirations,
+        type: selectedExpirations,
+      };
 
-    searchPlan(params)
-      .then((res) => {
-        console.log(res);
-        setOptions(res);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      searchPlan(params)
+        .then((res) => {
+          console.log(res);
+          setOptions(res);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      setUpdateOptions(true);
+    }
   }, [
     selectedProductTypes,
     selectedPlanTypes,
@@ -140,6 +147,35 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
     }
   }, [selectedQuickPlans]);
 
+  useEffect(() => {
+    setUpdateOptions(false);
+    setSelectedProductTypes(
+      selectedProductTypes.filter((product: string) =>
+        options.products.some((option: string) => option === product)
+      )
+    );
+    setSelectedPlanTypes(
+      selectedPlanTypes.filter((plan: string) =>
+        options.plans.some((option: string) => option === plan)
+      )
+    );
+    setSelectedCompanies(
+      selectedCompanies.filter((company: string) =>
+        options.companies.some((option: string) => option === company)
+      )
+    );
+    setSelectedExpirations(
+      selectedExpirations.filter((expiration: string) =>
+        options.expirations.some((option: string) => option === expiration)
+      )
+    );
+    setSelectedPricePlans(
+      selectedPricePlans.filter((type: string) =>
+        options.types.some((option: string) => option === type)
+      )
+    );
+  }, [options]);
+
   const [rotate, setRotate] = useState(false);
   return (
     <div className='f-fd-c hp100'>
@@ -174,7 +210,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
           values={productTypes.map((item: any) => item.value)}
           disabledValues={productTypes.map(
             (item: any) =>
-              !options.products.find((option: string) => option === item.value)
+              !options.products.some((option: string) => option === item.value)
           )}
           selectedChoices={selectedProductTypes}
           setSelectedChoices={setSelectedProductTypes}
@@ -188,7 +224,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
           values={planTypes.map((item: any) => item.value)}
           disabledValues={planTypes.map(
             (item: any) =>
-              !options.plans.find((option: string) => option === item.value)
+              !options.plans.some((option: string) => option === item.value)
           )}
           selectedChoices={selectedPlanTypes}
           setSelectedChoices={setSelectedPlanTypes}
@@ -236,7 +272,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
                 extraLabels={expirationOptions.map((item: any) => item.expiry)}
                 disabledValues={expirationOptions.map(
                   (item: any) =>
-                    !options.expirations.find(
+                    !options.expirations.some(
                       (option: string) => option === item.value
                     )
                 )}
@@ -258,7 +294,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
                 values={pricePlans.map((item: any) => item.value)}
                 disabledValues={pricePlans.map(
                   (item: any) =>
-                    !options.types.find(
+                    !options.types.some(
                       (option: string) => option === item.value
                     )
                 )}
@@ -272,45 +308,46 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
                 }
               />
             </div>
-
-            <div className='f f-ai-c h55 mb50'>
-              <Button
-                className={rotate ? 'hp100 mr8 br4 rot-360' : 'hp100 mr8 br4'}
-                onAnimationEnd={() => setRotate(false)}
-                onClick={() => {
-                  setRotate(true);
-                  setSelectedQuickPlans([]);
-                  setSelectedProductTypes([]);
-                  setSelectedPlanTypes([]);
-                  setSelectedCompanies([]);
-                  setSelectedExpirations([]);
-                  setSelectedPricePlans([]);
-                }}
-              >
-                <ResetIcon />
-              </Button>
-
-              <Button
-                type='primary'
-                className='f1 fls8 fs18 fwb hp100 br4'
-                onClick={() => history.push}
-                disabled={
-                  !(
-                    selectedProductTypes.length &&
-                    selectedPlanTypes.length &&
-                    selectedCompanies.length &&
-                    selectedExpirations.length &&
-                    selectedPricePlans.length
-                  )
-                }
-              >
-                간편 보험료 설계
-              </Button>
-            </div>
           </div>
         ) : null}
       </div>
       <div className='f1' />
+      <div className='f f-ai-c h55 mb50 ph16'>
+        <Button
+          className={rotate ? 'hp100 mr8 br4 rot-360' : 'hp100 mr8 br4'}
+          onAnimationEnd={() => setRotate(false)}
+          onClick={() => {
+            setRotate(true);
+            setSelectedQuickPlans([]);
+            setSelectedProductTypes([]);
+            setSelectedPlanTypes([]);
+            setSelectedCompanies([]);
+            setSelectedExpirations([]);
+            setSelectedPricePlans([]);
+          }}
+        >
+          <ResetIcon />
+        </Button>
+
+        <Button
+          type='primary'
+          className='f1 fls8 fs18 fwb hp100 br4'
+          onClick={() => history.push}
+          disabled={
+            !(
+              selectedProductTypes.length &&
+              selectedPlanTypes.length &&
+              selectedCompanies.length &&
+              selectedExpirations.length &&
+              selectedPricePlans.length &&
+              !loading
+            )
+          }
+        >
+          간편 보험료 설계
+        </Button>
+      </div>
+
       <Footer />
     </div>
   );
