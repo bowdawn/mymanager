@@ -42,7 +42,6 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
   const [selectedPricePlans, setSelectedPricePlans] = useState<Array<string>>(
     []
   );
-
   const [options, setOptions] = useState({
     companies: [],
     products: [],
@@ -50,7 +49,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
     expirations: [],
     types: [],
   });
-
+  const [rotate, setRotate] = useState(false);
   useEffect(() => {
     const params = {
       Age: age,
@@ -62,19 +61,16 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
       type: selectedExpirations,
     };
     const fetchData = async () => {
-      await searchPlan(params)
-        .then((res) => {
-          console.log(res);
-          setOptions(res);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      const response = await searchPlan(params).catch((error) => {
+        console.error(error);
+      });
+      if (response) {
+        setOptions(response);
+      }
     };
     fetchData();
   }, []);
 
-  const [rotate, setRotate] = useState(false);
   return (
     <div className='f-fd-c hp100'>
       <Header title='빠른 설계' subHeader={{ name: name, age: age }} />
@@ -128,7 +124,9 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
           setSelectedChoices={setSelectedPlanTypes}
           type='carousel'
         />
-        {selectedPlanTypes.length > 0 || selectedProductTypes.length > 0 ? (
+        {true ||
+        selectedPlanTypes.length > 0 ||
+        selectedProductTypes.length > 0 ? (
           <div>
             <div className='mb40'>
               <div className='fs12 fls60 fwb mb10 '>회사 선택</div>
