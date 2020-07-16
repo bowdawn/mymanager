@@ -1,7 +1,7 @@
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
 * {
   font-family: 'Spoqa Han Sans', 'Sans-serif';
-  overscroll-behavior-y: none;
+  overscroll-behavior: none;
 }
 
 body {
@@ -12,7 +12,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
-  overscroll-behavior-y: none;
+  overscroll-behavior: none;
   overflow-y: auto;
 }
 code {
