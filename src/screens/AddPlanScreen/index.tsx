@@ -72,7 +72,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
   }, []);
 
   return (
-    <div className='f-fd-c hp100'>
+    <div className='f-fd-c hp100' style={{ overflowY: 'auto' }}>
       <Header title='빠른 설계' subHeader={{ name: name, age: age }} />
       <CollapsibleLayout
         title='빠른 설계'
