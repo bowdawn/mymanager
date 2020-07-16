@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useLayoutEffect } from 'react';
 import Header from 'src/components/MyHeader';
 import Footer from 'src/components/MyFooter';
 import { Button, message } from 'antd';
@@ -42,6 +42,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
   const [selectedPricePlans, setSelectedPricePlans] = useState<Array<string>>(
     []
   );
+
   const [options, setOptions] = useState({
     companies: [],
     products: [],
@@ -49,28 +50,35 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
     expirations: [],
     types: [],
   });
-  const [rotate, setRotate] = useState(false);
-  // useEffect(() => {
-  //   const params = {
-  //     Age: age,
-  //     Gender: gender,
-  //     product: selectedProductTypes,
-  //     plan: selectedPlanTypes,
-  //     company: selectedCompanies,
-  //     expiration: selectedExpirations,
-  //     type: selectedExpirations,
-  //   };
-  //   const fetchData = async () => {
-  //     const response = await searchPlan(params).catch((error) => {
-  //       console.error(error);
-  //     });
-  //     if (response) {
-  //       setOptions(response);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
+  const [loading, setLoading] = useState(true);
+  useLayoutEffect(() => {
+    const params = {
+      Age: age,
+      Gender: gender,
+      product: selectedProductTypes,
+      plan: selectedPlanTypes,
+      company: selectedCompanies,
+      expiration: selectedExpirations,
+      type: selectedExpirations,
+    };
 
+    searchPlan(params)
+      .then((res) => {
+        console.log(res);
+        setOptions(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [
+    selectedProductTypes,
+    selectedPlanTypes,
+    selectedCompanies,
+    selectedExpirations,
+    selectedPricePlans,
+  ]);
+
+  const [rotate, setRotate] = useState(false);
   return (
     <div className='f-fd-c hp100'>
       <Header title='빠른 설계' subHeader={{ name: name, age: age }} />
@@ -96,7 +104,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
         <div className='fs12 fls60 fwb mb10 fc-pc'>
           *상품군 또는 플랜을 선택해주세요.
         </div>
-        <div className='fs12 fls60 fwb mb10 '>상품군 선택</div>
+        <div className='fs12 fls60 fwb mb10 '>성품군 선택</div>
         <ChoiceLayout
           columns={4}
           card={CheckableCard}
@@ -124,9 +132,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
           setSelectedChoices={setSelectedPlanTypes}
           type='carousel'
         />
-        {true ||
-        selectedPlanTypes.length > 0 ||
-        selectedProductTypes.length > 0 ? (
+        {selectedPlanTypes.length > 0 || selectedProductTypes.length > 0 ? (
           <div>
             <div className='mb40'>
               <div className='fs12 fls60 fwb mb10 '>회사 선택</div>
