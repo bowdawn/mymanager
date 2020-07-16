@@ -69,13 +69,9 @@ const MainNavigator: FC<any> = (props: any) => {
             <PrivateRoute
               exact
               path={screenPath3}
-              component={(props: any) => <ConfirmPlanScreen {...props} />}
+              component={ConfirmPlanScreen}
             />
-            <PrivateRoute
-              exact
-              path={screenPath4}
-              component={(props: any) => <AddPlanScreen {...props} />}
-            />
+            <PrivateRoute exact path={screenPath4} component={AddPlanScreen} />
 
             <Route exact path={screenPath5} component={ProductDetailScreen} />
             <Route exact path={screenPath6} component={NotAuthorizedScreen} />
