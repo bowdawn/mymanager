@@ -31,7 +31,7 @@ const quickSetup = [
     icon: <TwoMajorDiseasesIcon />,
   },
   {
-    label: '임플랜',
+    label: '암플랜',
     icon: <CancerPlanIcon />,
   },
   {

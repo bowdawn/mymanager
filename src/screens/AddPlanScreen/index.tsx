@@ -1,7 +1,7 @@
-import React, { FC, useState, useLayoutEffect } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import Header from 'src/components/MyHeader';
 import Footer from 'src/components/MyFooter';
-import { Button, message } from 'antd';
+import { Button } from 'antd';
 import { ReactComponent as ResetIcon } from 'src/assets/icons/reset.svg';
 import {
   planTypes,
@@ -51,7 +51,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
     types: [],
   });
   const [loading, setLoading] = useState(true);
-  useLayoutEffect(() => {
+  useEffect(() => {
     const params = {
       Age: age,
       Gender: gender,
@@ -78,6 +78,68 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
     selectedPricePlans,
   ]);
 
+  const quickSet = (
+    products: Array<string>,
+    plans: Array<string>,
+    companies: Array<string>,
+    expirations: Array<string>,
+    types: Array<string>
+  ) => {
+    setSelectedProductTypes(products);
+    setSelectedPlanTypes(plans);
+    setSelectedCompanies(companies);
+    setSelectedExpirations(expirations);
+    setSelectedPricePlans(types);
+  };
+
+  useEffect(() => {
+    if (selectedQuickPlans.length) {
+      switch (selectedQuickPlans[0]) {
+        case '종합':
+          quickSet(['10'], ['10'], [], ['2'], ['1']);
+          break;
+        case '4대질병':
+          quickSet(['10'], ['20'], [], ['2'], ['1']);
+          break;
+        case '3대질병':
+          quickSet(['10'], ['30'], [], ['2'], ['1']);
+          break;
+        case '2대질병':
+          quickSet(['10'], ['40'], [], ['2'], ['1']);
+          break;
+        case '암플랜':
+          quickSet(['10'], ['50'], [], ['2'], ['1']);
+          break;
+        case '수술/입원':
+          quickSet(['10'], ['60'], [], ['2'], ['1']);
+          break;
+        case '간병인':
+          quickSet(['10'], ['70'], [], ['2'], ['1']);
+          break;
+        case '어린이':
+          quickSet(['40'], ['10'], [], ['4'], ['1']);
+          break;
+        case '실손':
+          quickSet(['50'], ['10'], [], ['4'], ['1']);
+          break;
+        case '간편실손':
+          quickSet(['60'], ['10'], [], ['4'], ['1']);
+          break;
+        case '치매':
+          quickSet(['70'], ['10'], [], ['3'], ['1']);
+          break;
+        case '치아':
+          quickSet(['80'], ['10'], [], ['0'], ['1']);
+          break;
+        case '운전자':
+          quickSet(['90'], ['10'], [], ['5'], ['1']);
+          break;
+      }
+    } else {
+      quickSet([], [], [], [], []);
+    }
+  }, [selectedQuickPlans]);
+
   const [rotate, setRotate] = useState(false);
   return (
     <div className='f-fd-c hp100'>
@@ -95,7 +157,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
             setSelectedChoices={setSelectedQuickPlans}
             card={QuickCard}
             type='grid'
-            maxCheckableOptions={Infinity}
+            maxCheckableOptions={1}
           />
         }
       />
