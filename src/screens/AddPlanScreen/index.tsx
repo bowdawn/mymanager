@@ -129,6 +129,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
       setSelectedCompanies(companies);
       setSelectedExpirations(expirations);
       setSelectedPricePlans(types);
+      setOptions(response);
     } else {
       message.error('선택한 설계는 존재하지 않습니다');
     }
