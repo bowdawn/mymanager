@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import Header from 'src/components/MyHeader';
 import Footer from 'src/components/MyFooter';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import { ReactComponent as ResetIcon } from 'src/assets/icons/reset.svg';
 import {
   planTypes,
@@ -85,18 +85,50 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
     selectedPricePlans,
   ]);
 
-  const quickSet = (
+  const quickSet = async (
     products: Array<string>,
     plans: Array<string>,
     companies: Array<string>,
     expirations: Array<string>,
     types: Array<string>
   ) => {
-    setSelectedProductTypes(products);
-    setSelectedPlanTypes(plans);
-    setSelectedCompanies(companies);
-    setSelectedExpirations(expirations);
-    setSelectedPricePlans(types);
+    const params = {
+      Age: age,
+      Gender: gender,
+      product: products,
+      plan: plans,
+      company: companies,
+      expiration: expirations,
+      type: types,
+    };
+    const response: {
+      companies: never[];
+      products: never[];
+      plans: never[];
+      expirations: never[];
+      types: never[];
+    } = await searchPlan(params).catch((error) => {
+      console.error(error);
+    });
+
+    if (
+      response &&
+      response.products.some((product: string) => products[0] === product) &&
+      response.plans.some((plan: string) => plans[0] === plan) &&
+      response.expirations.some(
+        (expiration: string) => expirations[0] === expiration
+      ) &&
+      response.types.some((type: string) => types[0] === type)
+    ) {
+      setSelectedProductTypes(products);
+      setSelectedPlanTypes(plans);
+      setSelectedCompanies(companies);
+      setSelectedExpirations(expirations);
+      setSelectedPricePlans(types);
+    } else {
+      message.error('선택한 설계는 존재하지 않습니다');
+    }
+    //setOptions(response);
   };
 
   useEffect(() => {
@@ -197,7 +229,6 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
           />
         }
       />
-
       <div className='ph16 pt40'>
         <div className='fs12 fls60 fwb mb10 fc-pc'>
           *상품군 또는 플랜을 선택해주세요.
