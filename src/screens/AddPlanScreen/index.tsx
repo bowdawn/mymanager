@@ -50,29 +50,29 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
     types: [],
   });
   const [rotate, setRotate] = useState(false);
-  useEffect(() => {
-    const params = {
-      Age: age,
-      Gender: gender,
-      product: selectedProductTypes,
-      plan: selectedPlanTypes,
-      company: selectedCompanies,
-      expiration: selectedExpirations,
-      type: selectedExpirations,
-    };
-    const fetchData = async () => {
-      const response = await searchPlan(params).catch((error) => {
-        console.error(error);
-      });
-      if (response) {
-        setOptions(response);
-      }
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const params = {
+  //     Age: age,
+  //     Gender: gender,
+  //     product: selectedProductTypes,
+  //     plan: selectedPlanTypes,
+  //     company: selectedCompanies,
+  //     expiration: selectedExpirations,
+  //     type: selectedExpirations,
+  //   };
+  //   const fetchData = async () => {
+  //     const response = await searchPlan(params).catch((error) => {
+  //       console.error(error);
+  //     });
+  //     if (response) {
+  //       setOptions(response);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   return (
-    <div className='f-fd-c hp100' style={{ overflowY: 'auto' }}>
+    <div className='f-fd-c hp100'>
       <Header title='빠른 설계' subHeader={{ name: name, age: age }} />
       <CollapsibleLayout
         title='빠른 설계'
@@ -96,7 +96,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
         <div className='fs12 fls60 fwb mb10 fc-pc'>
           *상품군 또는 플랜을 선택해주세요.
         </div>
-        <div className='fs12 fls60 fwb mb10 '>성품군 선택</div>
+        <div className='fs12 fls60 fwb mb10 '>상품군 선택</div>
         <ChoiceLayout
           columns={4}
           card={CheckableCard}
