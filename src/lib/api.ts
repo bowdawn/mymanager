@@ -21,7 +21,6 @@ const setAuth = (token?: string | null) => {
     sessionStorage.removeItem('OhMyManager_Token');
     instance.defaults.headers.common['Authorization'] = null;
   }
-  page403Visited = false;
 };
 
 export { setAuth };

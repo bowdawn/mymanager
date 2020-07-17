@@ -8,10 +8,10 @@ import {
   CustomerCard,
   CustomPagination,
 } from 'src/components/MyManager/index';
-import { RouteComponentProps, useLocation } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import moment from 'moment';
-import { getDesign, deleteDesign } from 'src/lib/design/index';
-import { postAuth } from 'src/lib/auth/index';
+import { getDesign, deleteDesign } from 'src/lib/design';
+import { postAuth } from 'src/lib/auth';
 
 interface Props extends RouteComponentProps {}
 

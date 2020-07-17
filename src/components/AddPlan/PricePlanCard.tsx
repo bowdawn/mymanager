@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-
 import { Tag } from 'antd';
 import { ReactComponent as CheckboxIcon } from 'src/assets/icons/checkbox.svg';
 import { CheckableCardType } from 'src/assets/@types/checkableCardType';

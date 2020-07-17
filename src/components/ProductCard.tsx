@@ -4,6 +4,7 @@ import Icon, { CaretDownOutlined } from '@ant-design/icons';
 import { ReactComponent as DeleteIcon } from 'src/assets/icons/delete-icon.svg';
 import { useHistory } from 'react-router-dom';
 import { ProductCardType } from 'src/assets/@types/productCardType';
+import { companies } from 'src/assets/constants';
 
 const { Panel } = Collapse;
 
@@ -38,11 +39,15 @@ const ProductCard: FC<Props> = ({
       <div className='p16'>
         <div className='f-jc-sb'>
           <Space size={8}>
-            {productCard.tags.map((tag: any, j: number) => (
-              <div className='fls70' key={`tag${key}-${j}`}>
-                {tag}
-              </div>
-            ))}
+            {productCard.tags ? (
+              productCard.tags.map((tag: any, j: number) => (
+                <div className='fls70' key={`tag${key}-${j}`}>
+                  {tag}
+                </div>
+              ))
+            ) : (
+              <div>no tags</div>
+            )}
           </Space>
 
           {active ? (
@@ -57,16 +62,22 @@ const ProductCard: FC<Props> = ({
           ) : null}
         </div>
 
-        <div className='fs12 fc-gf mb10'>{productCard.title}</div>
+        <div className='fs12 fc-gf mb10'>{productCard.Name}</div>
 
         <Row justify='space-between'>
           <Col>
             <Tag color={darkSkyBlue} className='fc-w ph11'>
-              {productCard.type}
+              {companies.some(
+                (company) => productCard.Company === company.value
+              )
+                ? companies.find(
+                    (company) => productCard.Company === company.value
+                  )?.label
+                : null}
             </Tag>
           </Col>
           <Col className='fwb'>
-            {productCard.price.toLocaleString('ko-Kr')}원
+            {productCard.Amount?.toLocaleString('ko-Kr')}원
           </Col>
         </Row>
       </div>
@@ -76,14 +87,14 @@ const ProductCard: FC<Props> = ({
               <Panel showArrow={false} header={null} key='1'>
                 <Table
                   className='clean-style-table product-card-table'
-                  dataSource={productCard.ageGroupPlan}
+                  dataSource={productCard.Premium}
                   pagination={false}
                 >
                   <Table.Column
                     align='center'
                     title={<div className='fc-pc fwb fs12 fls60'>나이</div>}
-                    dataIndex='age'
-                    key='age'
+                    dataIndex='Age'
+                    key='Age'
                     render={(value) => (
                       <div className='fs14 fls70 f-ai-c f-jc-c'>
                         <div className='h4 w4 bc-pg br2 mr6' /> {value}세
@@ -95,11 +106,11 @@ const ProductCard: FC<Props> = ({
                     title={<div className='fc-pc fwb fs12 fls60'>월보험료</div>}
                     render={(value) => (
                       <div className='fs14 fwb'>
-                        {value.toLocaleString('ko-Kr')}원
+                        {value?.toLocaleString('ko-Kr')}원
                       </div>
                     )}
-                    dataIndex='price'
-                    key='price'
+                    dataIndex='Amount'
+                    key='Amount'
                   ></Table.Column>
                   <Table.Column
                     align='center'
@@ -110,11 +121,11 @@ const ProductCard: FC<Props> = ({
                     }
                     render={(value) => (
                       <div className='fs14 fw300'>
-                        (+{value.toLocaleString('ko-Kr')}원)
+                        (+{value?.toLocaleString('ko-Kr')}원)
                       </div>
                     )}
-                    dataIndex='premium'
-                    key='premium'
+                    dataIndex='Difference'
+                    key='Difference'
                   ></Table.Column>
                 </Table>
               </Panel>

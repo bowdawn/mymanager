@@ -27,7 +27,7 @@ const ProductTable: FC<Props> = ({ item }) => {
           <div className='fs16 fls8 fc-pc fwb'>행복을 다주는 건강보험</div>
           <div className='f-jc-sb f-ai-fe'>
             <Tag color={darkSkyBlue} className='ph11 h28 fs14 f-ai-c'>
-              {item.type}
+              {item.Company}
             </Tag>
             <div>
               <div className='fls7 fs14 ta-e'>장기종합 / 100세 만기</div>

@@ -9,8 +9,21 @@ const searchPlan = async (params: {
   expiration: Array<string>;
   type: Array<string>;
 }) => {
-  console.log(params);
   return await axios.get('/Plan/search', { params: params }).then((res) => {
+    return res.data;
+  });
+};
+
+const singlePlan = async (params: {
+  Gender: string;
+  Age: string;
+  product: string;
+  plan: string;
+  company: string;
+  expiration: string;
+  type: string;
+}) => {
+  return await axios.get('/Plan/single', { params: params }).then((res) => {
     return res.data;
   });
 };
@@ -24,10 +37,9 @@ const selectPlan = async (params: {
   expiration: Array<string>;
   type: Array<string>;
 }) => {
-  console.log(params);
   return await axios.get('/Plan/select', { params: params }).then((res) => {
     return res.data;
   });
 };
 
-export { searchPlan, selectPlan };
+export { searchPlan, singlePlan, selectPlan };

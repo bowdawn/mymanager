@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import 'src/assets/less/components/footer.less';
 
 const Footer: FC<any> = () => {
   return (

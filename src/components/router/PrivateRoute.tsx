@@ -26,6 +26,7 @@ const PrivateRoute: FC<IPrivateRouteProps> = ({
         rest.state.forEach((element: string) => {
           stateProps[element] = state[element];
         });
+        page403Visited = false;
         return (
           <Route
             {...rest}
@@ -34,12 +35,14 @@ const PrivateRoute: FC<IPrivateRouteProps> = ({
         );
       }
     } else {
+      page403Visited = false;
       return <Route {...rest} render={(props) => <Component {...props} />} />;
     }
   }
   if (page403Visited) {
     globalThis.history.back();
   }
+  page403Visited = true;
   return (
     <Redirect to={{ pathname: screenPath6, state: { from: screenPath6 } }} />
   );

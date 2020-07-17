@@ -2,15 +2,22 @@ import React, { FC, useState } from 'react';
 import { message, Radio, Button } from 'antd';
 import { myPlans } from 'src/assets/constants/index';
 import { ReactComponent as Checkbox } from 'src/assets/icons/checkbox.svg';
+import { postPreset } from 'src/lib/preset';
 
 interface Props {
   setVisible: (value: boolean) => void;
+  data: Array<{
+    plan: string;
+    product: string;
+    company: string;
+    expiration: string;
+  }>;
 }
-const SaveModalBody: FC<Props> = ({ setVisible }) => {
+const SaveModalBody: FC<Props> = ({ setVisible, data }) => {
   const [savedClicked, setSavedClicked] = useState(false);
-  const [myPlan, setMyPlan] = useState('');
+  const [myPlan, setMyPlan] = useState<number>(0);
   return (
-    <div className='ant-override'>
+    <div>
       {(!savedClicked
         ? [
             <div className='fs18 fwb fo9 fc-bt'>저장 위치를 선택해주세요.</div>,
@@ -56,7 +63,12 @@ const SaveModalBody: FC<Props> = ({ setVisible }) => {
               <Button
                 type='primary'
                 className='f1 br4 h55 w128'
-                onClick={() => setSavedClicked(true)}
+                onClick={() =>
+                  postPreset(myPlan, data).then(() => {
+                    setSavedClicked(true);
+                  })
+                }
+                disabled={myPlan === 0}
               >
                 저장
               </Button>

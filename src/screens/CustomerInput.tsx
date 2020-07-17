@@ -8,7 +8,7 @@ import { ReactComponent as Calendar } from 'src/assets/icons/calendar.svg';
 import Icon from '@ant-design/icons';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
-import { putDesign } from 'src/lib/design/index';
+import { putDesign } from 'src/lib/design';
 import { Store } from 'antd/lib/form/interface';
 
 const genders: Array<{ label: string; value: string }> = [
@@ -30,8 +30,8 @@ const CustomerInputScreen: FC = (props: any) => {
       birthday: birthdate,
       gender: values.gender,
     };
-    await putDesign(parameters).then(() => {
-      history.push(screenPath3, values);
+    await putDesign(parameters).then((res) => {
+      history.push(screenPath3, res);
     });
   };
   const [form] = Form.useForm();

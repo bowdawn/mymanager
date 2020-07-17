@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import Header from 'src/components/MyHeader';
 import ProductCard from 'src/components/ProductCard';
 import Footer from 'src/components/MyFooter';
@@ -12,24 +12,29 @@ import Icon from '@ant-design/icons';
 import { ReactComponent as SaveIcon } from 'src/assets/icons/save.svg';
 import { ReactComponent as PlusIcon } from 'src/assets/icons/plus-icon.svg';
 import { ReactComponent as KakaoIcon } from 'src/assets/icons/kakao.svg';
-
 import { productCards as cards } from 'src/assets/constants/index';
 import { useHistory, RouteComponentProps } from 'react-router-dom';
-
-import { useLocation } from 'react-router-dom';
-
-import { useEffect } from 'react';
+import { getDesignId } from 'src/lib/design';
 
 interface Props extends RouteComponentProps {
   name: string;
   age: string;
   gender: string;
+  designId: number;
 }
-const ConfirmPlanScreen: FC<Props> = ({ name, age, location }) => {
+const ConfirmPlanScreen: FC<Props> = ({ name, age, location, designId }) => {
   const [myPlan, setMyPlan] = useState('');
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [productCards, setProductCards] = useState(cards);
+  const [customer, setCustomer] = useState<any>();
   const history = useHistory();
+
+  useEffect(() => {
+    getDesignId(designId).then((res) => {
+      console.log(JSON.parse(res.data));
+      setCustomer(JSON.parse(res.data));
+    });
+  }, []);
 
   return (
     <div className='f-fd-c hp100'>
@@ -52,6 +57,18 @@ const ConfirmPlanScreen: FC<Props> = ({ name, age, location }) => {
       <NewsCardCarousel className='mb24' />
       <div className='ph16'>
         {productCards.map((item: any, i: number) => (
+          <ProductCard
+            productCard={item}
+            key={i}
+            className='mb10'
+            active
+            deleteCard={() => {
+              productCards.splice(i, 1);
+              setProductCards([...productCards]);
+            }}
+          />
+        ))}
+        {customer?.map((item: any, i: number) => (
           <ProductCard
             productCard={item}
             key={i}
@@ -104,7 +121,17 @@ const ConfirmPlanScreen: FC<Props> = ({ name, age, location }) => {
         centered
         destroyOnClose
       >
-        <SaveModalBody setVisible={setShowSaveModal} />
+        <SaveModalBody
+          setVisible={setShowSaveModal}
+          data={[
+            {
+              plan: 'string',
+              product: 'string',
+              company: 'string',
+              expiration: 'string',
+            },
+          ]}
+        />
       </Modal>
     </div>
   );

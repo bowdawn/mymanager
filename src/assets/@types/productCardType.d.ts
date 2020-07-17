@@ -1,7 +1,7 @@
 export interface ProductCardType {
-  title: string;
+  Name: string;
   tags: Array<string>;
-  type: string;
-  price: number;
-  ageGroupPlan: Array<{ age: number; price: number; premium: number }>;
+  Company: string;
+  Amount: number;
+  Premium: Array<{ Age: number; Amount: number; Difference: number }>;
 }

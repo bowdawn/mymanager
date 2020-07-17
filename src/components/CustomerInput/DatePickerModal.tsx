@@ -1,10 +1,8 @@
 import React, { FC, useState } from 'react';
 import DatePicker from 'react-mobile-datepicker';
-import 'src/assets/less/components/datepicker.less';
 import { Modal, Button } from 'antd';
 import moment from 'moment';
 import 'moment/locale/ko';
-
 moment.locale('ko');
 
 interface Props {
@@ -19,7 +17,6 @@ const DatePickerModal: FC<Props> = ({ date, setDate, visible, setVisible }) => {
 
   return (
     <Modal
-      className='ant-override'
       visible={visible}
       closable={false}
       onCancel={() => setVisible(false)}

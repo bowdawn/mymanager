@@ -2,7 +2,6 @@ import React, { FC, ReactChild } from 'react';
 import { PageHeader, Row, Col } from 'antd';
 import { ReactComponent as ArrowLeft } from 'src/assets/icons/header-arrow-left.svg';
 import Icon from '@ant-design/icons';
-import 'src/assets/less/components/header.less';
 import { useHistory } from 'react-router-dom';
 
 interface Props {

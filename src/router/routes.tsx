@@ -8,8 +8,11 @@ import {
   NotAuthorized,
   PageNotFound,
 } from 'src/screens/index';
-import { ScrollToTop, ScreenResize } from 'src/utils/index';
-import PrivateRoute from 'src/router/PrivateRoute';
+import {
+  ScrollToTop,
+  ScreenResize,
+  PrivateRoute,
+} from 'src/components/router/index';
 import {
   BrowserRouter as Router,
   Switch,
@@ -34,13 +37,13 @@ const MainNavigator: FC<any> = (props: any) => {
             exact
             path={screenPath3}
             component={ConfirmPlan}
-            state={['name', 'age', 'gender']}
+            state={['name', 'age', 'gender', 'designId']}
           />
           <PrivateRoute
             exact
             path={screenPath4}
             component={AddPlan}
-            state={['name', 'age', 'gender']}
+            state={['name', 'age', 'gender', 'designId']}
           />
           <Route exact path={screenPath5} component={ProductDetail} />
           <Route exact path={screenPath6} component={NotAuthorized} />

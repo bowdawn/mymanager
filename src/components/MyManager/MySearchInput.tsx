@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react';
 import { message, Input } from 'antd';
-
 import { ReactComponent as SearchIcon } from 'src/assets/icons/search-icon.svg';
 
 interface Props {

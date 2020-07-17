@@ -20,12 +20,15 @@ import {
   PricePlanCard,
 } from 'src/components/AddPlan/index';
 import { RouteComponentProps } from 'react-router-dom';
-import { searchPlan, selectPlan } from 'src/lib/plan/index';
+import { searchPlan, selectPlan } from 'src/lib/plan';
+import { postDesign, getDesignId } from 'src/lib/design';
 
 interface Props extends RouteComponentProps {
   name: string;
-  age: string;
-  gender: string;
+  age: number;
+  gender: 'M' | 'F';
+  designId: number;
+  cardType: string;
 }
 interface SearchPlanResponse {
   companies: never[];
@@ -35,7 +38,15 @@ interface SearchPlanResponse {
   types: never[];
 }
 
-const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
+const AddPlanScreen: FC<Props> = ({
+  name,
+  age,
+  gender,
+  designId,
+  cardType,
+  history,
+  location,
+}) => {
   const [selectedQuickPlans, setSelectedQuickPlans] = useState<Array<string>>(
     []
   );
@@ -64,7 +75,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
     setLoading(true);
     if (updateOptions) {
       const params = {
-        Age: age,
+        Age: age.toString(),
         Gender: gender,
         product: selectedProductTypes,
         plan: selectedPlanTypes,
@@ -75,7 +86,6 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
 
       searchPlan(params)
         .then((res) => {
-          console.log(res);
           setOptions(res);
           setLoading(false);
         })
@@ -101,7 +111,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
     types: Array<string>
   ) => {
     const params = {
-      Age: age,
+      Age: age.toString(),
       Gender: gender,
       product: products,
       plan: plans,
@@ -109,7 +119,7 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
       expiration: expirations,
       type: types,
     };
-    console.log(params);
+
     const response: SearchPlanResponse = await searchPlan(params).catch(
       (error) => {
         console.error(error);
@@ -374,13 +384,24 @@ const AddPlanScreen: FC<Props> = ({ name, age, gender, history }) => {
           className='f1 fls8 fs18 fwb hp100 br4'
           onClick={() =>
             selectPlan({
-              Age: age,
+              Age: age.toString(),
               Gender: gender,
               product: options.products,
               plan: options.plans,
               company: options.companies,
               expiration: options.expirations,
               type: options.types,
+            }).then((res) => {
+              postDesign(designId, {
+                name: name,
+                gender: gender,
+                age: age,
+                cardType: cardType,
+                data: res,
+              }).then((state) => {
+                location.state = state;
+                history.push(screenPath3, location.state);
+              });
             })
           }
           disabled={
