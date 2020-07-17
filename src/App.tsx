@@ -1,18 +1,17 @@
-import React, { FC, useState, useLayoutEffect } from 'react';
-
+import React, { FC } from 'react';
 import 'src/App.less';
 import { ConfigProvider } from 'antd';
 import koKr from 'antd/es/locale/ko_KR';
-import 'src/assets/constants/colors';
-import 'src/assets/constants/globals';
-import 'src/assets/constants/auth';
-import MainNavigator from './router';
+import 'src/assets/constants/global/index';
+import Router from './router';
 
 const App: FC = () => {
   return (
-    <ConfigProvider locale={koKr}>
-      <MainNavigator />
-    </ConfigProvider>
+    <div className='app ant-override'>
+      <ConfigProvider locale={koKr}>
+        <Router />
+      </ConfigProvider>
+    </div>
   );
 };
 

@@ -6,7 +6,7 @@ import {
   TogglePlan,
   NewsCardCarousel,
   SaveModalBody,
-} from 'src/screens/ConfirmPlanScreen/components/index';
+} from 'src/components/ConfirmPlan/index';
 import { message, Button, Modal, Divider } from 'antd';
 import Icon from '@ant-design/icons';
 import { ReactComponent as SaveIcon } from 'src/assets/icons/save.svg';

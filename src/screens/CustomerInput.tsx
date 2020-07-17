@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { Input, Button, Form, Radio, InputNumber } from 'antd';
 import Header from 'src/components/MyHeader';
 import Footer from 'src/components/MyFooter';
-import { DatePickerModal } from 'src/screens/CustomerInputScreen/components/index';
+import { DatePickerModal } from 'src/components/CustomerInput/index';
 import { ReactComponent as Checkbox } from 'src/assets/icons/checkbox.svg';
 import { ReactComponent as Calendar } from 'src/assets/icons/calendar.svg';
 import Icon from '@ant-design/icons';

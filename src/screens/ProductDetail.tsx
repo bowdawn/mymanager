@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Header from 'src/components/MyHeader';
 import ProductCard from 'src/components/ProductCard';
 import Footer from 'src/components/MyFooter';
-import { ProductTable } from 'src/screens/ProductDetailScreen/components/index';
+import { ProductTable } from 'src/components/ProductDetail/index';
 
 const item = {
   title: '무)간편건강보험과건강하게사는이야기(20.4)',

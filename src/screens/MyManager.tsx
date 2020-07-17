@@ -7,7 +7,7 @@ import {
   CustomFilter,
   CustomerCard,
   CustomPagination,
-} from 'src/screens/MyManagerScreen/components/index';
+} from 'src/components/MyManager/index';
 import { RouteComponentProps, useLocation } from 'react-router-dom';
 import moment from 'moment';
 import { getDesign, deleteDesign } from 'src/lib/design/index';

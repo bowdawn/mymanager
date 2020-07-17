@@ -27,7 +27,7 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "nodemon -w craco.config.js -w ./src/assets/less/colors.less -w ./src/assets/less/globals.less --exec \"craco start\"",
+    "start": "nodemon -w craco.config.js -w ./src/assets/less/style/colors.less -w ./src/assets/less/style/globals.less --exec \"craco start\"",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"

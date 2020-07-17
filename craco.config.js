@@ -82,15 +82,15 @@ const globalizeLessFile = (
   );
 };
 
-// to add a new globalized Less File that refreshes on edit,
+// to add a new globalized Less File accessible in Typescript that refreshes on edit,
 // edit the package.json start script
 // by add the lessfilepath to the list of files that nodemon watches.
-const path1 = './src/assets/less/colors.less';
+const path1 = './src/assets/less/style/colors.less';
 const path2 = './src/assets/@types/colors.d.ts';
 const path3 = './src/assets/constants/colors.ts';
 globalizeLessFile(path1, path2, path3);
 
-const path4 = './src/assets/less/globals.less';
+const path4 = './src/assets/less/style/globals.less';
 const path5 = './src/assets/@types/globals.d.ts';
 const path6 = './src/assets/constants/globals.ts';
 globalizeLessFile(path4, path5, path6);

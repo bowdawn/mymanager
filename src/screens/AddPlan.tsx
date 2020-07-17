@@ -18,7 +18,7 @@ import {
   ChoiceLayout,
   QuickCard,
   PricePlanCard,
-} from 'src/screens/AddPlanScreen/components/index';
+} from 'src/components/AddPlan/index';
 import { RouteComponentProps } from 'react-router-dom';
 import { searchPlan, selectPlan } from 'src/lib/plan/index';
 
