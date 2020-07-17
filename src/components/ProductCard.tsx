@@ -4,7 +4,12 @@ import Icon, { CaretDownOutlined } from '@ant-design/icons';
 import { ReactComponent as DeleteIcon } from 'src/assets/icons/delete-icon.svg';
 import { useHistory } from 'react-router-dom';
 import { ProductCardType } from 'src/assets/@types/productCardType';
-import { companies } from 'src/assets/constants';
+import {
+  companies,
+  productTypes,
+  expirationOptions,
+  planTypes,
+} from 'src/assets/constants';
 
 const { Panel } = Collapse;
 
@@ -15,6 +20,21 @@ interface Props {
   key: number | string;
   active: boolean;
 }
+
+const getIfExist = (
+  value: string,
+  list: Array<any>,
+  property: string,
+  tag: string
+) => {
+  const item = list.find((item) => value === item.value);
+  if (item && item[property]) {
+    return tag + item[property];
+  } else {
+    return null;
+  }
+};
+
 const ProductCard: FC<Props> = ({
   className,
   productCard,
@@ -32,22 +52,31 @@ const ProductCard: FC<Props> = ({
       {...(active ? { hoverable: true } : {})}
       onClick={() => {
         if (active) {
-          history.push(screenPath5);
+          history.push(screenPath5, { item: productCard });
         }
       }}
     >
       <div className='p16'>
         <div className='f-jc-sb'>
           <Space size={8}>
-            {productCard.tags ? (
-              productCard.tags.map((tag: any, j: number) => (
-                <div className='fls70' key={`tag${key}-${j}`}>
-                  {tag}
-                </div>
-              ))
-            ) : (
-              <div>no tags</div>
-            )}
+            <div>
+              {getIfExist(
+                productCard.Expiration,
+                expirationOptions,
+                'label',
+                '#'
+              )}
+              {getIfExist(
+                productCard.Expiration,
+                expirationOptions,
+                'expiry',
+                ''
+              )}
+            </div>
+            <div>{getIfExist(productCard.Plan, planTypes, 'label', '#')}</div>
+            <div>
+              {getIfExist(productCard.Product, productTypes, 'label', '#')}
+            </div>
           </Space>
 
           {active ? (

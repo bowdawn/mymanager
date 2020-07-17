@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Input, Tag, Table } from 'antd';
 import { ProductCardType } from 'src/assets/@types/productCardType';
+import { companies, planTypes, expirationOptions } from 'src/assets/constants';
 
 const data = [
   { feeName: '일반암진단비', subscriptionFee: 1000, insuranceCost: 590 },
@@ -19,6 +20,20 @@ interface Props {
   item: ProductCardType;
 }
 
+const getIfExist = (
+  value: string,
+  list: Array<any>,
+  property: string,
+  tag: string
+) => {
+  const item = list.find((item) => value === item.value);
+  if (item && item[property]) {
+    return tag + item[property];
+  } else {
+    return null;
+  }
+};
+
 const ProductTable: FC<Props> = ({ item }) => {
   return (
     <Table
@@ -27,12 +42,22 @@ const ProductTable: FC<Props> = ({ item }) => {
           <div className='fs16 fls8 fc-pc fwb'>행복을 다주는 건강보험</div>
           <div className='f-jc-sb f-ai-fe'>
             <Tag color={darkSkyBlue} className='ph11 h28 fs14 f-ai-c'>
-              {item.Company}
+              {companies.some((company) => item.Company === company.value)
+                ? companies.find((company) => item.Company === company.value)
+                    ?.label
+                : null}
             </Tag>
             <div>
-              <div className='fls7 fs14 ta-e'>장기종합 / 100세 만기</div>
+              <div className='fls7 fs14 ta-e'>
+                장기{getIfExist(item.Plan, planTypes, 'label', '')} /{' '}
+                {getIfExist(item.Expiration, expirationOptions, 'label', '')}
+                {getIfExist(item.Expiration, expirationOptions, 'expiry', ' ')}
+              </div>
               <div className='fls7 fs14'>
-                종합 고급형 <span className='fs16 fwb'>82,000원</span>
+                {getIfExist(item.Plan, planTypes, 'label', '')} 고급형{' '}
+                <span className='fs16 fwb'>
+                  {item.Amount?.toLocaleString('ko-Kr')}원
+                </span>
               </div>
             </div>
           </div>

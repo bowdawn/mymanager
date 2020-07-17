@@ -45,7 +45,12 @@ const MainNavigator: FC<any> = (props: any) => {
             component={AddPlan}
             state={['name', 'age', 'gender', 'designId']}
           />
-          <Route exact path={screenPath5} component={ProductDetail} />
+          <PrivateRoute
+            exact
+            path={screenPath5}
+            component={ProductDetail}
+            state={['item']}
+          />
           <Route exact path={screenPath6} component={NotAuthorized} />
           <Route component={PageNotFound} />
         </Switch>

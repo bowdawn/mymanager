@@ -6,7 +6,10 @@ const productCards: Array<ProductCardType> = [
   {
     Name: '무)간편건강보험과건강하게사는이야기(20.4)',
     tags: ['#100세만기', '#장기종합', '#암플랜(고)'],
-    Company: '삼성화재',
+    Company: 'SA',
+    Product: '',
+    Plan: '',
+    Expiration: '',
     Amount: 82000,
     Premium: [
       { Age: 51, Amount: 87000, Difference: 2145000 },
@@ -17,7 +20,10 @@ const productCards: Array<ProductCardType> = [
   {
     Name: '무)간편건강보험과건강하게사는이야기(20.4)',
     tags: ['#100세만기', '#장기종합', '#암플랜(고)'],
-    Company: '삼성화재',
+    Company: 'SA',
+    Product: '',
+    Plan: '',
+    Expiration: '',
     Amount: 82000,
     Premium: [
       { Age: 51, Amount: 87000, Difference: 2145000 },

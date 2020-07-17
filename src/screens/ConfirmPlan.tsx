@@ -56,18 +56,6 @@ const ConfirmPlanScreen: FC<Props> = ({ name, age, location, designId }) => {
       <Divider />
       <NewsCardCarousel className='mb24' />
       <div className='ph16'>
-        {productCards.map((item: any, i: number) => (
-          <ProductCard
-            productCard={item}
-            key={i}
-            className='mb10'
-            active
-            deleteCard={() => {
-              productCards.splice(i, 1);
-              setProductCards([...productCards]);
-            }}
-          />
-        ))}
         {customer?.map((item: any, i: number) => (
           <ProductCard
             productCard={item}
